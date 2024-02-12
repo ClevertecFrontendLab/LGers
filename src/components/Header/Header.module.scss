@@ -1,0 +1,78 @@
+.header {
+    padding: 1rem 1.5rem;
+    color: #262626;
+    background-color: #f0f5ff;
+
+    &__content {
+        display: flex;
+    }
+
+    &__h1 {
+        margin: 6px 0;
+        padding: 10px 0;
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+
+        @media all and (max-width: 834px) {
+            font-size: 1.5rem;
+        }
+
+        @media all and (max-width: 360px) {
+            font-size: 1.25rem;
+        }
+    }
+
+    &__settings {
+        margin-top: 0.5rem;
+    }
+}
+
+.button {
+    padding: 0.5625rem 0.9375rem;
+    vertical-align: center;
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+
+    @media all and (max-width: 834px) {
+        padding: 7px 15px;
+    }
+
+    @media all and (max-width: 360px) {
+        display: flex;
+        justify-content: center;
+        border-radius: 50%;
+        border: 1px solid #d9d9d9;
+        background-color: #fff;
+        width: 2rem;
+        height: 2rem;
+    }
+
+    &__icon {
+        @media all and (max-width: 834px) {
+            display: none;
+        }
+
+        @media all and (max-width: 360px) {
+            display: inline;
+        }
+    }
+
+    &__text {
+        @media all and (max-width: 360px) {
+            display: none;
+        }
+    }
+}
+
+.breadcrumbs {
+    margin-bottom: 0;
+
+    @media all and (max-width: 360px) {
+        padding-bottom: 1rem;
+    }
+}
