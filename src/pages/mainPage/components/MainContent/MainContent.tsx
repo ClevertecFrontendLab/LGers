@@ -43,22 +43,27 @@ const cards = [
 export const MainContent = () => {
     return (
         <>
-            <div className={s.mainCard}>
-                <p className={s.about}>
-                    {descItems.map((item) => {
-                        return (
-                            <span key={item.id}>{item.desc}</span>
-                        );
-                    })
-                    }
-                </p>
-            </div>
-            <div className={s.mainCard}>
-                <h4 className={s.description}>
-                    CleverFit — это не просто приложение, а твой личный помощник в мире фитнеса. Не
-                    откладывай на завтра — начни тренироваться уже сегодня!
-                </h4>
-            </div>
+            <section className={s.mainSection}>
+
+
+                <div className={s.mainCard}>
+                    <p className={s.about}>
+                        {descItems.map((item) => {
+                            return (
+                                <span key={item.id}>{item.desc}</span>
+                            );
+                        })
+                        }
+                    </p>
+                </div>
+                <div className={s.mainCard}>
+                    <h4 className={s.description}>
+                        CleverFit — это не просто приложение, а твой личный помощник в мире фитнеса.
+                        Не
+                        откладывай на завтра — начни тренироваться уже сегодня!
+                    </h4>
+                </div>
+            </section>
             <div className={s.cards}>
                 {cards.map((card) => {
                     return <Card {...card} />
