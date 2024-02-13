@@ -3,10 +3,9 @@
 
     &__page {
         display: flex;
-        background-image: url('../../../public/assets/img/bg-light.png');
-        background-position: center;
         background-size: cover;
         width: 100%;
+        background: url('../../../public/assets/img/bg-light.png') center;
     }
 }
 

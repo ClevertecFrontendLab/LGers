@@ -1,0 +1,35 @@
+.card {
+    color: #262626;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+
+    &__title {
+        padding: 12px 24px;
+        font-size: 1rem;
+
+    }
+
+    &__btn {
+        width: 100%;
+        font-size: 14px;
+        padding: 7px 0;
+        margin: 12px 0;
+        color: #2f54eb;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 0.5rem;
+        cursor: pointer;
+        border: none;
+        background-color: transparent;
+    }
+
+    &__icon {
+        path {
+            fill: #2f54eb;
+        }
+    }
+}

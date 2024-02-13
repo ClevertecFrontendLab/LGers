@@ -3,6 +3,7 @@ import { Sidebar } from "@components/Sidebar";
 import { Header } from "@components/Header";
 import { Footer } from "@components/Footer";
 import s from './mainPage.module.scss';
+import { MainContent } from '@pages/mainPage/components/MainContent';
 
 export const MainPage = () => {
 
@@ -13,9 +14,7 @@ export const MainPage = () => {
                 <div className={s.pageContainer}>
                     <Header/>
                     <main className={s.main}>
-                        <div>
-                            main
-                        </div>
+                        <MainContent />
                     </main>
                     <Footer/>
                 </div>
