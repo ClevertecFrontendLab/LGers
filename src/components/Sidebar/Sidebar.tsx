@@ -1,5 +1,5 @@
 import { FC, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 import s from './Sidebar.module.scss';
 import LogoBig from '../../assets/img/logo-big.png';
 import LogoSmall from '../../assets/img/logo-small.png';
