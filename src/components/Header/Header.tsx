@@ -1,5 +1,6 @@
 import s from './Header.module.scss';
 import { Link } from 'react-router-dom';
+import settingsIcon from '../../assets/svg/settings.svg';
 
 export const Header = () => {
     return (
@@ -17,8 +18,9 @@ export const Header = () => {
                     </span>
                 </h1>
                 <div className={s.header__settings}>
-                    <button  className={s.button}>
-                        <img className={s.button__icon}src="../../../public/assets/svg/settings.svg" alt="Settings" />
+                    <button className={s.button}>
+                        <img className={s.button__icon}
+                             src={settingsIcon} alt="Settings" />
                         <span className={s.button__text}>Настройки</span>
                     </button>
                 </div>

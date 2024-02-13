@@ -1,14 +1,15 @@
 import { FC, useState } from "react";
 import { Link } from "react-router-dom";
 import s from './Sidebar.module.scss';
-import LogoBig from '../../../public/assets/img/logo-big.png';
-import LogoSmall from '../../../public/assets/img/logo-small.png';
+import LogoBig from '../../assets/img/logo-big.png';
+import LogoSmall from '../../assets/img/logo-small.png';
 import {
     CalendarTwoTone,
     HeartTwoTone,
     ProfileOutlined,
     TrophyTwoTone
 } from '@ant-design/icons';
+import exitIcon from '../../assets/svg/exit.svg'
 
 interface State {
     isShowSidebar: boolean;
@@ -65,7 +66,7 @@ export const Sidebar: FC = () => {
                 </nav>
                 <div className={s.exit}>
                     <button className={s.exit__btn}>
-                        <img src="../../../public/assets/svg/exit.svg" alt="exit"
+                        <img src={exitIcon} alt="exit"
                              className={s.exit__icon}
                         />
                         <span
