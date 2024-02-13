@@ -3,9 +3,17 @@
 
     &__page {
         display: flex;
-        background: url('../../../public/assets/img/bg-light.png') center;
+        background: url('../../../public/assets/img/bg-light.png') 0 0;
         background-size: cover;
         width: 100%;
+
+        @media all and (max-width: 996px) {
+            background-position: -424px 0;
+        }
+
+        @media all and (max-width: 425px) {
+            background-position: 4144px 896px;
+        }
     }
 }
 
