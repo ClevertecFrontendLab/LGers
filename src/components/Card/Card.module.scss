@@ -25,11 +25,28 @@
         cursor: pointer;
         border: none;
         background-color: transparent;
+        transition: all 0.3s ease-in-out;
+
+        &:hover {
+            color: #85a5ff;
+            transition: all 0.3s ease-in-out;
+
+            path {
+                fill: #85a5ff;
+                transition: all 0.3s ease-in-out;
+            }
+        }
     }
 
     &__icon {
         path {
             fill: #2f54eb;
+            transition: all 0.3s ease-in-out;
+
+            &:hover {
+                fill: #85a5ff;
+                transition: all 0.3s ease-in-out;
+            }
         }
     }
 }

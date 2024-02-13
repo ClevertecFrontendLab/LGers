@@ -19,6 +19,12 @@
         margin-top: auto;
         margin-left: 12px;
         padding-top: 36px;
+        transition: all 0.5s ease-in-out;
+
+        &:hover {
+            transform: translate(0, 1rem);
+            transition: all 0.5s ease-in-out;
+        }
 
         @media all and (min-width: 425px) {
             padding-top: 0;
