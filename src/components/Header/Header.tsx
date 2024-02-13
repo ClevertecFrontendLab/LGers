@@ -20,7 +20,7 @@ export const Header = () => {
                 <div className={s.header__settings}>
                     <button className={s.button}>
                         <img className={s.button__icon}
-                             src={settingsIcon} alt="Settings" />
+                             src={settingsIcon} alt='Settings' />
                         <span className={s.button__text}>Настройки</span>
                     </button>
                 </div>

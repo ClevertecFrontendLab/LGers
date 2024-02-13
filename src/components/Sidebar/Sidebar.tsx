@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC, useState } from 'react';
 import { Link } from 'react-router-dom';
 import s from './Sidebar.module.scss';
 import LogoBig from '../../assets/img/logo-big.png';
@@ -57,7 +57,7 @@ export const Sidebar: FC = () => {
 
             <div className={!state.isShowSidebar ? s.hideMobile : s.showMobile}>
                 <Link to='/' className={s.logo__img}>
-                    <img src={state.isShowSidebar ? LogoBig : LogoSmall} alt="Cleverfit" />
+                    <img src={state.isShowSidebar ? LogoBig : LogoSmall} alt='Cleverfit' />
                 </Link>
                 <nav className={s.nav}>
                     <ul className={s.nav__links}>
@@ -66,7 +66,7 @@ export const Sidebar: FC = () => {
                 </nav>
                 <div className={s.exit}>
                     <button className={s.exit__btn}>
-                        <img src={exitIcon} alt="exit"
+                        <img src={exitIcon} alt='exit'
                              className={s.exit__icon}
                         />
                         <span

@@ -1,7 +1,7 @@
-import { Wrapper } from "@components/Wrapper";
-import { Sidebar } from "@components/Sidebar";
-import { Header } from "@components/Header";
-import { Footer } from "@components/Footer";
+import { Wrapper } from '@components/Wrapper';
+import { Sidebar } from '@components/Sidebar';
+import { Header } from '@components/Header';
+import { Footer } from '@components/Footer';
 import s from './mainPage.module.scss';
 import { MainContent } from '@pages/mainPage/components/MainContent';
 

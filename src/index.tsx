@@ -7,7 +7,7 @@ import { store } from '@redux/configure-store';
 
 import 'normalize.css';
 import './index.css';
-import { MainPage } from "./pages";
+import { MainPage } from './pages';
 
 const domNode = document.getElementById('root') as HTMLDivElement;
 const root = createRoot(domNode);
