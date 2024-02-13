@@ -25,15 +25,15 @@
     &__btn {
         width: 100%;
         font-size: 0.875rem;
-        padding: 0.5rem 0;
-        margin: 0.75rem 0;
+        padding: 1.25rem 0;
         color: #2f54eb;
         display: flex;
         justify-content: center;
         align-items: center;
         gap: 0.5rem;
         cursor: pointer;
-        border: none;
+        border: transparent;
+        border-top: 1px solid #f0f0f0;
         background-color: transparent;
         transition: all 0.3s ease-in-out;
 
