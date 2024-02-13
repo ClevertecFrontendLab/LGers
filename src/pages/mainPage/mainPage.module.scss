@@ -1,0 +1,26 @@
+.main {
+    flex: 1;
+
+    &__page {
+        display: flex;
+        background: url('../../assets/img/bg-light.png') 0 0;
+        background-size: cover;
+        position: relative;
+        width: 100%;
+
+        @media all and (max-width: 996px) {
+            background-position: -424px 0;
+        }
+
+        @media all and (max-width: 425px) {
+            background-position: 4144px 896px;
+        }
+    }
+}
+
+.pageContainer {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    margin-bottom: 42px;
+}

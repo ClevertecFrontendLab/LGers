@@ -1,0 +1,52 @@
+.mainCard {
+    color: #262626;
+    max-width: 704px;
+    background-color: #fff;
+    padding: 1.5rem;
+
+    @media all and (max-width: 425px) {
+        padding: 1rem 1.5rem 1rem 1rem;
+    }
+}
+
+.about {
+    color: #061178;
+    display: flex;
+    flex-direction: column;
+    font-size: 1rem;
+    line-height: 130%;
+    max-width: 752px;
+}
+
+.description {
+    padding: 0;
+}
+
+.h4 {
+    margin: 0;
+}
+
+.cards {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    max-width: 752px;
+    margin: 0 1rem;
+
+    @media all and (min-width: 525px) {
+        flex-direction: row;
+        gap: 1rem;
+        margin: 0 1.5rem;
+    }
+}
+
+.mainSection {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin: 1.5rem 1.5rem 1rem;
+
+    @media all and (max-width: 425px) {
+        margin: 1.5rem 1rem 1rem;
+    }
+}
