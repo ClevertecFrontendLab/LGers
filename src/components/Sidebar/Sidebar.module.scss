@@ -5,10 +5,16 @@
     position: relative;
     background-color: #fff;
 
+    @media all and (max-width: 425px) {
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+
     &__DTBtn {
         position: absolute;
         right: -20px;
-        top: 50vh;
+        top: calc(50% - 48px);
         width: 20px;
         height: 66px;
 
@@ -52,6 +58,7 @@
     background-color: transparent;
     border: none;
     position: relative;
+    cursor: pointer;
 
     &:before {
         background-image: url(../../../public/assets/img/sidemenu-fixed-switcher.png);
