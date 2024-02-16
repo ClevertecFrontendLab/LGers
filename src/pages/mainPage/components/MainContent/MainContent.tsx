@@ -24,16 +24,19 @@ const descItems = [
 
 const cards = [
     {
+        key: 0,
         title: 'Расписать тренировки',
         btnText: 'Тренировки',
         btnIcon: <HeartFilled />
     },
     {
+        key: 1,
         title: 'Назначить календарь',
         btnText: 'Календарь',
         btnIcon: <CalendarTwoTone />,
     },
     {
+        key: 2,
         title: 'Заполнить профиль',
         btnText: 'Профиль',
         btnIcon: <ProfileOutlined />,
@@ -44,8 +47,6 @@ export const MainContent = () => {
     return (
         <>
             <section className={s.mainSection}>
-
-
                 <div className={s.mainCard}>
                     <p className={s.about}>
                         {descItems.map((item) => {
