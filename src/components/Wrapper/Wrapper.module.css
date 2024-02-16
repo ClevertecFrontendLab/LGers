@@ -1,6 +1,5 @@
 .wrapper {
     display: flex;
-    background: #ccc;
     width: 100%;
     min-height: 100vh;
     overflow: hidden;

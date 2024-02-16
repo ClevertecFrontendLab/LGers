@@ -1,3 +1,6 @@
+@import '../../constants/colors';
+@import '../../constants/media-sizes';
+
 .main {
     flex: 1;
 
@@ -8,11 +11,11 @@
         position: relative;
         width: 100%;
 
-        @media all and (max-width: 996px) {
+        @media all and (max-width: $lg) {
             background-position: -424px 0;
         }
 
-        @media all and (max-width: 425px) {
+        @media all and (max-width: $xs) {
             background-position: 4144px 896px;
         }
     }

@@ -1,6 +1,9 @@
+@import '../../constants/colors';
+@import '../../constants/media-sizes';
+
 .card {
-    color: #262626;
-    background-color: #fff;
+    color: $color-black-85;
+    background-color: $color-bg;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -12,11 +15,11 @@
         text-align: left;
         align-self: flex-start;
 
-        @media all and (max-width: 425px) {
+        @media all and (max-width: $xs) {
             align-self: center;
         }
 
-        @media all and (min-width: 768px) {
+        @media all and (min-width: $md) {
             align-self: center;
         }
 
@@ -26,23 +29,23 @@
         width: 100%;
         font-size: 0.875rem;
         padding: 1.25rem 0;
-        color: #2f54eb;
+        color: $btn-color;
         display: flex;
         justify-content: center;
         align-items: center;
         gap: 0.5rem;
         cursor: pointer;
         border: transparent;
-        border-top: 1px solid #f0f0f0;
+        border-top: 1px solid $color-black-06;
         background-color: transparent;
         transition: all 0.3s ease-in-out;
 
         &:hover {
-            color: #85a5ff;
+            color: $btn-color-hover;
             transition: all 0.3s ease-in-out;
 
             path {
-                fill: #85a5ff;
+                fill: $btn-color-hover;
                 transition: all 0.3s ease-in-out;
             }
         }
@@ -50,11 +53,11 @@
 
     &__icon {
         path {
-            fill: #2f54eb;
+            fill: $btn-color;
             transition: all 0.3s ease-in-out;
 
             &:hover {
-                fill: #85a5ff;
+                fill: $btn-color-hover;
                 transition: all 0.3s ease-in-out;
             }
         }
