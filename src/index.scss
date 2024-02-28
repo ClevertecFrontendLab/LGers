@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
+@import './src/constants/colors';
 
 :root {
     font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
@@ -73,4 +74,17 @@ p {
     font-size: 0.875rem;
     font-weight: 400;
     line-height: 130%;
+}
+.ant-btn-link {
+    color: $btn-color;
+
+}
+.ant-btn-primary {
+    color: #fff;
+    border-color: $btn-color;
+    background: $btn-color;
+}
+
+.ant-form-item-explain-error {
+    color: $clr-red-6;
 }

@@ -1,0 +1,54 @@
+@import '../../constants/colors';
+@import '../../constants/media-sizes';
+
+.auth {
+    flex: 1;
+
+    &Wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        background-position: center;
+        width: 100%;
+        background-color: $bg-light-color;
+        padding: 0 1rem 8px;
+
+        @media all and (min-width: $sm){
+            padding-bottom: 52px;
+        }
+
+        @media all and (min-width: $lg){
+            padding-bottom: 2px;
+        }
+
+        &::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-size: cover;
+            background: url('../../assets/img/auth_ page_light.png') center;
+            display: block;
+            height: 100%;
+            z-index: -1;
+            filter: blur(2px);
+        }
+    }
+}
+
+.pageContainer {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    margin-bottom: 42px;
+}
+
+.wrapper {
+    display: flex;
+    width: 100%;
+    min-height: 100vh;
+    overflow: hidden;
+    overflow-y: auto;
+}
