@@ -1,5 +1,5 @@
 import { FC, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import s from './Sidebar.module.scss';
 import LogoBig from '../../assets/img/logo-big.png';
 import LogoSmall from '../../assets/img/logo-small.png';
@@ -10,6 +10,8 @@ import {
     TrophyTwoTone
 } from '@ant-design/icons';
 import exitIcon from '../../assets/svg/exit.svg'
+import { logout } from '@redux/auth/auth.slice';
+import { useAppDispatch } from '@hooks/typed-react-redux-hooks';
 
 interface State {
     isShowSidebar: boolean;
@@ -27,10 +29,18 @@ export const Sidebar: FC = () => {
         isShowSidebar: false,
     });
 
+    const dispatch = useAppDispatch();
+    const navigate = useNavigate();
+
     const toggleSidebar = () => {
         setState((prev: State) => ({ ...prev, isShowSidebar: !prev.isShowSidebar }));
     };
 
+    const onExit = () => {
+        dispatch(logout());
+        navigate('/auth');
+        console.log('exit');
+    };
     const navLinks = links.map((item) => {
         return (
             <li className={s.nav__li} key={item.id}>
@@ -65,7 +75,7 @@ export const Sidebar: FC = () => {
                     </ul>
                 </nav>
                 <div className={s.exit}>
-                    <button className={s.exit__btn}>
+                    <button className={s.exit__btn} onClick={onExit}>
                         <img src={exitIcon} alt='exit'
                              className={s.exit__icon}
                         />

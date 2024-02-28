@@ -1,24 +1,27 @@
+@import '../../constants/colors';
+@import '../../constants/media-sizes';
+
 .footer {
-    margin: 24px 16px 0;
+    margin: 1.5rem 1rem 0;
     display: flex;
     flex-direction: column;
 
-    @media all and (min-width: 425px) {
+    @media all and (min-width: $sm) {
         flex-direction: row-reverse;
         justify-content: space-between;
-        margin: 42px 24px 0;
+        margin: 2.625rem 1.5rem 0;
     }
 
     &__btn {
         border: none;
         background: transparent;
-        color: #2f54eb;
+        color: $btn-color;
         cursor: pointer;
         text-align: center;
         min-height: 40px;
         margin-top: auto;
-        margin-left: 12px;
-        padding-top: 36px;
+        margin-left: 0.75rem;
+        padding-top: 2.25rem;
         transition: all 0.5s ease-in-out;
 
         &:hover {
@@ -26,7 +29,7 @@
             transition: all 0.5s ease-in-out;
         }
 
-        @media all and (min-width: 425px) {
+        @media all and (min-width: $sm) {
             padding-top: 0;
         }
     }
@@ -35,10 +38,10 @@
 .app {
     display: flex;
     flex-direction: column;
-    background: #fff;
+    background: $color-bg;
     max-width: 20.5rem;
 
-    @media all and (min-width: 425px) {
+    @media all and (min-width: $sm) {
         max-width: 15rem;
     }
 
@@ -47,9 +50,9 @@
         flex-direction: column;
         padding: 0.75rem 1.5rem;
         gap: 0.5rem;
-        border-bottom: 1px solid #f0f0f0;
+        border-bottom: 1px solid $color-black-06;
 
-        @media all and (min-width: 425px) {
+        @media all and (min-width: $sm) {
             margin-right: 1.375rem;
         }
 
@@ -57,23 +60,22 @@
             text-align: center;
             font-size: 1rem;
 
-            @media all and (min-width: 425px) {
+            @media all and (min-width: $sm) {
                 text-align: left;
             }
         }
 
         &_primary {
-            color: #2f54eb;
+            color: $btn-color;
         }
 
         &_secondary {
-            color: #8c8c8c;
+            color: $color-black-45;
             letter-spacing: -1px;
 
-            @media all and (min-width: 425px) {
+            @media all and (min-width: $sm) {
                 transform: scaleX(1);
                 font-stretch: 50%;
-                //letter-spacing: 0;
                 align-self: flex-start;
             }
         }

@@ -1,0 +1,44 @@
+@import '../../../constants/colors';
+@import '../../../constants/media-sizes';
+@import '../../../constants/sizes';
+
+.CEWrapper {
+    width: 100%;
+
+    margin: auto 2rem;
+    padding: 40px 16px 28px;
+
+    @media all and (min-width: $sm) {
+        min-width: 368px;
+        max-width: 539px;
+    }
+
+    &__title {
+        margin-bottom: 0;
+        letter-spacing: 0.5px;
+    }
+
+
+    &__subTitle {
+        letter-spacing: 0.5px;
+        color: $color-black-45;
+        padding: 0 16px;
+
+        p {
+            margin: 0;
+        }
+    }
+
+    &__email {
+        font-weight: 700;
+        margin: 0;
+        letter-spacing: 0.5px;
+    }
+}
+
+.subtitle {
+    letter-spacing: 0.5px;
+    color: $color-black-45;
+    margin: 0 48px 32px;
+    text-align: center;
+}
