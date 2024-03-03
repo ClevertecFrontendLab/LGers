@@ -23,5 +23,6 @@ export interface AuthState {
     password: string | null | undefined;
     accessToken: string | undefined | null;
     error: ApiError | FetchBaseQueryError | undefined | null;
+    authError?: undefined | ApiError;
 }
 

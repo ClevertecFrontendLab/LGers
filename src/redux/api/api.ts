@@ -80,7 +80,7 @@ export const cleverFitApi = createApi({
             query: (email) => ({
                 url: '/auth/check-email',
                 method: 'POST',
-                body: { email },
+                body: email,
             }),
         }),
 

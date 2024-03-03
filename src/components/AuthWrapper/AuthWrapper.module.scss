@@ -23,13 +23,12 @@
             padding-bottom: 2px;
         }
 
-        &::after {
+        &:after {
             content: '';
             position: fixed;
             top: 0;
             left: 0;
-            background-size: cover;
-            background: url('../../assets/img/auth_ page_light.png') center;
+            background: cover url('../../assets/img/auth_ page_light.png') center;
             display: block;
             height: 100%;
             z-index: -1;

@@ -12,7 +12,7 @@ const DATA: AppResultProps = {
     dataTestId: 'check-retry-button',
 }
 
-export const ErrorChekEmailNoExist: FC = () => {
+export const ErrorCheckEmailNoExist: FC = () => {
 
     return (
         <AppResult {...DATA} />

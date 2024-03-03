@@ -2,24 +2,20 @@
 @import '../../constants/media-sizes';
 
 .auth {
-    //flex: 1;
-
     &__page {
         display: flex;
         position: relative;
         background-position: 0 center;
         width: 100%;
-        width: 1440px;
-        color: white; // todo
+        color: $color-white;
         background-color: $bg-light-color;
 
-        &::after {
+        &:after {
             content: '';
             position: fixed;
             top: 0;
             left: 0;
-            background-size: cover;
-            background: url('../../assets/img/auth_ page_light.png') center;
+            background: cover url('../../assets/img/auth_ page_light.png') center;
             display: block;
             width: 100%;
             height: 100%;
@@ -27,29 +23,6 @@
             filter: blur(2px);
         }
     }
-
-    //&__linkBtn {
-    //    border-bottom: 2px solid transparent;
-    //    padding-bottom: 4px;
-    //    width: 100%;
-    //    transition: all 0.3s ease-in-out;
-    //
-    //    &:hover {
-    //        color: $btn-color;
-    //        border-bottom: 2px solid $btn-color;
-    //        transition: all 0.3s ease-in-out;
-    //    }
-    //
-    //    @media all and (min-width: $sm){
-    //        letter-spacing: 0;
-    //    }
-    //}
-    //
-    //&__linkBtnActive {
-    //    border-bottom: 2px solid $btn-color;
-    //    padding-bottom: 4px;
-    //    width: 100%;
-    //}
 
     &__btns {
         display: flex;
@@ -88,6 +61,10 @@
             padding-right: 6px;
         }
     }
+
+    &__title {
+        margin-top: 32px;
+    }
 }
 
 .pageContainer {
@@ -124,7 +101,7 @@
     width: 100%;
     align-items: center;
     padding-top: 20px;
-    margin: 0px 0 22px;
+    margin: 0 0 22px;
 
     @media all and (min-width: $sm) {
         padding-top: 20px;

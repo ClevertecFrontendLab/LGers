@@ -1,6 +1,5 @@
-import { Wrapper } from '@components/Wrapper';
-import s from './Auth.module.scss';
 import { FC, useEffect, useState } from 'react';
+import { Wrapper } from '@components/Wrapper';
 import { Button, Checkbox, Form, Input } from 'antd';
 import { AuthWrapper } from '@components/AuthWrapper';
 import { FormWrapper } from '@pages/auth/components/FormWrapper';
@@ -15,7 +14,8 @@ import {
 } from '@redux/api/api';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
 import { Loader } from '@components/Loader';
-import { resetError, setCredentials } from '@redux/auth/auth.slice';
+import { resetError, setAuthError, setCredentials } from '@redux/auth/auth.slice';
+import s from './Auth.module.scss';
 
 const marginBottom = 32;
 
@@ -27,11 +27,9 @@ type FieldType = {
 
 const EmailLabel = () => {
     return (
-        <>
-            <span className={s.emailLabel}>e-mail:</span>
-        </>
-    )
-}
+        <span className={s.emailLabel}>e-mail:</span>
+    );
+};
 
 export const Auth: FC = () => {
     const [login] = cleverFitApi.useLoginMutation();
@@ -41,32 +39,38 @@ export const Auth: FC = () => {
     const { isAuth, error, isFetching } = useAppSelector(state => state.auth);
     const [checkEmail] = useCheckEmailMutation();
     const [form] = Form.useForm();
+
     const [isEmailCorrect, setIsEmailCorrect] = useState(true);
 
     const onFinish = (values: UserCredentials) => {
+
         if (!form.getFieldValue('rememberMe')) {
             localStorage.removeItem('accessToken');
         }
+
         const { email, password } = values;
         dispatch(setCredentials({ email, password }))
         login({ email, password });
     };
 
     const onRestorePassword = async () => {
-        const isEmailCorrect =  form.getFieldValue('email');
+        form.validateFields(['email'])
+            .then( async (values) => {
+                setIsEmailCorrect(true);
+                const { email, password } = values;
+                dispatch(setCredentials({ email, password }));
+                if (email) {
+                    const data = await checkEmail({ email }) as CheckEmailResponse;
+                    if (data.data) {
+                        navigate('/auth/confirm-email', { state: { from: location } });
+                    }
+                }
 
-        setIsEmailCorrect(isEmailCorrect);
-        if (isEmailCorrect) {
-            const { email, password } = form.getFieldsValue();
-            dispatch(setCredentials({ email, password }));
-            isEmailCorrect && checkEmail(email);
-            const data = await checkEmail(email) as CheckEmailResponse;
-
-            if (data.data) {
-                navigate('/auth/confirm-email', { state: { from: location } });
-            }
-        }
-
+            })
+            .catch((e) => {
+                dispatch(setAuthError(e));
+            })
+        ;
     };
 
     useEffect(() => {
@@ -77,14 +81,28 @@ export const Auth: FC = () => {
 
     useEffect(() => {
         if (error) {
-            if (error.status === 404 && error.data?.message === 'Email не найден') {
-                navigate('/result/error-check-email-no-exist', { state: { from: location } });
-            } else if (error.status === 404) {
-                navigate('/result/error-login', { state: { from: location } });
-            } else {
-                navigate('/result/error-check-email', { state: { from: location } });
+            switch (error.status) {
+                case 400:
+                    navigate('/result/error-login', { state: { from: location } });
+                    break;
+
+                case 404: 
+                    if (error.data?.message === 'Email не найден') {
+                        navigate('/result/error-check-email-no-exist', { state: { from: location } });
+                    } else {
+                        navigate('/result/error-login', { state: { from: location } });
+                    }
+                    break;
+
+                case 409: 
+                        navigate('/result/error-check-email');
+                    break;
+
+                default:
+                    navigate('/result/error-check-email', { state: { from: location } });
             }
         }
+
         dispatch(resetError());
     }, [error]);
 
@@ -109,7 +127,6 @@ export const Auth: FC = () => {
                                         remember: true,
                                     }}
                                     onFinish={onFinish}
-                                    autoComplete="off"
                                     size={'large'}
                                     onFieldsChange={onFieldsChange}
                                 >
@@ -151,8 +168,7 @@ export const Auth: FC = () => {
                                             name="rememberMe"
                                             style={{ marginBottom: 0 }}
                                         >
-                                            <Checkbox defaultChecked={true}
-                                                      data-test-id={'login-remember'}>
+                                            <Checkbox defaultChecked={true} data-test-id={'login-remember'}>
                                                 Запомнить меня
                                             </Checkbox>
                                         </Form.Item>

@@ -1,4 +1,4 @@
-import { AuthState } from '@redux/auth/auth.types';
+import { ApiError, AuthState } from '@redux/auth/auth.types';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { cleverFitApi } from '@redux/api/api';
 
@@ -11,6 +11,7 @@ const initialState: AuthState = {
     accessToken: '',
     password: '',
     email: '',
+    authError: undefined
 };
 
 export const authSlice = createSlice({
@@ -29,6 +30,10 @@ export const authSlice = createSlice({
             state.accessToken = action.payload;
         },
 
+        setAuthError: (state, action) => {
+            state.authError = action.payload as ApiError;
+        },
+
         resetError: (state) => {
             state.error = null;
         },
@@ -37,7 +42,7 @@ export const authSlice = createSlice({
             state.hasResult = false;
         },
 
-        setCredentials: (state, action: PayloadAction<{ email: string, password: string }>) => {
+        setCredentials: (state, action: PayloadAction<{ email: string | undefined, password: string| undefined }>) => {
             const { email, password } = action.payload;
             if (email) {
                 state.email = email;
@@ -140,7 +145,8 @@ export const {
     setToken,
     resetError,
     resetHasResult,
-    setCredentials
+    setCredentials,
+    setAuthError,
 } = authSlice.actions;
 
 export const authReducer = authSlice.reducer;

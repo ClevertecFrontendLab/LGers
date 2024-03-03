@@ -10,13 +10,12 @@
         color: white;
         background-color: $bg-light-color;
 
-        &::after {
+        &:after {
             content: '';
             position: fixed;
             top: 0;
             left: 0;
-            background-size: cover;
-            background: url('../../../assets/img/auth_ page_light.png') center;
+            background: cover url('../../../assets/img/auth_ page_light.png') center;
             display: block;
             width: 100%;
             height: 100%;
@@ -32,10 +31,6 @@
 
         @media all and (min-width: $xs) {
             padding-top: 8px;
-        }
-
-        @media all and (min-width: $sm) {
-
         }
 
         @media all and (min-width: $lg) {

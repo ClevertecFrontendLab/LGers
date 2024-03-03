@@ -10,7 +10,7 @@ import s from './AppResult.module.scss';
 export interface AppResultProps {
     title: string;
     buttonText: string;
-    navigateTo: string; // | number;
+    navigateTo: string | number;
     dataTestId: string;
     status?: | 'success' | 'error' | 'info' | 'warning' | '404' | '403' | '500';
     subTitle?: string;
