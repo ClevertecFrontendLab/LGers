@@ -3,7 +3,7 @@ import { Breadcrumb } from "antd";
 import { useLocation } from "react-router-dom";
 import { getItems } from "./Breadcrumbs.utils";
 
-export interface Item {
+export type Item = {
   path: string;
   breadcrumbName: string;
 }

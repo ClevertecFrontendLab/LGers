@@ -1,10 +1,10 @@
 import { FetchBaseQueryError } from '@reduxjs/toolkit/query/react';
 
-export interface LoginData {
+export type LoginData = {
     token: string;
 }
 
-export interface ApiError {
+export type ApiError = {
     status: number;
     message?: string;
     data?: {
@@ -14,7 +14,7 @@ export interface ApiError {
     }
 }
 
-export interface AuthState {
+export type AuthState = {
     rememberMe: boolean;
     isAuth: boolean;
     isFetching: boolean;

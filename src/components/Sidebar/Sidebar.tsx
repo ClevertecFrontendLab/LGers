@@ -13,7 +13,7 @@ import exitIcon from '../../assets/svg/exit.svg'
 import { logout } from '@redux/auth/auth.slice';
 import { useAppDispatch } from '@hooks/typed-react-redux-hooks';
 
-interface State {
+type State = {
     isShowSidebar: boolean;
 }
 

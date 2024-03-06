@@ -3,7 +3,7 @@ import { Button, Modal, Result } from 'antd';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
 import { resetError } from '@redux/feedbacks/feedbacks.slice';
 
-export interface FeedbackErrorPostProps {
+export type FeedbackErrorPostProps = {
     showModal: () => void;
 };
 

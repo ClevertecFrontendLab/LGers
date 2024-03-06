@@ -1,4 +1,4 @@
-export interface Feedback {
+export type Feedback = {
     id: string;
     fullName: string | null;
     imageSrc: string | null;

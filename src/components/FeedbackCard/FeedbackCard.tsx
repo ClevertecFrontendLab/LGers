@@ -5,7 +5,7 @@ import styles from "./FeedbackCard.module.scss";
 import { Feedback } from "@redux/feedbacks/feedbacks.types";
 
 const { Text } = Typography;
-export interface FeedbackCardProps {
+export type FeedbackCardProps = {
   id: string;
   fullName: string | null;
   imageSrc: string | null;

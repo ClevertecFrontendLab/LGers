@@ -7,7 +7,7 @@ import { AuthResultWrapper } from '@components/AuthResultWrapper';
 import { Button, Result } from 'antd';
 import styles from './AppResult.module.scss';
 
-export interface AppResultProps {
+export type AppResultProps = {
     title: string;
     buttonText: string;
     navigateTo: string | number;

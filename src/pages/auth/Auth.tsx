@@ -27,17 +27,13 @@ type FieldType = {
     remember?: boolean;
 };
 
-export interface GoogleResponse {
+export type GoogleResponse = {
     clientId: string;
     credential: string;
     select_by: string;
 }
 
-const EmailLabel = () => {
-    return (
-        <span className={styles.emailLabel}>e-mail:</span>
-    );
-};
+const EmailLabel = () => <span className={styles.emailLabel}>e-mail:</span>
 
 export const Auth: FC = () => {
     const [login] = cleverFitApi.useLoginMutation();

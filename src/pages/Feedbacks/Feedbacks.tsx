@@ -14,7 +14,7 @@ import { FeedbackError500 } from "@components/modals/FeedbackError500";
 import { useLazyGetFeedbacksQuery } from "@redux/api/api";
 import { FeedbackErrorPost } from "@components/modals/FeedbackErrorPost";
 
-export interface ModalProps {
+export type ModalProps = {
     isModalOpenProp: boolean;
 };
 

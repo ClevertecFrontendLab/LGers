@@ -3,7 +3,7 @@ import { Button, Modal, Input, Rate } from 'antd';
 import styles from './AddFeedback.module.scss';
 import { useAddFeedbackMutation, useLazyGetFeedbacksQuery } from '@redux/api/api';
 
-export interface AddFeedbackProps {
+export type AddFeedbackProps = {
     showModal: boolean;
     handleClose: () => void;
 }

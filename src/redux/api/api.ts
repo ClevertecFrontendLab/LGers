@@ -2,7 +2,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { RootState } from '@redux/configure-store';
 import { Feedback } from './api.types';
 
-export interface IPost {
+export type IPost = {
     id: number;
     title: string;
     body: string;
@@ -17,17 +17,17 @@ export interface FormValues extends UserCredentials {
     remember: boolean;
 }
 
-export interface UserResponse {
+export type UserResponse = {
     user: UserCredentials,
     accessToken: string,
 }
 
-export interface LoginRequest {
+export type LoginRequest = {
     email: string,
     password: string,
 }
 
-export interface CheckEmailResponse {
+export type CheckEmailResponse = {
     data: {
 
         email: string,

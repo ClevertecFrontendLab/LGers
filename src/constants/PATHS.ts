@@ -1,4 +1,4 @@
-export interface Path {
+export type Path = {
   path: string;
   title: string;
 }

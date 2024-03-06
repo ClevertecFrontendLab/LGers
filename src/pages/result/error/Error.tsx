@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { AppResult } from '@components/AppResult';
 import { AppResultProps } from '@components/AppResult/AppResult';
 
-interface Props {
+type Props = {
     navigateTo: string;
 }
 

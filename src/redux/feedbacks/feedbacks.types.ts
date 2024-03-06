@@ -1,6 +1,6 @@
 import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
 
-export interface ApiError {
+export type ApiError ={
     status: number;
     message?: string;
     data?: {
@@ -10,7 +10,7 @@ export interface ApiError {
     }
 }
 
-export interface Feedback {
+export type Feedback = {
     id: string;
     fullName: string | null;
     imageSrc: string | null;
@@ -19,7 +19,7 @@ export interface Feedback {
     createdAt: string;
 };
 
-export interface FeedbackState {
+export type FeedbackState = {
     isFetching: boolean;
     isShowSuccess: boolean;
     feedbacks: Feedback[];

@@ -8,7 +8,7 @@ import { setCredentials } from '@redux/auth/auth.slice';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
 import { Loader } from '@components/Loader';
 
-interface Props {
+type Props = {
     email?: string;
 }
 
