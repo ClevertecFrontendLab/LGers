@@ -4,6 +4,7 @@ import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
 import { resetError } from '@redux/feedbacks/feedbacks.slice';
 import { useNavigate } from 'react-router-dom';
 import { PATHS } from '@constants/PATHS';
+import { STATUS } from '@constants/STATUS';
 
 export const FeedbackError500: FC = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -16,7 +17,7 @@ export const FeedbackError500: FC = () => {
     };
 
     useEffect(() => {
-        if (error?.status === 403 || error?.status === 500) {
+        if (error?.status === STATUS.CODE_403 || error?.status === STATUS.CODE_500) {
             setIsOpen(true);
         } else {
             setIsOpen(false);

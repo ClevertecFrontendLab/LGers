@@ -1,4 +1,4 @@
-export const STATUS: Record<string, number> = {
+export const STATUS = {
     CODE_200: 200,
     CODE_201: 201,
     CODE_203: 203,

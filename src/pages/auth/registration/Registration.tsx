@@ -13,6 +13,7 @@ import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
 import { Loader } from '@components/Loader';
 import { resetError, setCredentials } from '@redux/auth/auth.slice';
 import { PATHS, PATHS_RESULT } from '@constants/PATHS';
+import { STATUS } from '@constants/STATUS';
 
 const marginBottom = 32;
 
@@ -40,7 +41,7 @@ export const Registration: FC = () => {
     }, []);
 
     useEffect(() => {
-        if (error && error.status === 409) {
+        if (error && error.status === STATUS.CODE_409) {
             dispatch(resetError());
             navigate(PATHS_RESULT.errorUserExist);
         } else if (error) {
@@ -171,7 +172,7 @@ export const Registration: FC = () => {
                                             </Button>
                                         </Form.Item>
                                         <Button type="default" className={styles.auth__googleBtn} block
-                                                disabled>
+                                            disabled>
                                             Регистрация через Google
                                         </Button>
                                     </div>

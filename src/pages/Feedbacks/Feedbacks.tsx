@@ -13,6 +13,7 @@ import { logout } from "@redux/auth/auth.slice";
 import { FeedbackError500 } from "@components/modals/FeedbackError500";
 import { useLazyGetFeedbacksQuery } from "@redux/api/api";
 import { FeedbackErrorPost } from "@components/modals/FeedbackErrorPost";
+import { STATUS } from "@constants/STATUS";
 
 export type ModalProps = {
     isModalOpenProp: boolean;
@@ -47,7 +48,7 @@ export const Feedbacks = () => {
     });
 
     useEffect(() => {
-        if (error?.status === 403) {
+        if (error?.status === STATUS.CODE_403) {
             dispatch(logout());
         }
     }, [error]);
