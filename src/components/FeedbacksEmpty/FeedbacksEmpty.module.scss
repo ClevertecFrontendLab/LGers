@@ -1,0 +1,35 @@
+.content {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+  margin: 16px ;
+
+  &__title {
+    color: #061178;
+    text-align: center;
+  }
+
+  &__message {
+      max-width: 521px;
+      text-align: center;
+  }
+
+  @media all and (min-width: 576px) {
+    margin: 24px 16px;
+  }
+
+  &__card {
+    margin: 16px;
+    width: 100%;
+  }
+
+  &__user {
+    font-size: 16px;
+    @media all and (min-width: 576px) {
+      min-width: 174px;
+      flex-direction: column;
+    }
+  }
+}

@@ -1,0 +1,28 @@
+.content {
+  display: flex;
+  flex-direction: column;
+
+  &__wrapper {
+    margin: 16px;
+    @media all and (min-width: 576px) {
+        margin: 20px 24px;
+      }
+  }
+
+  @media all and (min-width: 576px) {
+    flex-direction: row;
+  }
+
+  &__card {
+    margin-bottom: 16px;
+  }
+
+  &__user {
+    font-size: 16px;
+
+    @media all and (min-width: 576px) {
+      min-width: 174px;
+      flex-direction: column;
+    }
+  }
+}

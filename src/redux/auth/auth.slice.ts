@@ -2,13 +2,16 @@ import { ApiError, AuthState } from '@redux/auth/auth.types';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { cleverFitApi } from '@redux/api/api';
 
+const accessToken = localStorage.getItem('accessToken');
+
 const initialState: AuthState = {
-    isAuth: false,
+    rememberMe: true,
+    isAuth: !!accessToken,
     isFetching: false,
     hasResult: false,
     user: '',
     error: null,
-    accessToken: '',
+    accessToken: accessToken,
     password: '',
     email: '',
     authError: undefined
@@ -42,7 +45,7 @@ export const authSlice = createSlice({
             state.hasResult = false;
         },
 
-        setCredentials: (state, action: PayloadAction<{ email: string | undefined, password: string| undefined }>) => {
+        setCredentials: (state, action: PayloadAction<{ email: string | undefined, password: string | undefined }>) => {
             const { email, password } = action.payload;
             if (email) {
                 state.email = email;
@@ -50,6 +53,10 @@ export const authSlice = createSlice({
             if (password) {
                 state.password = password;
             }
+        },
+
+        setRememberMe: (state, action) => {
+            state.rememberMe = action.payload;
         },
     },
 
@@ -65,7 +72,11 @@ export const authSlice = createSlice({
                 state.isAuth = true;
                 state.accessToken = action.payload.accessToken;
                 state.error = null;
-                localStorage.setItem('accessToken', action.payload.accessToken);
+
+                debugger;
+                if (state.rememberMe) {
+                    localStorage.setItem('accessToken', action.payload.accessToken);
+                }
             })
             .addMatcher(login.matchRejected, (state, action) => {
                 state.isFetching = false;
@@ -147,6 +158,7 @@ export const {
     resetHasResult,
     setCredentials,
     setAuthError,
+    setRememberMe,
 } = authSlice.actions;
 
 export const authReducer = authSlice.reducer;

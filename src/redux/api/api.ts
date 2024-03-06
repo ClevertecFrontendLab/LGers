@@ -1,5 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { RootState } from '@redux/configure-store';
+import { Feedback } from './api.types';
 
 export interface IPost {
     id: number;
@@ -10,6 +11,10 @@ export interface IPost {
 export interface UserCredentials {
     email: string,
     password: string,
+}
+
+export interface FormValues extends UserCredentials {
+    remember: boolean;
 }
 
 export interface UserResponse {
@@ -99,6 +104,18 @@ export const cleverFitApi = createApi({
                 body: { password, confirmPassword },
             }),
         }),
+
+        addFeedback: builder.mutation<Record<string, never>, { message: string, rating: number }>({
+            query: ({ message, rating }) => ({
+                url: '/feedback',
+                method: 'POST',
+                body: { message, rating },
+            }),
+        }),
+
+        getFeedbacks: builder.query<Feedback[], null>({
+            query: () => '/feedback',
+        }),
     }),
 });
 
@@ -108,4 +125,7 @@ export const {
     useCheckEmailMutation,
     useConfirmEmailMutation,
     useChangePasswordMutation,
+    useAddFeedbackMutation,
+    useGetFeedbacksQuery,
+    useLazyGetFeedbacksQuery,
 } = cleverFitApi;

@@ -15,6 +15,7 @@ export interface ApiError {
 }
 
 export interface AuthState {
+    rememberMe: boolean;
     isAuth: boolean;
     isFetching: boolean;
     hasResult: boolean;

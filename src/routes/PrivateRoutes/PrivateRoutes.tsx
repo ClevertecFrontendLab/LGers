@@ -3,14 +3,23 @@ import { MainPage } from '@pages/mainPage';
 import { FC } from 'react';
 
 import { Private } from '../../hoc/Private';
+import { Feedbacks } from '@pages/Feedbacks';
+import { PATHS } from '@constants/PATHS';
 
 export const PrivateRoutes: FC = () => {
     return (
         <Routes>
-            <Route path='/' element={<Navigate to={'/main'} replace/>} />
-            <Route path='/main' element={
+            <Route path={PATHS.home.path} element={
+                <Navigate to={PATHS.main.path} replace />
+            } />
+            <Route path={PATHS.main.path} element={
                 <Private>
                     <MainPage />
+                </Private>
+            } />
+            <Route path={PATHS.feedbacks.path} element={
+                <Private>
+                    <Feedbacks />
                 </Private>
             } />
         </Routes>

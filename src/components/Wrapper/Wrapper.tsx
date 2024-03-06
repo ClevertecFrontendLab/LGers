@@ -2,7 +2,7 @@ import styles from './Wrapper.module.css';
 import { FC, JSX } from 'react';
 
 interface WrapperProps {
-     children: JSX.Element;
+    children: JSX.Element | JSX.Element[];
 }
 
 export const Wrapper: FC<WrapperProps> = ({ children }) => {

@@ -9,12 +9,12 @@ import { AuthTabs } from '@pages/auth/components/AuthTabs';
 import {
     CheckEmailResponse,
     cleverFitApi,
+    FormValues,
     useCheckEmailMutation,
-    UserCredentials
 } from '@redux/api/api';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
 import { Loader } from '@components/Loader';
-import { resetError, setAuthError, setCredentials } from '@redux/auth/auth.slice';
+import { resetError, setAuthError, setCredentials, setRememberMe } from '@redux/auth/auth.slice';
 import s from './Auth.module.scss';
 
 const marginBottom = 32;
@@ -22,7 +22,7 @@ const marginBottom = 32;
 type FieldType = {
     email?: string;
     password?: string;
-    rememberMe?: boolean;
+    remember?: boolean;
 };
 
 const EmailLabel = () => {
@@ -36,26 +36,33 @@ export const Auth: FC = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const dispatch = useAppDispatch();
-    const { isAuth, error, isFetching } = useAppSelector(state => state.auth);
+    const { isAuth, error, isFetching, rememberMe } = useAppSelector(state => state.auth);
     const [checkEmail] = useCheckEmailMutation();
     const [form] = Form.useForm();
 
     const [isEmailCorrect, setIsEmailCorrect] = useState(true);
 
-    const onFinish = (values: UserCredentials) => {
+    const onFinish = async (values: FormValues) => {
+        const { email, password, remember } = values;
 
-        if (!form.getFieldValue('rememberMe')) {
+        if (!remember) {
             localStorage.removeItem('accessToken');
+            dispatch(setRememberMe(false));
         }
 
-        const { email, password } = values;
         dispatch(setCredentials({ email, password }))
         login({ email, password });
+            // .then((res) => {
+            //     if (!remember) {
+            //         localStorage.removeItem('accessToken');
+            //         dispatch(setRememberMe(false));
+            //     }
+            // });
     };
 
     const onRestorePassword = async () => {
         form.validateFields(['email'])
-            .then( async (values) => {
+            .then(async (values) => {
                 setIsEmailCorrect(true);
                 const { email, password } = values;
                 dispatch(setCredentials({ email, password }));
@@ -70,12 +77,12 @@ export const Auth: FC = () => {
             .catch((e) => {
                 dispatch(setAuthError(e));
             })
-        ;
+            ;
     };
 
     useEffect(() => {
         if (isAuth) {
-            navigate('/', { state: { from: location } });
+            navigate('/main', { state: { from: location } });
         }
     }, [isAuth]);
 
@@ -86,7 +93,7 @@ export const Auth: FC = () => {
                     navigate('/result/error-login', { state: { from: location } });
                     break;
 
-                case 404: 
+                case 404:
                     if (error.data?.message === 'Email не найден') {
                         navigate('/result/error-check-email-no-exist', { state: { from: location } });
                     } else {
@@ -94,8 +101,8 @@ export const Auth: FC = () => {
                     }
                     break;
 
-                case 409: 
-                        navigate('/result/error-check-email');
+                case 409:
+                    navigate('/result/error-check-email');
                     break;
 
                 default:
@@ -165,10 +172,14 @@ export const Auth: FC = () => {
 
                                     <div className={s.rememberMe}>
                                         <Form.Item<FieldType>
-                                            name="rememberMe"
+                                            name="remember"
                                             style={{ marginBottom: 0 }}
                                         >
-                                            <Checkbox defaultChecked={true} data-test-id={'login-remember'}>
+                                            <Checkbox
+                                                defaultChecked={true}
+                                                data-test-id={'login-remember'}
+                                                onClick={() => dispatch(setRememberMe(!rememberMe))}
+                                            >
                                                 Запомнить меня
                                             </Checkbox>
                                         </Form.Item>
