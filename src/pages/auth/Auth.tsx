@@ -14,8 +14,10 @@ import {
 } from '@redux/api/api';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
 import { Loader } from '@components/Loader';
-import { resetError, setAuthError, setCredentials, setRememberMe } from '@redux/auth/auth.slice';
+import { resetError, setAuth, setAuthError, setCredentials, setRememberMe, setToken } from '@redux/auth/auth.slice';
 import s from './Auth.module.scss';
+import { useGoogleLogin } from '@react-oauth/google';
+import { PATHS } from '@constants/PATHS';
 
 const marginBottom = 32;
 
@@ -24,6 +26,12 @@ type FieldType = {
     password?: string;
     remember?: boolean;
 };
+
+export interface GoogleResponse {
+    clientId: string;
+    credential: string;
+    select_by: string;
+}
 
 const EmailLabel = () => {
     return (
@@ -52,12 +60,6 @@ export const Auth: FC = () => {
 
         dispatch(setCredentials({ email, password }))
         login({ email, password });
-            // .then((res) => {
-            //     if (!remember) {
-            //         localStorage.removeItem('accessToken');
-            //         dispatch(setRememberMe(false));
-            //     }
-            // });
     };
 
     const onRestorePassword = async () => {
@@ -116,6 +118,20 @@ export const Auth: FC = () => {
     const onFieldsChange = () => {
         setIsEmailCorrect(!form.getFieldError('email').length);
     };
+
+    const googleLogin = useGoogleLogin({
+        onSuccess: tokenResponse => {
+            const { access_token } = tokenResponse;
+            dispatch(setToken(access_token));
+            dispatch(setAuth(true));
+
+            if (rememberMe) {
+                localStorage.setItem('accessToken', access_token);
+            }
+
+            navigate(PATHS.main.path);
+        },
+    });
 
     return (
         <Wrapper>
@@ -205,7 +221,12 @@ export const Auth: FC = () => {
                                                 Войти
                                             </Button>
                                         </Form.Item>
-                                        <Button type="default" className={s.auth__googleBtn} block>
+                                        <Button
+                                            type="default"
+                                            className={s.auth__googleBtn}
+                                            block
+                                            onClick={() => googleLogin()}
+                                        >
                                             Войти через Google
                                         </Button>
                                     </div>
