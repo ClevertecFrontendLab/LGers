@@ -5,10 +5,10 @@ import { Registration } from '@pages/auth/registration';
 import { ChangePassword } from '@pages/auth/change-password/ChangePassword';
 import { Error } from '@pages/result/error';
 import { ErrorLogin } from '@pages/result/error-login';
-import { ErrorChekEmailNoExist } from '@pages/result/error-check-email-no-exist';
-import { ErrorChekEmail } from '@pages/result/error-check-email';
+import { ErrorCheckEmailNoExist } from '@pages/result/error-check-email-no-exist';
+import { ErrorCheckEmail } from '@pages/result/error-check-email';
 import { ErrorUserExist } from '@pages/result/error-user-exist';
-import { Success } from '@pages/result/succes';
+import { Success } from '@pages/result/success';
 import { PrivateRoutes } from './PrivateRoutes';
 import { setAuth, setToken } from '@redux/auth/auth.slice';
 import { useAppDispatch } from '@hooks/typed-react-redux-hooks';
@@ -40,8 +40,8 @@ export const AppRoutes: FC = () => {
                        element={<Error navigateTo={'/auth/registration'} />} />
                 <Route path='/result/error-login' element={<ErrorLogin />} />
                 <Route path='/result/error-check-email-no-exist'
-                       element={<ErrorChekEmailNoExist />} />
-                <Route path='/result/error-check-email' element={<ErrorChekEmail />} />
+                       element={<ErrorCheckEmailNoExist />} />
+                <Route path='/result/error-check-email' element={<ErrorCheckEmail />} />
                 <Route path='/result/error-user-exist' element={<ErrorUserExist />} />
                 <Route path='/result/error-change-password' element={<ErrorChangePassword />} />
                 <Route path='/result/success' element={<Success />} />

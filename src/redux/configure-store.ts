@@ -3,6 +3,7 @@ import { createReduxHistoryContext } from 'redux-first-history';
 import { createBrowserHistory } from 'history';
 import { authReducer } from '@redux/auth/auth.slice';
 import { cleverFitApi } from '@redux/api/api';
+import { feedbacksReducer } from './feedbacks/feedbacks.slice';
 
 const { createReduxHistory, routerMiddleware, routerReducer } = createReduxHistoryContext({
     history: createBrowserHistory(),
@@ -11,6 +12,7 @@ const { createReduxHistory, routerMiddleware, routerReducer } = createReduxHisto
 const combinedReducer = combineReducers({
     router: routerReducer,
     auth: authReducer,
+    feedbacks: feedbacksReducer,
     [cleverFitApi.reducerPath]: cleverFitApi.reducer,
 });
 

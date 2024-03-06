@@ -1,1 +1,1 @@
-export { ErrorChekEmail } from './ErrorChekEmail';
+export { ErrorCheckEmail } from './ErrorCheckEmail';

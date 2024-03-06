@@ -39,7 +39,6 @@ export const Sidebar: FC = () => {
     const onExit = () => {
         dispatch(logout());
         navigate('/auth');
-        console.log('exit');
     };
     const navLinks = links.map((item) => {
         return (

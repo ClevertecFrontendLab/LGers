@@ -1,6 +1,5 @@
-import { Wrapper } from '@components/Wrapper';
-import s from './Auth.module.scss';
 import { FC, useEffect, useState } from 'react';
+import { Wrapper } from '@components/Wrapper';
 import { Button, Checkbox, Form, Input } from 'antd';
 import { AuthWrapper } from '@components/AuthWrapper';
 import { FormWrapper } from '@pages/auth/components/FormWrapper';
@@ -10,87 +9,129 @@ import { AuthTabs } from '@pages/auth/components/AuthTabs';
 import {
     CheckEmailResponse,
     cleverFitApi,
+    FormValues,
     useCheckEmailMutation,
-    UserCredentials
 } from '@redux/api/api';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
 import { Loader } from '@components/Loader';
-import { resetError, setCredentials } from '@redux/auth/auth.slice';
+import { resetError, setAuth, setAuthError, setCredentials, setRememberMe, setToken } from '@redux/auth/auth.slice';
+import s from './Auth.module.scss';
+import { useGoogleLogin } from '@react-oauth/google';
+import { PATHS } from '@constants/PATHS';
 
 const marginBottom = 32;
 
 type FieldType = {
     email?: string;
     password?: string;
-    rememberMe?: boolean;
+    remember?: boolean;
 };
+
+export interface GoogleResponse {
+    clientId: string;
+    credential: string;
+    select_by: string;
+}
 
 const EmailLabel = () => {
     return (
-        <>
-            <span className={s.emailLabel}>e-mail:</span>
-        </>
-    )
-}
+        <span className={s.emailLabel}>e-mail:</span>
+    );
+};
 
 export const Auth: FC = () => {
     const [login] = cleverFitApi.useLoginMutation();
     const navigate = useNavigate();
     const location = useLocation();
     const dispatch = useAppDispatch();
-    const { isAuth, error, isFetching } = useAppSelector(state => state.auth);
+    const { isAuth, error, isFetching, rememberMe } = useAppSelector(state => state.auth);
     const [checkEmail] = useCheckEmailMutation();
     const [form] = Form.useForm();
+
     const [isEmailCorrect, setIsEmailCorrect] = useState(true);
 
-    const onFinish = (values: UserCredentials) => {
-        if (!form.getFieldValue('rememberMe')) {
+    const onFinish = async (values: FormValues) => {
+        const { email, password, remember } = values;
+
+        if (!remember) {
             localStorage.removeItem('accessToken');
+            dispatch(setRememberMe(false));
         }
-        const { email, password } = values;
+
         dispatch(setCredentials({ email, password }))
         login({ email, password });
     };
 
     const onRestorePassword = async () => {
-        const isEmailCorrect =  form.getFieldValue('email');
+        form.validateFields(['email'])
+            .then(async (values) => {
+                setIsEmailCorrect(true);
+                const { email, password } = values;
+                dispatch(setCredentials({ email, password }));
+                if (email) {
+                    const data = await checkEmail({ email }) as CheckEmailResponse;
+                    if (data.data) {
+                        navigate('/auth/confirm-email', { state: { from: location } });
+                    }
+                }
 
-        setIsEmailCorrect(isEmailCorrect);
-        if (isEmailCorrect) {
-            const { email, password } = form.getFieldsValue();
-            dispatch(setCredentials({ email, password }));
-            isEmailCorrect && checkEmail(email);
-            const data = await checkEmail(email) as CheckEmailResponse;
-
-            if (data.data) {
-                navigate('/auth/confirm-email', { state: { from: location } });
-            }
-        }
-
+            })
+            .catch((e) => {
+                dispatch(setAuthError(e));
+            })
+            ;
     };
 
     useEffect(() => {
         if (isAuth) {
-            navigate('/', { state: { from: location } });
+            navigate('/main', { state: { from: location } });
         }
     }, [isAuth]);
 
     useEffect(() => {
         if (error) {
-            if (error.status === 404 && error.data?.message === 'Email не найден') {
-                navigate('/result/error-check-email-no-exist', { state: { from: location } });
-            } else if (error.status === 404) {
-                navigate('/result/error-login', { state: { from: location } });
-            } else {
-                navigate('/result/error-check-email', { state: { from: location } });
+            switch (error.status) {
+                case 400:
+                    navigate('/result/error-login', { state: { from: location } });
+                    break;
+
+                case 404:
+                    if (error.data?.message === 'Email не найден') {
+                        navigate('/result/error-check-email-no-exist', { state: { from: location } });
+                    } else {
+                        navigate('/result/error-login', { state: { from: location } });
+                    }
+                    break;
+
+                case 409:
+                    navigate('/result/error-check-email');
+                    break;
+
+                default:
+                    navigate('/result/error-check-email', { state: { from: location } });
             }
         }
+
         dispatch(resetError());
     }, [error]);
 
     const onFieldsChange = () => {
         setIsEmailCorrect(!form.getFieldError('email').length);
     };
+
+    const googleLogin = useGoogleLogin({
+        onSuccess: tokenResponse => {
+            const { access_token } = tokenResponse;
+            dispatch(setToken(access_token));
+            dispatch(setAuth(true));
+
+            if (rememberMe) {
+                localStorage.setItem('accessToken', access_token);
+            }
+
+            navigate(PATHS.main.path);
+        },
+    });
 
     return (
         <Wrapper>
@@ -109,7 +150,6 @@ export const Auth: FC = () => {
                                         remember: true,
                                     }}
                                     onFinish={onFinish}
-                                    autoComplete="off"
                                     size={'large'}
                                     onFieldsChange={onFieldsChange}
                                 >
@@ -148,11 +188,14 @@ export const Auth: FC = () => {
 
                                     <div className={s.rememberMe}>
                                         <Form.Item<FieldType>
-                                            name="rememberMe"
+                                            name="remember"
                                             style={{ marginBottom: 0 }}
                                         >
-                                            <Checkbox defaultChecked={true}
-                                                      data-test-id={'login-remember'}>
+                                            <Checkbox
+                                                defaultChecked={true}
+                                                data-test-id={'login-remember'}
+                                                onClick={() => dispatch(setRememberMe(!rememberMe))}
+                                            >
                                                 Запомнить меня
                                             </Checkbox>
                                         </Form.Item>
@@ -178,7 +221,12 @@ export const Auth: FC = () => {
                                                 Войти
                                             </Button>
                                         </Form.Item>
-                                        <Button type="default" className={s.auth__googleBtn} block>
+                                        <Button
+                                            type="default"
+                                            className={s.auth__googleBtn}
+                                            block
+                                            onClick={() => googleLogin()}
+                                        >
                                             Войти через Google
                                         </Button>
                                     </div>

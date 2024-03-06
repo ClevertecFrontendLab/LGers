@@ -1,1 +1,1 @@
-export { ErrorChekEmailNoExist } from './ErrorChekEmailNoExist';
+export { ErrorCheckEmailNoExist } from './ErrorCheckEmailNoExist';

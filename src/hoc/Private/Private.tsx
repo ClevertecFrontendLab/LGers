@@ -10,7 +10,7 @@ export const Private = ({ children }: PrivateProps): JSX.Element => {
     const { isAuth } = useAppSelector((state) => state.auth);
 
     if (!isAuth) {
-        return <Navigate to={'/auth'} replace />;
+        return <Navigate to={'/auth'} replace/>;
     }
 
     return children;

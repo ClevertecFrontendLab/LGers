@@ -28,7 +28,6 @@ export const ChangePassword: FC<Props> = () => {
 
     const { email, password, isFetching } = useAppSelector((state) => state.auth);
     const onFinish = (values: FieldType) => {
-        console.log('onFinish', values);
         const { password, confirmPassword } = values;
         dispatch(setCredentials({ email, password }));
         changePassword({ password, confirmPassword });
@@ -54,11 +53,11 @@ export const ChangePassword: FC<Props> = () => {
             <AuthResultWrapper>
                 <>
                     {isFetching && <Loader />}
-                    <h3>Восстановление аккауанта</h3>
+                    <h3 className={s.auth__title}>Восстановление аккауанта</h3>
                     <Form
                         form={form}
                         name="auth-change-password"
-                        style={{ margin: 32 }}
+                        style={{ margin: 32,  }}
                         initialValues={{
                             password,
                             confirmPassword: password,
@@ -66,8 +65,8 @@ export const ChangePassword: FC<Props> = () => {
                         onFinish={onFinish}
                         autoComplete="off"
                         size={'large'}
-
-                    >
+                        
+                        >
                         <Form.Item<FieldType>
                             name="password"
                             rules={[

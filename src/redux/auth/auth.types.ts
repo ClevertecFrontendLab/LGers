@@ -15,6 +15,7 @@ export interface ApiError {
 }
 
 export interface AuthState {
+    rememberMe: boolean;
     isAuth: boolean;
     isFetching: boolean;
     hasResult: boolean;
@@ -23,5 +24,6 @@ export interface AuthState {
     password: string | null | undefined;
     accessToken: string | undefined | null;
     error: ApiError | FetchBaseQueryError | undefined | null;
+    authError?: undefined | ApiError;
 }
 

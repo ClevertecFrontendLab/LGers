@@ -3,7 +3,7 @@ import { FC } from 'react';
 import { AppResult } from '@components/AppResult';
 import { AppResultProps } from '@components/AppResult/AppResult';
 
-export const ErrorChekEmail: FC = () => {
+export const ErrorCheckEmail: FC = () => {
 
     const DATA: AppResultProps = {
         navigateTo: '/auth/confirm-email',
@@ -15,6 +15,6 @@ export const ErrorChekEmail: FC = () => {
     }
 
     return (
-        <AppResult {...DATA} />
+        <AppResult {...DATA} navigateTo={-1}/>
     );
 };
