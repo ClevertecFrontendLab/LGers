@@ -6,23 +6,13 @@ type Props = {
     children: JSX.Element;
 };
 
-export const AuthResultWrapper: FC<Props> = ({ children }) => {
-
-    return (
-        <Wrapper>
-            <div
-                className={styles.result__page}
-            >
-                <div
-                    className={styles.resultWrapper}
-                >
-                    <div
-                        className={styles.formWrapper}
-                    >
-                        {children}
-                    </div>
+export const AuthResultWrapper: FC<Props> = ({ children }) =>
+    <Wrapper>
+        <div className={styles.result__page}>
+            <div className={styles.resultWrapper}>
+                <div className={styles.formWrapper}>
+                    {children}
                 </div>
             </div>
-        </Wrapper>
-    );
-};
+        </div>
+    </Wrapper>

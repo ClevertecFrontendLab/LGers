@@ -7,19 +7,15 @@ import styles from './AppWrapper.module.scss';
 interface AppWrapperProps {
     children: JSX.Element | JSX.Element[];
 };
-export const AppWrapper: FC<AppWrapperProps> = ({ children }) => {
-
-    return (
-        <Wrapper>
-            <div className={styles.main__page}>
-                <Sidebar/>
-                <div className={styles.pageContainer}>
-                    <Header/>
-                    <main className={styles.main}>
-                        {children}
-                    </main>
-                </div>
+export const AppWrapper: FC<AppWrapperProps> = ({ children }) =>
+    <Wrapper>
+        <div className={styles.main__page}>
+            <Sidebar />
+            <div className={styles.pageContainer}>
+                <Header />
+                <main className={styles.main}>
+                    {children}
+                </main>
             </div>
-        </Wrapper>
-    );
-};
+        </div>
+    </Wrapper>

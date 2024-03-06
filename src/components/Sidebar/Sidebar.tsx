@@ -40,8 +40,9 @@ export const Sidebar: FC = () => {
         dispatch(logout());
         navigate('/auth');
     };
-    const navLinks = links.map((item) => {
-        return (
+
+    const navLinks = links
+        .map((item) =>
             <li className={styles.nav__li} key={item.id}>
                 <Link to={item.link} className={styles.nav__link}>
                     <span className={styles.nav__icon}>
@@ -53,7 +54,6 @@ export const Sidebar: FC = () => {
                 </Link>
             </li>
         );
-    });
 
     return (
         <aside className={styles.sidebar}>
@@ -76,7 +76,7 @@ export const Sidebar: FC = () => {
                 <div className={styles.exit}>
                     <button className={styles.exit__btn} onClick={onExit}>
                         <img src={exitIcon} alt='exit'
-                             className={styles.exit__icon}
+                            className={styles.exit__icon}
                         />
                         <span
                             className={!state.isShowSidebar ? styles.nav_hideTitle : styles.link__title}>Выход

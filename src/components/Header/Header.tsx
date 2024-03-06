@@ -5,7 +5,8 @@ import { Breadcrumbs } from '@components/Breadcrumbs';
 import { PATHS } from '@constants/PATHS';
 
 export const Header = () => {
-    const location = useLocation()
+    const location = useLocation();
+
     return (
         <header className={styles.header}>
             <Breadcrumbs />

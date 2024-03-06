@@ -6,6 +6,7 @@ import { closeShowSuccess } from '@redux/feedbacks/feedbacks.slice';
 export const FeedbackSuccess: FC = () => {
     const { isShowSuccess } = useAppSelector((state) => state.feedbacks);
     const dispatch = useAppDispatch();
+
     return (
         <Modal
             open={isShowSuccess}
@@ -19,7 +20,7 @@ export const FeedbackSuccess: FC = () => {
                 status={'success'}
                 title={'Отзыв успешно опубликован'}
                 extra={[
-                    <Button type="primary" onClick={() => dispatch(closeShowSuccess())} block>
+                    <Button type="primary" onClick={() => dispatch(closeShowSuccess())} block key={'closeButton'}>
                         Отлично
                     </Button>,
                 ]}

@@ -5,11 +5,8 @@ interface WrapperProps {
     children: JSX.Element | JSX.Element[];
 }
 
-export const Wrapper: FC<WrapperProps> = ({ children }) => {
-
-    return (
-        <div className={styles.wrapper}>
-            {children}
-        </div>
-    );
-};
+export const Wrapper: FC<WrapperProps> = ({ children }) =>
+    <div className={styles.wrapper}>
+        {children}
+    </div>
+    ;
