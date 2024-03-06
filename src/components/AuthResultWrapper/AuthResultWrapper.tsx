@@ -1,4 +1,4 @@
-import s from './AuthResultWrapper.module.scss';
+import styles from './AuthResultWrapper.module.scss';
 import { FC, JSX } from 'react';
 import { Wrapper } from '@components/Wrapper';
 
@@ -11,13 +11,13 @@ export const AuthResultWrapper: FC<Props> = ({ children }) => {
     return (
         <Wrapper>
             <div
-                className={s.result__page}
+                className={styles.result__page}
             >
                 <div
-                    className={s.resultWrapper}
+                    className={styles.resultWrapper}
                 >
                     <div
-                        className={s.formWrapper}
+                        className={styles.formWrapper}
                     >
                         {children}
                     </div>

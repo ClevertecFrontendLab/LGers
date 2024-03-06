@@ -1,5 +1,5 @@
 import { Wrapper } from '@components/Wrapper';
-import s from './Registration.module.scss'; // todo registration
+import styles from './Registration.module.scss';
 import { FC, useEffect } from 'react';
 import { Button, Form, Input } from 'antd';
 import { AuthWrapper } from '@components/AuthWrapper';
@@ -70,7 +70,7 @@ export const Registration: FC = () => {
         <Wrapper>
             <>
                 {isFetching && <Loader />}
-                <div className={s.auth__page}>
+                <div className={styles.auth__page}>
                     {/*<Reg />*/}
                     <AuthWrapper>
                         <FormWrapper>
@@ -89,7 +89,7 @@ export const Registration: FC = () => {
                                     scrollToFirstError
                                 >
                                     <AuthTabs activeTab={'registration'} />
-                                    <div className={s.auth__items}>
+                                    <div className={styles.auth__items}>
                                         <Form.Item<FieldType>
                                             name="email"
                                             rules={[
@@ -157,7 +157,7 @@ export const Registration: FC = () => {
                                             />
                                         </Form.Item>
                                     </div>
-                                    <div className={s.auth__btns}>
+                                    <div className={styles.auth__btns}>
                                         <Form.Item
                                             style={{ marginBottom: 0 }}
                                         >
@@ -170,7 +170,7 @@ export const Registration: FC = () => {
                                                 Войти
                                             </Button>
                                         </Form.Item>
-                                        <Button type="default" className={s.auth__googleBtn} block
+                                        <Button type="default" className={styles.auth__googleBtn} block
                                                 disabled>
                                             Регистрация через Google
                                         </Button>

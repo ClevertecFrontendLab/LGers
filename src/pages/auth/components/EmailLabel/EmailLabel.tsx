@@ -1,11 +1,3 @@
-import s from './EmailLabel.module.scss';
-import { FC } from 'react';
+import styles from './EmailLabel.module.scss';
 
-export const EmailLabel: FC = () => {
-
-    return (
-        <>
-            <span className={s.emailLabel}>e-mail:</span>
-        </>
-    );
-};
+export const EmailLabel = () => <span className={styles.emailLabel}>e-mail:</span>;

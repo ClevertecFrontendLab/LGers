@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import s from './Footer.module.scss';
+import styles from './Footer.module.scss';
 import { Button } from '@components/Button';
 import { AndroidFilled, AppleFilled } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
@@ -17,13 +17,13 @@ export const Footer: FC = () => {
     };
 
     return (
-        <footer className={s.footer}>
-            <div className={s.app}>
-                <div className={s.app__txt}>
-                    <p className={s.app__txt_primary}>Скачать на телефон</p>
-                    <p className={s.app__txt_secondary}>Доступно в PRO-тарифе</p>
+        <footer className={styles.footer}>
+            <div className={styles.app}>
+                <div className={styles.app__txt}>
+                    <p className={styles.app__txt_primary}>Скачать на телефон</p>
+                    <p className={styles.app__txt_secondary}>Доступно в PRO-тарифе</p>
                 </div>
-                <div className={s.app__btns}>
+                <div className={styles.app__btns}>
                     <Button
                         btnText={'Android OS'}
                         btnIcon={<AndroidFilled />}
@@ -36,7 +36,7 @@ export const Footer: FC = () => {
                     />
                 </div>
             </div>
-            <button className={s.footer__btn} onClick={handleFeedbacksClick}>
+            <button className={styles.footer__btn} onClick={handleFeedbacksClick}>
                 <Link to={PATHS.feedbacks.path} data-test-id='see-reviews'>
                     Смотреть отзывы
                 </Link>

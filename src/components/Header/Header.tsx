@@ -1,4 +1,4 @@
-import s from './Header.module.scss';
+import styles from './Header.module.scss';
 import { useLocation } from 'react-router-dom';
 import settingsIcon from '../../assets/svg/settings.svg';
 import { Breadcrumbs } from '@components/Breadcrumbs';
@@ -7,11 +7,11 @@ import { PATHS } from '@constants/PATHS';
 export const Header = () => {
     const location = useLocation()
     return (
-        <header className={s.header}>
+        <header className={styles.header}>
             <Breadcrumbs />
             {location.pathname === PATHS.main.path
-                && <div className={s.header__content}>
-                    <h1 className={s.header__h1}>
+                && <div className={styles.header__content}>
+                    <h1 className={styles.header__h1}>
                         <span>
                             Приветствуем тебя в CleverFit — приложении,
                         </span>
@@ -19,11 +19,11 @@ export const Header = () => {
                             которое поможет тебе добиться своей мечты!
                         </span>
                     </h1>
-                    <div className={s.header__settings}>
-                        <button className={s.button}>
-                            <img className={s.button__icon}
+                    <div className={styles.header__settings}>
+                        <button className={styles.button}>
+                            <img className={styles.button__icon}
                                 src={settingsIcon} alt='Settings' />
-                            <span className={s.button__text}>Настройки</span>
+                            <span className={styles.button__text}>Настройки</span>
                         </button>
                     </div>
                 </div>

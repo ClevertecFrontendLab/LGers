@@ -15,7 +15,7 @@ import {
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
 import { Loader } from '@components/Loader';
 import { resetError, setAuth, setAuthError, setCredentials, setRememberMe, setToken } from '@redux/auth/auth.slice';
-import s from './Auth.module.scss';
+import styles from './Auth.module.scss';
 import { useGoogleLogin } from '@react-oauth/google';
 import { PATHS } from '@constants/PATHS';
 
@@ -35,7 +35,7 @@ export interface GoogleResponse {
 
 const EmailLabel = () => {
     return (
-        <span className={s.emailLabel}>e-mail:</span>
+        <span className={styles.emailLabel}>e-mail:</span>
     );
 };
 
@@ -137,7 +137,7 @@ export const Auth: FC = () => {
         <Wrapper>
             <>
                 {isFetching && <Loader />}
-                <div className={s.auth__page}>
+                <div className={styles.auth__page}>
                     <AuthWrapper>
                         <FormWrapper>
                             <>
@@ -186,7 +186,7 @@ export const Auth: FC = () => {
                                         />
                                     </Form.Item>
 
-                                    <div className={s.rememberMe}>
+                                    <div className={styles.rememberMe}>
                                         <Form.Item<FieldType>
                                             name="remember"
                                             style={{ marginBottom: 0 }}
@@ -200,7 +200,7 @@ export const Auth: FC = () => {
                                             </Checkbox>
                                         </Form.Item>
                                         <Button
-                                            className={s.rememberMe__link}
+                                            className={styles.rememberMe__link}
                                             type={'link'}
                                             onClick={onRestorePassword}
                                             disabled={!isEmailCorrect}
@@ -209,7 +209,7 @@ export const Auth: FC = () => {
                                             Забыли пароль?
                                         </Button>
                                     </div>
-                                    <div className={s.auth__btns}>
+                                    <div className={styles.auth__btns}>
                                         <Form.Item style={{ marginBottom: 0 }}>
                                             <Button
                                                 type="primary"
@@ -223,7 +223,7 @@ export const Auth: FC = () => {
                                         </Form.Item>
                                         <Button
                                             type="default"
-                                            className={s.auth__googleBtn}
+                                            className={styles.auth__googleBtn}
                                             block
                                             onClick={() => googleLogin()}
                                         >

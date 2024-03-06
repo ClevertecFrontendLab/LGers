@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { Avatar, Card, Rate, Space, Typography } from "antd";
 import { UserOutlined } from "@ant-design/icons";
-import s from "./FeedbackCard.module.scss";
+import styles from "./FeedbackCard.module.scss";
 import { Feedback } from "@redux/feedbacks/feedbacks.types";
 
 const { Text } = Typography;
@@ -26,11 +26,11 @@ export const FeedbackCard: FC<Feedback> = ({
   const month = date.getMonth().toString().padStart(2, "0");
   const day = date.getDate().toString().padStart(2, "0");
   return (
-    <div className={s.content__wrapper}>
-      <Card className={s.content__card} size={"small"} style={{ marginBottom: 16 }}>
-        <div className={s.content}>
+    <div className={styles.content__wrapper}>
+      <Card className={styles.content__card} size={"small"} style={{ marginBottom: 16 }}>
+        <div className={styles.content}>
           <Space
-            className={s.content__user}
+            className={styles.content__user}
             align="center"
           >
             <Avatar

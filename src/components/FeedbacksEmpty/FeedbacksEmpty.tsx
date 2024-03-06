@@ -1,6 +1,6 @@
 import { FC, useState } from "react";
 import { Card, Space, Typography, Button } from "antd";
-import s from "./FeedbacksEmpty.module.scss";
+import styles from "./FeedbacksEmpty.module.scss";
 import { AddFeedback } from "@components/modals/AddFeedback";
 
 const { Paragraph } = Typography;
@@ -18,19 +18,19 @@ export const FeedbacksEmpty: FC = () => {
   };
 
   return (
-    <div className={s.content}>
-      <Card className={s.content__card} size={"small"}>
-        <div className={s.content}>
+    <div className={styles.content}>
+      <Card className={styles.content__card} size={"small"}>
+        <div className={styles.content}>
           <Space
-            className={s.content__user}
+            className={styles.content__user}
             direction="vertical"
             align="center"
             size={48}
           >
-            <h3 className={s.content__title}>
+            <h3 className={styles.content__title}>
               Оставьте свой отзыв первым
             </h3>
-            <Paragraph type="secondary" style={{ textAlign: 'center' }} className={s.content__message}>
+            <Paragraph type="secondary" style={{ textAlign: 'center' }} className={styles.content__message}>
               Вы можете быть первым, кто оставит отзыв об этом фитнесс
               приложении. Поделитесь своим мнением и опытом с другими
               пользователями, и помогите им сделать правильный выбор.

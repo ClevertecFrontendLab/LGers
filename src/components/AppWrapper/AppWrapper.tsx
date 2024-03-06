@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { Wrapper } from '@components/Wrapper';
 import { Sidebar } from '@components/Sidebar';
 import { Header } from '@components/Header';
-import s from './AppWrapper.module.scss';
+import styles from './AppWrapper.module.scss';
 
 interface AppWrapperProps {
     children: JSX.Element | JSX.Element[];
@@ -11,11 +11,11 @@ export const AppWrapper: FC<AppWrapperProps> = ({ children }) => {
 
     return (
         <Wrapper>
-            <div className={s.main__page}>
+            <div className={styles.main__page}>
                 <Sidebar/>
-                <div className={s.pageContainer}>
+                <div className={styles.pageContainer}>
                     <Header/>
-                    <main className={s.main}>
+                    <main className={styles.main}>
                         {children}
                     </main>
                 </div>

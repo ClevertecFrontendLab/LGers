@@ -5,7 +5,7 @@ import { useAppDispatch } from '@hooks/typed-react-redux-hooks';
 import { resetError, resetHasResult } from '@redux/auth/auth.slice';
 import { AuthResultWrapper } from '@components/AuthResultWrapper';
 import { Button, Result } from 'antd';
-import s from './AppResult.module.scss';
+import styles from './AppResult.module.scss';
 
 export interface AppResultProps {
     title: string;
@@ -41,15 +41,15 @@ export const AppResult: FC<AppResultProps> = (
     return (
         <AuthResultWrapper>
             <Result
-                className={s.resultWrapper}
+                className={styles.resultWrapper}
                 status={status}
                 title={
-                    <h3 className={s.resultWrapper__title}>
+                    <h3 className={styles.resultWrapper__title}>
                         {title}
                     </h3>
                 }
                 subTitle={
-                    <span className={s.resultWrapper__subTitle}>
+                    <span className={styles.resultWrapper__subTitle}>
                         {subTitle}
                     </span>
                 }

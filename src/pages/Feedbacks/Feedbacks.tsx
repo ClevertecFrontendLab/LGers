@@ -3,7 +3,7 @@ import { Button } from "antd";
 import { FeedbackCard } from "../../components/FeedbackCard";
 import { FeedbacksEmpty } from '@components/FeedbacksEmpty';
 import { AppWrapper } from "@components/AppWrapper";
-import s from './Feedbacks.module.scss';
+import styles from './Feedbacks.module.scss';
 import { AddFeedback } from "@components/modals/AddFeedback";
 import { useAppDispatch, useAppSelector } from "@hooks/typed-react-redux-hooks";
 import { Feedback } from "@redux/feedbacks/feedbacks.types";
@@ -61,14 +61,14 @@ export const Feedbacks = () => {
     return (
         <AppWrapper>
             {feedbacks.length ?
-                <div className={s.feedbacks}>
+                <div className={styles.feedbacks}>
                     <div
-                        className={s.feedbacks__content}
+                        className={styles.feedbacks__content}
                     >
                         {feedbacksMapped}
                     </div>
 
-                    <div className={s.feedbacks__footer}>
+                    <div className={styles.feedbacks__footer}>
                         <Button type="primary" onClick={handleAddFeedback} data-test-id='write-review'>
                             Написать отзыв
                         </Button>

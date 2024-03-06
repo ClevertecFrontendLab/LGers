@@ -1,6 +1,6 @@
 import { FC, useState } from 'react';
-import { Button, Modal, Input, Rate, Divider } from 'antd';
-import s from './AddFeedback.module.scss';
+import { Button, Modal, Input, Rate } from 'antd';
+import styles from './AddFeedback.module.scss';
 import { useAddFeedbackMutation, useLazyGetFeedbacksQuery } from '@redux/api/api';
 
 export interface AddFeedbackProps {
@@ -44,7 +44,7 @@ export const AddFeedback: FC<AddFeedbackProps> = ({
             cancelButtonProps={{ style: { display: 'none' } }}
             onCancel={handleClose}
             style={{ padding: 0 }}
-            wrapClassName={s.wrapper}
+            wrapClassName={styles.wrapper}
             maskStyle={{ backdropFilter: 'blur(3px)' }}
             centered
             footer={[

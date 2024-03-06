@@ -1,6 +1,6 @@
 import { FC, useEffect, useState } from 'react';
 import { Result } from 'antd';
-import s from './ConfirmEmail.module.scss';
+import styles from './ConfirmEmail.module.scss';
 import { AuthResultWrapper } from '@components/AuthResultWrapper';
 import { useNavigate } from 'react-router-dom';
 import { useAppSelector } from '@hooks/typed-react-redux-hooks';
@@ -58,16 +58,16 @@ export const ConfirmEmail: FC = () => {
                 <>
                     {isFetching && <Loader />}
                     <Result
-                        className={s.CEWrapper}
+                        className={styles.CEWrapper}
                         status={status}
                         title={
-                            <h3 className={s.CEWrapper__title}>
+                            <h3 className={styles.CEWrapper__title}>
                                 {title}
                             </h3>
                         }
                         subTitle={
-                            <div className={s.CEWrapper__subTitle}>
-                                <p>Мы отправили вам на e-mail <span className={s.CEWrapper__email}>
+                            <div className={styles.CEWrapper__subTitle}>
+                                <p>Мы отправили вам на e-mail <span className={styles.CEWrapper__email}>
                                     {email}
                                 </span> шестизначный код. Введите его в поле ниже.</p>
                             </div>
@@ -91,7 +91,7 @@ export const ConfirmEmail: FC = () => {
                             { 'data-test-id': 'verification-input' }
                         }
                     />
-                    <p className={s.subtitle}>Не пришло письмо? Проверьте папку Спам.</p>
+                    <p className={styles.subtitle}>Не пришло письмо? Проверьте папку Спам.</p>
                 </>
             </AuthResultWrapper>
         </div>

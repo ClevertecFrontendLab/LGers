@@ -1,4 +1,4 @@
-import s from './AuthWrapper.module.scss';
+import styles from './AuthWrapper.module.scss';
 import { FC, JSX } from 'react';
 
 type Props = {
@@ -8,7 +8,7 @@ type Props = {
 export const AuthWrapper: FC<Props> = ({ children }) => {
 
     return (
-        <div className={s.authWrapper}>
+        <div className={styles.authWrapper}>
             {children}
         </div>
     );
