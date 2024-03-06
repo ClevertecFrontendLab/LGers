@@ -2,9 +2,10 @@ import { FC } from 'react';
 
 import { AppResult } from '@components/AppResult';
 import { AppResultProps } from '@components/AppResult/AppResult';
+import { PATHS } from '@constants/PATHS';
 
 const DATA: AppResultProps = {
-    navigateTo: '/auth/registration',
+    navigateTo: PATHS.authRegistration.path,
     title: 'Данные не сохранились',
     status: 'error',
     subTitle: 'Такой e-mail уже записан в системе. Попробуйте зарегистрироваться по другому e-mail.',

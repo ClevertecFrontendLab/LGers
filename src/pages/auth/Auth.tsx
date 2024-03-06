@@ -17,7 +17,7 @@ import { Loader } from '@components/Loader';
 import { resetError, setAuth, setAuthError, setCredentials, setRememberMe, setToken } from '@redux/auth/auth.slice';
 import styles from './Auth.module.scss';
 import { useGoogleLogin } from '@react-oauth/google';
-import { PATHS } from '@constants/PATHS';
+import { PATHS, PATHS_RESULT } from '@constants/PATHS';
 
 const marginBottom = 32;
 
@@ -67,7 +67,7 @@ export const Auth: FC = () => {
                 if (email) {
                     const data = await checkEmail({ email }) as CheckEmailResponse;
                     if (data.data) {
-                        navigate('/auth/confirm-email', { state: { from: location } });
+                        navigate(PATHS.authConfirmEmail.path, { state: { from: location } });
                     }
                 }
 
@@ -80,7 +80,7 @@ export const Auth: FC = () => {
 
     useEffect(() => {
         if (isAuth) {
-            navigate('/main', { state: { from: location } });
+            navigate(PATHS.main.path, { state: { from: location } });
         }
     }, [isAuth]);
 
@@ -88,23 +88,23 @@ export const Auth: FC = () => {
         if (error) {
             switch (error.status) {
                 case 400:
-                    navigate('/result/error-login', { state: { from: location } });
+                    navigate(PATHS_RESULT.errorLogin, { state: { from: location } });
                     break;
 
                 case 404:
                     if (error.data?.message === 'Email не найден') {
-                        navigate('/result/error-check-email-no-exist', { state: { from: location } });
+                        navigate(PATHS_RESULT.errorCheckEmailNoExist, { state: { from: location } });
                     } else {
-                        navigate('/result/error-login', { state: { from: location } });
+                        navigate(PATHS_RESULT.errorLogin, { state: { from: location } });
                     }
                     break;
 
                 case 409:
-                    navigate('/result/error-check-email');
+                    navigate(PATHS_RESULT.errorCheckEmail);
                     break;
 
                 default:
-                    navigate('/result/error-check-email', { state: { from: location } });
+                    navigate(PATHS_RESULT.errorCheckEmail, { state: { from: location } });
             }
         }
 

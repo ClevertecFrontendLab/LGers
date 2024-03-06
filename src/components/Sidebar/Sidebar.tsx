@@ -12,6 +12,7 @@ import {
 import exitIcon from '../../assets/svg/exit.svg'
 import { logout } from '@redux/auth/auth.slice';
 import { useAppDispatch } from '@hooks/typed-react-redux-hooks';
+import { PATHS } from '@constants/PATHS';
 
 type State = {
     isShowSidebar: boolean;
@@ -38,7 +39,7 @@ export const Sidebar: FC = () => {
 
     const onExit = () => {
         dispatch(logout());
-        navigate('/auth');
+        navigate(PATHS.auth.path);
     };
 
     const navLinks = links

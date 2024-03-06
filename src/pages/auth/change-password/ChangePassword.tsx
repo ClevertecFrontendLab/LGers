@@ -7,6 +7,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { setCredentials } from '@redux/auth/auth.slice';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
 import { Loader } from '@components/Loader';
+import { PATHS_RESULT } from '@constants/PATHS';
 
 type Props = {
     email?: string;
@@ -35,10 +36,10 @@ export const ChangePassword: FC<Props> = () => {
 
     useEffect(() => {
         if (changePasswordResult.isSuccess) {
-            navigate('/result/success-change-password');
+            navigate(PATHS_RESULT.successChangePassword);
         }
         if (changePasswordResult.isError) {
-            navigate('/result/error-change-password', { state: { from: location } });
+            navigate(PATHS_RESULT.errorChangePassword, { state: { from: location } });
         }
     }, [changePasswordResult])
 

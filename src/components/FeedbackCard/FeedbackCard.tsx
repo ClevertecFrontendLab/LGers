@@ -3,6 +3,7 @@ import { Avatar, Card, Rate, Space, Typography } from "antd";
 import { UserOutlined } from "@ant-design/icons";
 import styles from "./FeedbackCard.module.scss";
 import { Feedback } from "@redux/feedbacks/feedbacks.types";
+import { formatTime } from "@utils/index";
 
 const { Text } = Typography;
 export type FeedbackCardProps = {
@@ -20,37 +21,30 @@ export const FeedbackCard: FC<Feedback> = ({
   message,
   rating,
   createdAt,
-}) => {
-  const date = new Date(createdAt);
-  const year = date.getFullYear();
-  const month = date.getMonth().toString().padStart(2, "0");
-  const day = date.getDate().toString().padStart(2, "0");
-  return (
-    <div className={styles.content__wrapper}>
-      <Card className={styles.content__card} size={"small"} style={{ marginBottom: 16 }}>
-        <div className={styles.content}>
-          <Space
-            className={styles.content__user}
-            align="center"
-          >
-            <Avatar
-              icon={<UserOutlined />}
-              src={imageSrc}
-            />
-            <p>{fullName}</p>
+}) =>
+  <div className={styles.content__wrapper}>
+    <Card className={styles.content__card} size={"small"} style={{ marginBottom: 16 }}>
+      <div className={styles.content}>
+        <Space
+          className={styles.content__user}
+          align="center"
+        >
+          <Avatar
+            icon={<UserOutlined />}
+            src={imageSrc}
+          />
+          <p>{fullName}</p>
+        </Space>
+        <Space direction="vertical">
+          <Space>
+            <Rate disabled defaultValue={rating} />
+            <Text
+              type="secondary"
+              style={{ fontSize: 12 }}
+            >{formatTime(createdAt)}</Text>
           </Space>
-          <Space direction="vertical">
-            <Space>
-              <Rate disabled defaultValue={rating} />
-              <Text
-                type="secondary"
-                style={{ fontSize: 12 }}
-              >{`${day}:${month}:${year}`}</Text>
-            </Space>
-            <Text type="secondary">{message}</Text>
-          </Space>
-        </div>
-      </Card>
-    </div>
-  );
-};
+          <Text type="secondary">{message}</Text>
+        </Space>
+      </div>
+    </Card>
+  </div>

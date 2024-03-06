@@ -12,6 +12,7 @@ import { cleverFitApi, UserCredentials } from '@redux/api/api';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
 import { Loader } from '@components/Loader';
 import { resetError, setCredentials } from '@redux/auth/auth.slice';
+import { PATHS, PATHS_RESULT } from '@constants/PATHS';
 
 const marginBottom = 32;
 
@@ -41,22 +42,21 @@ export const Registration: FC = () => {
     useEffect(() => {
         if (error && error.status === 409) {
             dispatch(resetError());
-            navigate('/result/error-user-exist');
+            navigate(PATHS_RESULT.errorUserExist);
         } else if (error) {
-            navigate('/result/error');
+            navigate(PATHS_RESULT.error);
         }
     }, [error]);
 
     useEffect(() => {
         if (isAuth) {
-            navigate('/');
+            navigate(PATHS.root.path);
         }
     }, [isAuth]);
 
     useEffect(() => {
-        console.log('result', result);
         if (result.isSuccess) {
-            navigate('/result/success');
+            navigate(PATHS_RESULT.success);
         }
     }, [result]);
 

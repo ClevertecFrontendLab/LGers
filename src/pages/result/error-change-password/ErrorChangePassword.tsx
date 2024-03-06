@@ -2,9 +2,10 @@ import { FC } from 'react';
 
 import { AppResult } from '@components/AppResult';
 import { AppResultProps } from '@components/AppResult/AppResult';
+import { PATHS } from '@constants/PATHS';
 
 const DATA: AppResultProps = {
-    navigateTo: '/auth/change-password',
+    navigateTo: PATHS.authChangePassword.path,
     title: 'Данные не сохранились',
     status: 'error',
     subTitle: 'Что-то пошло не так. Попробуйте еще раз',

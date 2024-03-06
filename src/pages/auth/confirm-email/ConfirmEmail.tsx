@@ -9,6 +9,7 @@ import './ConfirmEmail.scss';
 import { useConfirmEmailMutation } from '@redux/api/api';
 import { ResultStatusType } from 'antd/es/result';
 import { Loader } from '@components/Loader';
+import { PATHS } from '@constants/PATHS';
 
 export const ConfirmEmail: FC = () => {
     const [codeValue, setCodeValue] = useState('');
@@ -48,7 +49,7 @@ export const ConfirmEmail: FC = () => {
         }
 
         if (confirmEmailResult.isSuccess) {
-            navigate('/auth/change-password');
+            navigate(PATHS.authChangePassword.path);
         }
     }, [confirmEmailResult]);
 
