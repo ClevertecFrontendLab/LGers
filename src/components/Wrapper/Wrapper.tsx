@@ -9,4 +9,3 @@ export const Wrapper: FC<WrapperProps> = ({ children }) =>
     <div className={styles.wrapper}>
         {children}
     </div>
-    ;

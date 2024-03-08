@@ -1,8 +1,8 @@
-import styles from './Header.module.scss';
 import { useLocation } from 'react-router-dom';
-import settingsIcon from '../../assets/svg/settings.svg';
 import { Breadcrumbs } from '@components/Breadcrumbs';
 import { PATHS } from '@constants/PATHS';
+import settingsIcon from '../../assets/svg/settings.svg';
+import styles from './Header.module.scss';
 
 export const Header = () => {
     const location = useLocation();

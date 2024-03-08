@@ -10,11 +10,6 @@ const DATA: AppResultProps = {
     subTitle: 'Теперь можно войти в аккаунт исплльзуя свой логин и новый пароль',
     buttonText: 'Вход',
     dataTestId: 'change-entry-button',
-}
-
-export const SuccessChangePassword: FC = () => {
-
-    return (
-        <AppResult {...DATA} />
-    );
 };
+
+export const SuccessChangePassword: FC = () => <AppResult {...DATA} />;

@@ -5,4 +5,4 @@ export type Feedback = {
     message: string | null;
     rating: number;
     createdAt: string;
-}
+};

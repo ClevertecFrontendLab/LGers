@@ -45,7 +45,7 @@ export const feedbackSlice = createSlice({
             .addMatcher(getFeedbacks.matchFulfilled, (state, action) => {
                 state.isFetching = false;
                 state.error = null;
-                state.feedbacks = action.payload;
+                state.feedbacks = action.payload.reverse();
                 state.isGetError = false;
             })
             .addMatcher(getFeedbacks.matchRejected, (state, action) => {

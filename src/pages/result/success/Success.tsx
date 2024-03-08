@@ -10,11 +10,6 @@ const DATA: AppResultProps = {
     subTitle: 'Регистрация прошла успешно. Зайдите в приложение, используя свои e-mail и пароль.',
     buttonText: 'Войти',
     dataTestId: 'registration-enter-button',
-}
-
-export const Success: FC = () => {
-
-    return (
-        <AppResult {...DATA} />
-    );
 };
+
+export const Success: FC = () => <AppResult {...DATA} />;

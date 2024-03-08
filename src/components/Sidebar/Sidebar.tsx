@@ -1,8 +1,7 @@
 import { FC, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import styles from './Sidebar.module.scss';
-import LogoBig from '../../assets/img/logo-big.png';
-import LogoSmall from '../../assets/img/logo-small.png';
+import { useAppDispatch } from '@hooks/typed-react-redux-hooks';
+import { logout } from '@redux/auth/auth.slice';
 import {
     CalendarTwoTone,
     HeartTwoTone,
@@ -10,9 +9,10 @@ import {
     TrophyTwoTone
 } from '@ant-design/icons';
 import exitIcon from '../../assets/svg/exit.svg'
-import { logout } from '@redux/auth/auth.slice';
-import { useAppDispatch } from '@hooks/typed-react-redux-hooks';
 import { PATHS } from '@constants/PATHS';
+import LogoSmall from '../../assets/img/logo-small.png';
+import LogoBig from '../../assets/img/logo-big.png';
+import styles from './Sidebar.module.scss';
 
 type State = {
     isShowSidebar: boolean;
