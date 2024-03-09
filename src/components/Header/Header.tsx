@@ -10,25 +10,24 @@ export const Header = () => {
     return (
         <header className={styles.header}>
             <Breadcrumbs />
-            {location.pathname === PATHS.main.path
-                && <div className={styles.header__content}>
+            {location.pathname === PATHS.main.path && (
+                <div className={styles.header__content}>
                     <h1 className={styles.header__h1}>
-                        <span>
-                            Приветствуем тебя в CleverFit — приложении,
-                        </span>
-                        <span>
-                            которое поможет тебе добиться своей мечты!
-                        </span>
+                        <span>Приветствуем тебя в CleverFit — приложении,</span>
+                        <span>которое поможет тебе добиться своей мечты!</span>
                     </h1>
                     <div className={styles.header__settings}>
                         <button className={styles.button}>
-                            <img className={styles.button__icon}
-                                src={settingsIcon} alt='Settings' />
+                            <img
+                                className={styles.button__icon}
+                                src={settingsIcon}
+                                alt='Settings'
+                            />
                             <span className={styles.button__text}>Настройки</span>
                         </button>
                     </div>
                 </div>
-            }
+            )}
         </header>
     );
 };

@@ -1,23 +1,30 @@
 import { FC, useEffect, useState } from 'react';
-import { Wrapper } from '@components/Wrapper';
-import { Button, Checkbox, Form, Input } from 'antd';
-import { AuthWrapper } from '@components/AuthWrapper';
-import { FormWrapper } from '@pages/auth/components/FormWrapper';
-import { Logo } from '@pages/auth/components/Logo';
+import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
+import {
+    resetError,
+    setAuth,
+    setAuthError,
+    setCredentials,
+    setRememberMe,
+    setToken,
+} from '@redux/auth/auth.slice';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { AuthTabs } from '@pages/auth/components/AuthTabs';
+import { useGoogleLogin } from '@react-oauth/google';
 import {
     CheckEmailResponse,
     cleverFitApi,
     FormValues,
     useCheckEmailMutation,
 } from '@redux/api/api';
-import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
+import { Button, Checkbox, Form, Input } from 'antd';
+import { Wrapper } from '@components/Wrapper';
+import { AuthWrapper } from '@components/AuthWrapper';
+import { FormWrapper } from '@pages/auth/components/FormWrapper';
+import { Logo } from '@pages/auth/components/Logo';
+import { AuthTabs } from '@pages/auth/components/AuthTabs';
 import { Loader } from '@components/Loader';
-import { resetError, setAuth, setAuthError, setCredentials, setRememberMe, setToken } from '@redux/auth/auth.slice';
-import styles from './Auth.module.scss';
-import { useGoogleLogin } from '@react-oauth/google';
 import { PATHS, PATHS_RESULT } from '@constants/PATHS';
+import styles from './Auth.module.scss';
 
 const marginBottom = 32;
 
@@ -31,16 +38,16 @@ export type GoogleResponse = {
     clientId: string;
     credential: string;
     select_by: string;
-}
+};
 
-const EmailLabel = () => <span className={styles.emailLabel}>e-mail:</span>
+const EmailLabel = () => <span className={styles.emailLabel}>e-mail:</span>;
 
 export const Auth: FC = () => {
     const [login] = cleverFitApi.useLoginMutation();
     const navigate = useNavigate();
     const location = useLocation();
     const dispatch = useAppDispatch();
-    const { isAuth, error, isFetching, rememberMe } = useAppSelector(state => state.auth);
+    const { isAuth, error, isFetching, rememberMe } = useAppSelector((state) => state.auth);
     const [checkEmail] = useCheckEmailMutation();
     const [form] = Form.useForm();
 
@@ -54,7 +61,7 @@ export const Auth: FC = () => {
             dispatch(setRememberMe(false));
         }
 
-        dispatch(setCredentials({ email, password }))
+        dispatch(setCredentials({ email, password }));
         login({ email, password });
     };
 
@@ -65,24 +72,22 @@ export const Auth: FC = () => {
                 const { email, password } = values;
                 dispatch(setCredentials({ email, password }));
                 if (email) {
-                    const data = await checkEmail({ email }) as CheckEmailResponse;
+                    const data = (await checkEmail({ email })) as CheckEmailResponse;
                     if (data.data) {
                         navigate(PATHS.authConfirmEmail.path, { state: { from: location } });
                     }
                 }
-
             })
             .catch((e) => {
                 dispatch(setAuthError(e));
-            })
-            ;
+            });
     };
 
     useEffect(() => {
         if (isAuth) {
             navigate(PATHS.main.path, { state: { from: location } });
         }
-    }, [isAuth]);
+    }, [isAuth, navigate]);
 
     useEffect(() => {
         if (error) {
@@ -93,7 +98,9 @@ export const Auth: FC = () => {
 
                 case 404:
                     if (error.data?.message === 'Email не найден') {
-                        navigate(PATHS_RESULT.errorCheckEmailNoExist, { state: { from: location } });
+                        navigate(PATHS_RESULT.errorCheckEmailNoExist, {
+                            state: { from: location },
+                        });
                     } else {
                         navigate(PATHS_RESULT.errorLogin, { state: { from: location } });
                     }
@@ -109,14 +116,14 @@ export const Auth: FC = () => {
         }
 
         dispatch(resetError());
-    }, [error]);
+    }, [error, dispatch, navigate]);
 
     const onFieldsChange = () => {
         setIsEmailCorrect(!form.getFieldError('email').length);
     };
 
     const googleLogin = useGoogleLogin({
-        onSuccess: tokenResponse => {
+        onSuccess: (tokenResponse) => {
             const { access_token } = tokenResponse;
             dispatch(setToken(access_token));
             dispatch(setAuth(true));
@@ -140,7 +147,7 @@ export const Auth: FC = () => {
                                 <Logo />
                                 <Form
                                     form={form}
-                                    name="auth"
+                                    name='auth'
                                     style={{ width: '100%', maxWidth: 368 }}
                                     initialValues={{
                                         remember: true,
@@ -151,7 +158,7 @@ export const Auth: FC = () => {
                                 >
                                     <AuthTabs activeTab={'auth'} />
                                     <Form.Item<FieldType>
-                                        name="email"
+                                        name='email'
                                         rules={[
                                             { required: true, message: '' },
                                             {
@@ -168,12 +175,15 @@ export const Auth: FC = () => {
                                     </Form.Item>
 
                                     <Form.Item<FieldType>
-                                        name="password"
-                                        rules={[{
-                                            required: true,
-                                            message: 'Пароль не менее 8 символов, с заглавной буквой и цифрой',
-                                            min: 8
-                                        }]}
+                                        name='password'
+                                        rules={[
+                                            {
+                                                required: true,
+                                                message:
+                                                    'Пароль не менее 8 символов, с заглавной буквой и цифрой',
+                                                min: 8,
+                                            },
+                                        ]}
                                         style={{ marginBottom, letterSpacing: '-0.5px' }}
                                     >
                                         <Input.Password
@@ -184,7 +194,7 @@ export const Auth: FC = () => {
 
                                     <div className={styles.rememberMe}>
                                         <Form.Item<FieldType>
-                                            name="remember"
+                                            name='remember'
                                             style={{ marginBottom: 0 }}
                                         >
                                             <Checkbox
@@ -208,9 +218,9 @@ export const Auth: FC = () => {
                                     <div className={styles.auth__btns}>
                                         <Form.Item style={{ marginBottom: 0 }}>
                                             <Button
-                                                type="primary"
-                                                htmlType="submit"
-                                                size="large"
+                                                type='primary'
+                                                htmlType='submit'
+                                                size='large'
                                                 block
                                                 data-test-id='login-submit-button'
                                             >
@@ -218,7 +228,7 @@ export const Auth: FC = () => {
                                             </Button>
                                         </Form.Item>
                                         <Button
-                                            type="default"
+                                            type='default'
                                             className={styles.auth__googleBtn}
                                             block
                                             onClick={() => googleLogin()}

@@ -1,17 +1,14 @@
 import { FC, useState } from 'react';
 import { Button, Modal, Input, Rate } from 'antd';
-import styles from './AddFeedback.module.scss';
 import { useAddFeedbackMutation, useLazyGetFeedbacksQuery } from '@redux/api/api';
+import styles from './AddFeedback.module.scss';
 
 export type AddFeedbackProps = {
     showModal: boolean;
     handleClose: () => void;
-}
+};
 
-export const AddFeedback: FC<AddFeedbackProps> = ({
-    showModal,
-    handleClose,
-}) => {
+export const AddFeedback: FC<AddFeedbackProps> = ({ showModal, handleClose }) => {
     const initialState = { rating: 0, message: '' };
     const [state, setState] = useState(initialState);
 
@@ -27,7 +24,7 @@ export const AddFeedback: FC<AddFeedbackProps> = ({
     const [getFeedbacks] = useLazyGetFeedbacksQuery();
 
     const handleOk = async () => {
-        await addFeedback({ rating: state.rating, message: state.message })
+        await addFeedback({ rating: state.rating, message: state.message });
         await getFeedbacks(null);
         handleClose();
     };
@@ -39,7 +36,7 @@ export const AddFeedback: FC<AddFeedbackProps> = ({
             okText={'Опубликовать'}
             okButtonProps={{
                 disabled: !state.rating,
-                datatype: 'new-review-submit-button'
+                datatype: 'new-review-submit-button',
             }}
             cancelButtonProps={{ style: { display: 'none' } }}
             onCancel={handleClose}
@@ -49,7 +46,7 @@ export const AddFeedback: FC<AddFeedbackProps> = ({
             centered
             footer={[
                 <Button
-                    type="primary"
+                    type='primary'
                     onClick={handleOk}
                     disabled={!state.rating}
                     data-test-id='new-review-submit-button'
@@ -60,11 +57,7 @@ export const AddFeedback: FC<AddFeedbackProps> = ({
             ]}
         >
             <Rate onChange={onRateChange} value={state.rating} />
-            <Input.TextArea
-                rows={3}
-                autoSize
-                onChange={(e) => onMessageChange(e.target.value)}
-            />
+            <Input.TextArea rows={3} autoSize onChange={(e) => onMessageChange(e.target.value)} />
         </Modal>
     );
 };

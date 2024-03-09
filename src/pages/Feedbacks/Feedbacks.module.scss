@@ -2,8 +2,8 @@
     margin: 16px;
 
     @media all and (min-width: 576px) {
-            margin: 20px 24px;
-        }
+        margin: 20px 24px;
+    }
 
     &__content {
         width: 100%;
@@ -14,7 +14,7 @@
         margin: 16px;
         flex-direction: column;
         gap: 16px;
-        
+
         @media all and (min-width: 576px) {
             margin: 20px 24px;
             flex-direction: row;

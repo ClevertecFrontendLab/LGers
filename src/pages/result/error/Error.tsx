@@ -4,10 +4,9 @@ import { AppResultProps } from '@components/AppResult/AppResult';
 
 type Props = {
     navigateTo: string;
-}
+};
 
 export const Error: FC<Props> = ({ navigateTo }) => {
-
     const DATA: AppResultProps = {
         title: 'Данные не сохранились',
         status: 'error',
@@ -15,9 +14,7 @@ export const Error: FC<Props> = ({ navigateTo }) => {
         navigateTo,
         subTitle: 'Что-то пошло не так и ваша регистрация не завершилась. Попробуйте ещё раз.',
         dataTestId: 'registration-retry-button',
-    }
+    };
 
-    return (
-        <AppResult {...DATA}/>
-    );
+    return <AppResult {...DATA} />;
 };

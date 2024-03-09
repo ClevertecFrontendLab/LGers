@@ -7,9 +7,7 @@ export type FeedbackErrorPostProps = {
     showModal: () => void;
 };
 
-export const FeedbackErrorPost: FC<FeedbackErrorPostProps> = ({
-    showModal,
-}) => {
+export const FeedbackErrorPost: FC<FeedbackErrorPostProps> = ({ showModal }) => {
     const { isPostError } = useAppSelector((state) => state.feedbacks);
     const dispatch = useAppDispatch();
     const handleWriteFeedback = () => {
@@ -43,11 +41,7 @@ export const FeedbackErrorPost: FC<FeedbackErrorPostProps> = ({
                     >
                         Написать отзыв
                     </Button>,
-                    <Button
-                        type='default'
-                        onClick={handleClose}
-                        key='close'
-                    >
+                    <Button type='default' onClick={handleClose} key='close'>
                         Закрыть
                     </Button>,
                 ]}

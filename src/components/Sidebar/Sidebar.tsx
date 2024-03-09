@@ -2,13 +2,8 @@ import { FC, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '@hooks/typed-react-redux-hooks';
 import { logout } from '@redux/auth/auth.slice';
-import {
-    CalendarTwoTone,
-    HeartTwoTone,
-    ProfileOutlined,
-    TrophyTwoTone
-} from '@ant-design/icons';
-import exitIcon from '../../assets/svg/exit.svg'
+import { CalendarTwoTone, HeartTwoTone, ProfileOutlined, TrophyTwoTone } from '@ant-design/icons';
+import exitIcon from '../../assets/svg/exit.svg';
 import { PATHS } from '@constants/PATHS';
 import LogoSmall from '../../assets/img/logo-small.png';
 import LogoBig from '../../assets/img/logo-big.png';
@@ -16,7 +11,7 @@ import styles from './Sidebar.module.scss';
 
 type State = {
     isShowSidebar: boolean;
-}
+};
 
 const links = [
     { id: 1, title: 'Календарь', link: '/', icon: <CalendarTwoTone /> },
@@ -42,19 +37,16 @@ export const Sidebar: FC = () => {
         navigate(PATHS.auth.path);
     };
 
-    const navLinks = links
-        .map((item) =>
-            <li className={styles.nav__li} key={item.id}>
-                <Link to={item.link} className={styles.nav__link}>
-                    <span className={styles.nav__icon}>
-                        {item.icon}
-                    </span>
-                    <span className={!state.isShowSidebar ? styles.nav_hideTitle : styles.link__title}>
-                        {item.title}
-                    </span>
-                </Link>
-            </li>
-        );
+    const navLinks = links.map((item) => (
+        <li className={styles.nav__li} key={item.id}>
+            <Link to={item.link} className={styles.nav__link}>
+                <span className={styles.nav__icon}>{item.icon}</span>
+                <span className={!state.isShowSidebar ? styles.nav_hideTitle : styles.link__title}>
+                    {item.title}
+                </span>
+            </Link>
+        </li>
+    ));
 
     return (
         <aside className={styles.sidebar}>
@@ -70,17 +62,17 @@ export const Sidebar: FC = () => {
                     <img src={state.isShowSidebar ? LogoBig : LogoSmall} alt='Cleverfit' />
                 </Link>
                 <nav className={styles.nav}>
-                    <ul className={styles.nav__links}>
-                        {navLinks}
-                    </ul>
+                    <ul className={styles.nav__links}>{navLinks}</ul>
                 </nav>
                 <div className={styles.exit}>
                     <button className={styles.exit__btn} onClick={onExit}>
-                        <img src={exitIcon} alt='exit'
-                            className={styles.exit__icon}
-                        />
+                        <img src={exitIcon} alt='exit' className={styles.exit__icon} />
                         <span
-                            className={!state.isShowSidebar ? styles.nav_hideTitle : styles.link__title}>Выход
+                            className={
+                                !state.isShowSidebar ? styles.nav_hideTitle : styles.link__title
+                            }
+                        >
+                            Выход
                         </span>
                     </button>
                 </div>

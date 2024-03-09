@@ -5,7 +5,6 @@ type Props = {
     children: JSX.Element;
 };
 
-export const FormWrapper: FC<Props> = ({ children }) =>
-    <div className={styles.formWrapper}>
-        {children}
-    </div>
+export const FormWrapper: FC<Props> = ({ children }) => (
+    <div className={styles.formWrapper}>{children}</div>
+);

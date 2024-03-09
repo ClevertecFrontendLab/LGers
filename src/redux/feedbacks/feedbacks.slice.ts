@@ -31,7 +31,7 @@ export const feedbackSlice = createSlice({
 
         closeShowSuccess: (state) => {
             state.isShowSuccess = false;
-        }
+        },
     },
 
     extraReducers: (builder) => {
@@ -75,10 +75,6 @@ export const feedbackSlice = createSlice({
     },
 });
 
-export const {
-    resetError,
-    resetFeedbacks,
-    closeShowSuccess,
-} = feedbackSlice.actions;
+export const { resetError, resetFeedbacks, closeShowSuccess } = feedbackSlice.actions;
 
 export const feedbacksReducer = feedbackSlice.reducer;

@@ -11,7 +11,7 @@ import { PATHS_RESULT } from '@constants/PATHS';
 
 type Props = {
     email?: string;
-}
+};
 
 type FieldType = {
     password: string;
@@ -41,13 +41,13 @@ export const ChangePassword: FC<Props> = () => {
         if (changePasswordResult.isError) {
             navigate(PATHS_RESULT.errorChangePassword, { state: { from: location } });
         }
-    }, [changePasswordResult])
+    }, [changePasswordResult, location, navigate]);
 
     useEffect(() => {
         if (email && password) {
             changePassword({ password, confirmPassword: password });
         }
-    }, [email, password])
+    }, [email, password, changePassword]);
 
     return (
         <AuthResultWrapper>
@@ -56,23 +56,22 @@ export const ChangePassword: FC<Props> = () => {
                 <h3 className={styles.auth__title}>Восстановление аккауанта</h3>
                 <Form
                     form={form}
-                    name="auth-change-password"
-                    style={{ margin: 32, }}
+                    name='auth-change-password'
+                    style={{ margin: 32 }}
                     initialValues={{
                         password,
                         confirmPassword: password,
                     }}
                     onFinish={onFinish}
-                    autoComplete="off"
+                    autoComplete='off'
                     size={'large'}
-
                 >
                     <Form.Item<FieldType>
-                        name="password"
+                        name='password'
                         rules={[
                             {
                                 required: true,
-                                message: 'Пароль не менее 8 символов, с заглавной буквой и цифрой'
+                                message: 'Пароль не менее 8 символов, с заглавной буквой и цифрой',
                             },
                             { min: 3, message: 'min 3!' },
                         ]}
@@ -85,11 +84,11 @@ export const ChangePassword: FC<Props> = () => {
                         />
                     </Form.Item>
                     <Form.Item<FieldType>
-                        name="confirmPassword"
+                        name='confirmPassword'
                         rules={[
                             {
                                 required: true,
-                                message: 'Пароль не менее 8 символов, с заглавной буквой и цифрой'
+                                message: 'Пароль не менее 8 символов, с заглавной буквой и цифрой',
                             },
                             ({ getFieldValue }) => ({
                                 validator(_, value) {
@@ -110,8 +109,8 @@ export const ChangePassword: FC<Props> = () => {
                     <div className={styles.auth__btns}>
                         <Form.Item style={{ marginBottom: 0 }}>
                             <Button
-                                type="primary"
-                                htmlType="submit"
+                                type='primary'
+                                htmlType='submit'
                                 // size="large"
                                 block
                                 data-test-id={'change-submit-button'}
@@ -124,4 +123,4 @@ export const ChangePassword: FC<Props> = () => {
             </>
         </AuthResultWrapper>
     );
-}
+};

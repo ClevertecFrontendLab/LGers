@@ -27,7 +27,7 @@ export const AppRoutes: FC = () => {
             dispatch(setToken(accessToken));
             dispatch(setAuth(true));
         }
-    }, []);
+    }, [dispatch]);
 
     return (
         <>
@@ -35,18 +35,27 @@ export const AppRoutes: FC = () => {
             <Routes>
                 <Route path={PATHS.auth.path} element={<Auth />} />
                 <Route path={PATHS.authRegistration.path} element={<Registration />} />
-                <Route path={PATHS.authChangePassword.path}
-                       element={<ChangePassword email={'email@email.com'} />} />
-                <Route path={PATHS_RESULT.error}
-                    element={<Error navigateTo={PATHS.authRegistration.path} />} />
+                <Route
+                    path={PATHS.authChangePassword.path}
+                    element={<ChangePassword email={'email@email.com'} />}
+                />
+                <Route
+                    path={PATHS_RESULT.error}
+                    element={<Error navigateTo={PATHS.authRegistration.path} />}
+                />
                 <Route path={PATHS_RESULT.errorLogin} element={<ErrorLogin />} />
-                <Route path={PATHS_RESULT.errorCheckEmailNoExist}
-                       element={<ErrorCheckEmailNoExist />} />
+                <Route
+                    path={PATHS_RESULT.errorCheckEmailNoExist}
+                    element={<ErrorCheckEmailNoExist />}
+                />
                 <Route path={PATHS_RESULT.errorCheckEmail} element={<ErrorCheckEmail />} />
                 <Route path={PATHS_RESULT.errorUserExist} element={<ErrorUserExist />} />
                 <Route path={PATHS_RESULT.errorChangePassword} element={<ErrorChangePassword />} />
                 <Route path={PATHS_RESULT.success} element={<Success />} />
-                <Route path={PATHS_RESULT.successChangePassword} element={<SuccessChangePassword />} />
+                <Route
+                    path={PATHS_RESULT.successChangePassword}
+                    element={<SuccessChangePassword />}
+                />
                 <Route path={PATHS.authConfirmEmail.path} element={<ConfirmEmail />} />
             </Routes>
         </>

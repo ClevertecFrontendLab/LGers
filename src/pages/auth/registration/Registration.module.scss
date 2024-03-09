@@ -7,7 +7,7 @@
         position: relative;
         background-position: 0 center;
         width: 1440px;
-        color: white;
+        color: $color-white;
         background-color: $bg-light-color;
 
         &:after {
@@ -61,7 +61,6 @@
 
         @media all and (min-width: $sm) {
             letter-spacing: 1px;
-
         }
     }
 
@@ -74,11 +73,8 @@
             color: $clr-red-6;
         }
     }
-
-    &__passwordItem {
-        color: blue;
-    }
 }
+
 .emailLabel {
     color: $color-black-85;
     letter-spacing: 1px;

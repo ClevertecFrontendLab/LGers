@@ -20,11 +20,11 @@ export const ConfirmEmail: FC = () => {
     const { email, isFetching } = useAppSelector((state) => state.auth);
     const CODE = {
         title: 'Введите код для восстановления аккауанта',
-    }
+    };
 
     const CODE_ERROR = {
         title: 'Неверный код. Введите код для восстановления аккауанта',
-    }
+    };
 
     const [title, setTitle] = useState(CODE.title);
     const [status, setStatus] = useState<ResultStatusType | undefined>('info');
@@ -38,14 +38,14 @@ export const ConfirmEmail: FC = () => {
 
     const handleCodeComplete = (value: string) => {
         setCodeValue('');
-        confirmEmail({ email, code: value })
+        confirmEmail({ email, code: value });
     };
 
     useEffect(() => {
         setHasCodeError(confirmEmailResult.isError);
         if (confirmEmailResult.isError) {
             setTitle(CODE_ERROR.title);
-            setStatus('error')
+            setStatus('error');
         }
 
         if (confirmEmailResult.isSuccess) {
@@ -61,16 +61,14 @@ export const ConfirmEmail: FC = () => {
                     <Result
                         className={styles.CEWrapper}
                         status={status}
-                        title={
-                            <h3 className={styles.CEWrapper__title}>
-                                {title}
-                            </h3>
-                        }
+                        title={<h3 className={styles.CEWrapper__title}>{title}</h3>}
                         subTitle={
                             <div className={styles.CEWrapper__subTitle}>
-                                <p>Мы отправили вам на e-mail <span className={styles.CEWrapper__email}>
-                                    {email}
-                                </span> шестизначный код. Введите его в поле ниже.</p>
+                                <p>
+                                    Мы отправили вам на e-mail{' '}
+                                    <span className={styles.CEWrapper__email}>{email}</span>{' '}
+                                    шестизначный код. Введите его в поле ниже.
+                                </p>
                             </div>
                         }
                     />
@@ -78,23 +76,23 @@ export const ConfirmEmail: FC = () => {
                         onChange={handleCodeChange}
                         onComplete={handleCodeComplete}
                         value={codeValue}
-                        validChars="0-9"
+                        validChars='0-9'
                         autoFocus={true}
                         classNames={{
                             container: 'vInput__container',
-                            character: hasCodeError ? 'vInput__character vInput__character_error' : 'vInput__character',
+                            character: hasCodeError
+                                ? 'vInput__character vInput__character_error'
+                                : 'vInput__character',
                             characterInactive: 'vInput__character_inactive',
                             characterSelected: 'vInput__character_selected',
                             characterFilled: 'vInput__character_filled',
                         }}
                         placeholder={''}
-                        inputProps={
-                            { 'data-test-id': 'verification-input' }
-                        }
+                        inputProps={{ 'data-test-id': 'verification-input' }}
                     />
                     <p className={styles.subtitle}>Не пришло письмо? Проверьте папку Спам.</p>
                 </>
             </AuthResultWrapper>
         </div>
     );
-}
+};

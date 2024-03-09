@@ -14,7 +14,7 @@ const initialState: AuthState = {
     accessToken: accessToken,
     password: '',
     email: '',
-    authError: undefined
+    authError: undefined,
 };
 
 export const authSlice = createSlice({
@@ -47,7 +47,10 @@ export const authSlice = createSlice({
             state.hasResult = false;
         },
 
-        setCredentials: (state, action: PayloadAction<{ email: string | undefined, password: string | undefined }>) => {
+        setCredentials: (
+            state,
+            action: PayloadAction<{ email: string | undefined; password: string | undefined }>,
+        ) => {
             const { email, password } = action.payload;
             if (email) {
                 state.email = email;

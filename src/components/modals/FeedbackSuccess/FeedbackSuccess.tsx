@@ -20,7 +20,12 @@ export const FeedbackSuccess: FC = () => {
                 status={'success'}
                 title={'Отзыв успешно опубликован'}
                 extra={[
-                    <Button type="primary" onClick={() => dispatch(closeShowSuccess())} block key={'closeButton'}>
+                    <Button
+                        type='primary'
+                        onClick={() => dispatch(closeShowSuccess())}
+                        block
+                        key={'closeButton'}
+                    >
                         Отлично
                     </Button>,
                 ]}

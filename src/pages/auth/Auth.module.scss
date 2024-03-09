@@ -30,11 +30,11 @@
         gap: 16px;
         margin-bottom: 92px;
 
-        @media all and (min-width: $xs){
+        @media all and (min-width: $xs) {
             margin-bottom: 108px;
         }
 
-        @media all and (min-width: $lg){
+        @media all and (min-width: $lg) {
             margin-bottom: 108px;
         }
     }
@@ -47,7 +47,6 @@
 
         @media all and (min-width: $sm) {
             letter-spacing: 0.5px;
-
         }
     }
 
@@ -113,7 +112,7 @@
         letter-spacing: 0.5px;
         padding-right: 8px;
 
-        @media all and (min-width: $sm){
+        @media all and (min-width: $sm) {
             letter-spacing: 1.5px;
             padding-right: 0;
         }

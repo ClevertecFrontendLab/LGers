@@ -1,19 +1,19 @@
-import { Wrapper } from '@components/Wrapper';
-import styles from './Registration.module.scss';
 import { FC, useEffect } from 'react';
+import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
+import { useNavigate } from 'react-router-dom';
+import { resetError, setCredentials } from '@redux/auth/auth.slice';
+import { cleverFitApi, UserCredentials } from '@redux/api/api';
 import { Button, Form, Input } from 'antd';
+import { Wrapper } from '@components/Wrapper';
 import { AuthWrapper } from '@components/AuthWrapper';
 import { FormWrapper } from '@pages/auth/components/FormWrapper';
 import { Logo } from '@pages/auth/components/Logo';
-import { useNavigate } from 'react-router-dom';
 import { AuthTabs } from '@pages/auth/components/AuthTabs';
 import { EmailLabel } from '@pages/auth/components/EmailLabel';
-import { cleverFitApi, UserCredentials } from '@redux/api/api';
-import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
 import { Loader } from '@components/Loader';
-import { resetError, setCredentials } from '@redux/auth/auth.slice';
 import { PATHS, PATHS_RESULT } from '@constants/PATHS';
 import { STATUS } from '@constants/STATUS';
+import styles from './Registration.module.scss';
 
 const marginBottom = 32;
 
@@ -31,7 +31,7 @@ export const Registration: FC = () => {
 
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
-    const { isAuth, error, isFetching, email, password } = useAppSelector(state => state.auth);
+    const { isAuth, error, isFetching, email, password } = useAppSelector((state) => state.auth);
 
     useEffect(() => {
         if (error && email && password) {
@@ -47,22 +47,22 @@ export const Registration: FC = () => {
         } else if (error) {
             navigate(PATHS_RESULT.error);
         }
-    }, [error]);
+    }, [error, navigate, dispatch]);
 
     useEffect(() => {
         if (isAuth) {
             navigate(PATHS.root.path);
         }
-    }, [isAuth]);
+    }, [isAuth, navigate]);
 
     useEffect(() => {
         if (result.isSuccess) {
             navigate(PATHS_RESULT.success);
         }
-    }, [result]);
+    }, [result, navigate]);
 
     const onFinish = (values: UserCredentials) => {
-        const { email, password } = values
+        const { email, password } = values;
         dispatch(setCredentials({ email, password }));
         registration({ email, password });
     };
@@ -79,24 +79,24 @@ export const Registration: FC = () => {
                                 <Logo />
                                 <Form
                                     form={form}
-                                    name="basic"
+                                    name='basic'
                                     style={{ width: '100%', maxWidth: 368 }}
                                     initialValues={{
                                         remember: true,
                                     }}
                                     onFinish={onFinish}
-                                    autoComplete="off"
+                                    autoComplete='off'
                                     size={'large'}
                                     scrollToFirstError
                                 >
                                     <AuthTabs activeTab={'registration'} />
                                     <div className={styles.auth__items}>
                                         <Form.Item<FieldType>
-                                            name="email"
+                                            name='email'
                                             rules={[
                                                 {
                                                     required: true,
-                                                    message: ''
+                                                    message: '',
                                                 },
                                                 {
                                                     type: 'email',
@@ -111,42 +111,48 @@ export const Registration: FC = () => {
                                             />
                                         </Form.Item>
                                         <Form.Item<FieldType>
-                                            name="password"
+                                            name='password'
                                             rules={[
                                                 {
                                                     required: true,
-                                                    message: 'Пароль не менее 8 символов, с заглавной буквой и цифрой'
+                                                    message:
+                                                        'Пароль не менее 8 символов, с заглавной буквой и цифрой',
                                                 },
                                                 { min: 3, message: 'min 3!' },
                                             ]}
                                             style={{
                                                 marginBottom: 46,
                                                 letterSpacing: '-1px',
-                                                fontSize: 12
+                                                fontSize: 12,
                                             }}
-
-                                            help={'Пароль не менее 8 символов, с заглавной буквой и цифрой'}
+                                            help={
+                                                'Пароль не менее 8 символов, с заглавной буквой и цифрой'
+                                            }
                                         >
                                             <Input.Password
                                                 placeholder={'Пароль'}
                                                 data-test-id='registration-password'
-
                                             />
                                         </Form.Item>
                                         <Form.Item<FieldType>
-                                            name="confirmPassword"
+                                            name='confirmPassword'
                                             dependencies={['password']}
                                             rules={[
                                                 {
                                                     required: true,
-                                                    message: 'Пароли не совпадают'
+                                                    message: 'Пароли не совпадают',
                                                 },
                                                 ({ getFieldValue }) => ({
                                                     validator(_, value) {
-                                                        if (!value || getFieldValue('password') === value) {
+                                                        if (
+                                                            !value ||
+                                                            getFieldValue('password') === value
+                                                        ) {
                                                             return Promise.resolve();
                                                         }
-                                                        return Promise.reject(new Error('Пароли не совпадают'));
+                                                        return Promise.reject(
+                                                            new Error('Пароли не совпадают'),
+                                                        );
                                                     },
                                                 }),
                                             ]}
@@ -159,20 +165,22 @@ export const Registration: FC = () => {
                                         </Form.Item>
                                     </div>
                                     <div className={styles.auth__btns}>
-                                        <Form.Item
-                                            style={{ marginBottom: 0 }}
-                                        >
+                                        <Form.Item style={{ marginBottom: 0 }}>
                                             <Button
-                                                type="primary"
-                                                htmlType="submit"
+                                                type='primary'
+                                                htmlType='submit'
                                                 block
                                                 data-test-id={'registration-submit-button'}
                                             >
                                                 Войти
                                             </Button>
                                         </Form.Item>
-                                        <Button type="default" className={styles.auth__googleBtn} block
-                                            disabled>
+                                        <Button
+                                            type='default'
+                                            className={styles.auth__googleBtn}
+                                            block
+                                            disabled
+                                        >
                                             Регистрация через Google
                                         </Button>
                                     </div>

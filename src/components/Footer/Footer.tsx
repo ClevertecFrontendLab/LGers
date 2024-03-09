@@ -24,16 +24,8 @@ export const Footer: FC = () => {
                     <p className={styles.app__txt_secondary}>Доступно в PRO-тарифе</p>
                 </div>
                 <div className={styles.app__btns}>
-                    <Button
-                        btnText={'Android OS'}
-                        btnIcon={<AndroidFilled />}
-                        color={'#262626'}
-                    />
-                    <Button
-                        btnText={'Apple IOS'}
-                        btnIcon={<AppleFilled />}
-                        color={'#262626'}
-                    />
+                    <Button btnText={'Android OS'} btnIcon={<AndroidFilled />} color={'#262626'} />
+                    <Button btnText={'Apple IOS'} btnIcon={<AppleFilled />} color={'#262626'} />
                 </div>
             </div>
             <button className={styles.footer__btn} onClick={handleFeedbacksClick}>

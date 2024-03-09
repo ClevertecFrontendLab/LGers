@@ -11,11 +11,8 @@ const DATA: AppResultProps = {
     subTitle: 'Что-то пошло не так. Попробуйте еще раз',
     buttonText: 'Повторить',
     dataTestId: 'change-retry-button',
-}
+};
 
 export const ErrorChangePassword: FC = () => {
-
-    return (
-        <AppResult {...DATA} />
-    );
+    return <AppResult {...DATA} />;
 };

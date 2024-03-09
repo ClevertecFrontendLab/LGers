@@ -38,7 +38,7 @@ export const FeedbackError500: FC = () => {
                 title={'Что-то пошло не так'}
                 subTitle={'Произошла ошибка, Попробуйте еще раз'}
                 extra={[
-                    <Button type="primary" onClick={handleClose} key='back'>
+                    <Button type='primary' onClick={handleClose} key='back'>
                         Назад
                     </Button>,
                 ]}

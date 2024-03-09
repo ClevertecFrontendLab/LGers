@@ -1,14 +1,14 @@
 import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
 
-export type ApiError ={
+export type ApiError = {
     status: number;
     message?: string;
     data?: {
         statusCode?: number;
         error?: string;
         message?: string;
-    }
-}
+    };
+};
 
 export type Feedback = {
     id: string;

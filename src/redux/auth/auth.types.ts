@@ -2,7 +2,7 @@ import { FetchBaseQueryError } from '@reduxjs/toolkit/query/react';
 
 export type LoginData = {
     token: string;
-}
+};
 
 export type ApiError = {
     status: number;
@@ -11,8 +11,8 @@ export type ApiError = {
         statusCode?: number;
         error?: string;
         message?: string;
-    }
-}
+    };
+};
 
 export type AuthState = {
     rememberMe: boolean;
@@ -25,5 +25,4 @@ export type AuthState = {
     accessToken: string | undefined | null;
     error: ApiError | FetchBaseQueryError | undefined | null;
     authError?: undefined | ApiError;
-}
-
+};

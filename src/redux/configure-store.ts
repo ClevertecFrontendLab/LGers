@@ -26,9 +26,8 @@ const rootReducer: Reducer = (state: RootState, action) => {
 
 export const store = configureStore({
     reducer: rootReducer,
-    middleware: (getDefaultMiddleware) => getDefaultMiddleware()
-        .concat(routerMiddleware)
-        .concat(cleverFitApi.middleware)
+    middleware: (getDefaultMiddleware) =>
+        getDefaultMiddleware().concat(routerMiddleware).concat(cleverFitApi.middleware),
 });
 
 export type RootState = ReturnType<typeof store.getState>;

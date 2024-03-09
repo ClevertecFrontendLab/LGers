@@ -11,13 +11,12 @@ const root = createRoot(domNode);
 
 root.render(
     <GoogleOAuthProvider clientId='1093600072128-ra2l3m6f8jev4iafqq96ptr1svc7sfj1.apps.googleusercontent.com'>
-
-    <React.StrictMode>
-        <Provider store={store}>
-            <Router history={history}>
-                <App />
-            </Router>
-        </Provider>
-    </React.StrictMode>,
-    </GoogleOAuthProvider>
+        <React.StrictMode>
+            <Provider store={store}>
+                <Router history={history}>
+                    <App />
+                </Router>
+            </Provider>
+        </React.StrictMode>
+    </GoogleOAuthProvider>,
 );

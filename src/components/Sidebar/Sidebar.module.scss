@@ -127,7 +127,7 @@
 
     &__icon {
         @media all and (max-width: $xs) {
-            display: none
+            display: none;
         }
     }
 }
@@ -164,7 +164,7 @@
 
     &__icon {
         @media all and (max-width: $xs) {
-            display: none
+            display: none;
         }
     }
 }
@@ -175,7 +175,7 @@
     height: 100%;
 
     @media all and (max-width: $xs) {
-        display: none
+        display: none;
     }
 }
 
