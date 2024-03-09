@@ -1,11 +1,13 @@
-@import '../../constants/colors';
-@import '../../constants/media-sizes';
+@import '@constants/colors';
+@import '@constants/media-sizes';
+@import '@constants/sizes';
+@import '@constants/font-sizes';
 
 .auth {
     &__page {
         display: flex;
         position: relative;
-        background-position: 0 center;
+        background-position: $size-0px center;
         width: 100%;
         color: $color-white;
         background-color: $bg-light-color;
@@ -13,56 +15,56 @@
         &:after {
             content: '';
             position: fixed;
-            top: 0;
-            left: 0;
+            top: $size-0px;
+            left: $size-0px;
             background: cover url('../../assets/img/auth_ page_light.png') center;
             display: block;
             width: 100%;
             height: 100%;
             z-index: -1;
-            filter: blur(2px);
+            filter: blur($size-2px);
         }
     }
 
     &__btns {
         display: flex;
         flex-direction: column;
-        gap: 16px;
-        margin-bottom: 92px;
+        gap: $size-16px;
+        margin-bottom: $size-92px;
 
         @media all and (min-width: $xs) {
-            margin-bottom: 108px;
+            margin-bottom: $size-108px;
         }
 
         @media all and (min-width: $lg) {
-            margin-bottom: 108px;
+            margin-bottom: $size-108px;
         }
     }
 
     &__googleBtn {
-        letter-spacing: -0.5px;
+        letter-spacing: -$size-0_5px;
 
         font-weight: 600;
-        font-size: 14px;
+        font-size: $font-size-p-14px;
 
         @media all and (min-width: $sm) {
-            letter-spacing: 0.5px;
+            letter-spacing: $size-0_5px;
         }
     }
 
     &__googleIcon {
         display: none;
 
-        font-size: 14px;
+        font-size: $font-size-p-14px;
         @media all and (min-width: $sm) {
             display: none;
-            margin: 0 6px;
-            padding-right: 6px;
+            margin: $size-0px $size-6px;
+            padding-right: $size-6px;
         }
     }
 
     &__title {
-        margin-top: 32px;
+        margin-top: $size-32px;
     }
 }
 
@@ -70,7 +72,7 @@
     display: flex;
     flex-direction: column;
     flex: 1;
-    margin-bottom: 42px;
+    margin-bottom: $size-42px;
 }
 
 .center {
@@ -78,19 +80,19 @@
     align-items: center;
     justify-content: center;
     width: 100%;
-    margin-bottom: 1.5rem;
+    margin-bottom: $size-24px;
 }
 
 .emailLabel {
-    letter-spacing: 1px;
+    letter-spacing: $size-1px;
 }
 
 .text05 {
-    letter-spacing: -0.5px;
-    padding-right: 0;
+    letter-spacing: -$size-0_5px;
+    padding-right: $size-0px;
 
     @media all and (min-width: $sm) {
-        letter-spacing: 1px;
+        letter-spacing: $size-1px;
     }
 }
 
@@ -99,26 +101,26 @@
     justify-content: space-between;
     width: 100%;
     align-items: center;
-    padding-top: 20px;
-    margin: 0 0 22px;
+    padding-top: $size-20px;
+    margin: $size-0px $size-0px $size-22px;
 
     @media all and (min-width: $sm) {
-        padding-top: 20px;
-        margin-bottom: 27px;
+        padding-top: $size-20px;
+        margin-bottom: $size-27px;
     }
 
     &__link {
         cursor: pointer;
-        letter-spacing: 0.5px;
-        padding-right: 8px;
+        letter-spacing: $size-0_5px;
+        padding-right: $size-8px;
 
         @media all and (min-width: $sm) {
-            letter-spacing: 1.5px;
+            letter-spacing: $size-1_5px;
             padding-right: 0;
         }
     }
 }
 
 .item {
-    margin-bottom: 24px;
+    margin-bottom: $size-24px;
 }

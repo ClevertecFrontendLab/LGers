@@ -1,43 +1,43 @@
-@import '../../../constants/colors';
-@import '../../../constants/media-sizes';
-@import '../../../constants/sizes';
+@import '@constants/colors';
+@import '@constants/media-sizes';
+@import '@constants/sizes';
 
 .CEWrapper {
     width: 100%;
 
-    margin: auto 2rem;
-    padding: 40px 16px 28px;
+    margin: auto $size-32px;
+    padding: $size-40px $size-16px $size-28px;
 
     @media all and (min-width: $sm) {
-        min-width: 368px;
-        max-width: 539px;
+        min-width: $size-368px;
+        max-width: $size-539px;
     }
 
     &__title {
-        margin-bottom: 0;
-        letter-spacing: 0.5px;
+        margin-bottom: $size-0px;
+        letter-spacing: $size-0_5px;
     }
 
     &__subTitle {
-        letter-spacing: 0.5px;
+        letter-spacing: $size-0_5px;
         color: $color-black-45;
-        padding: 0 16px;
+        padding: $size-0px $size-16px;
 
         p {
-            margin: 0;
+            margin: $size-0px;
         }
     }
 
     &__email {
         font-weight: 700;
-        margin: 0;
-        letter-spacing: 0.5px;
+        margin: $size-0px;
+        letter-spacing: $size-0_5px;
     }
 }
 
 .subtitle {
-    letter-spacing: 0.5px;
+    letter-spacing: $size-0_5px;
     color: $color-black-45;
-    margin: 0 48px 32px;
+    margin: $size-0px $size-48px $size-32px;
     text-align: center;
 }

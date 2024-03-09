@@ -1,12 +1,12 @@
-@import '../../../../constants/colors';
-@import '../../../../constants/media-sizes';
-@import '../../../../constants/sizes';
+@import '@constants/colors';
+@import '@constants/media-sizes';
+@import '@constants/sizes';
 
 .logo {
     width: 100%;
-    max-width: 203px;
+    max-width: $size-203px;
 
     @media all and (min-width: $sm) {
-        max-width: 309px;
+        max-width: $size-309px;
     }
 }

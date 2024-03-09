@@ -1,12 +1,15 @@
+@import '@constants/sizes';
+@import '@constants/font-sizes';
+
 .btn {
     width: 100%;
-    font-size: 14px;
-    padding: 7px 0;
-    margin: 12px 0;
+    font-size: $font-size-p-14px;
+    padding: $size-7px $size-0px;
+    margin: $size-12px $size-0px;
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 0.5rem;
+    gap: $size-8px;
     cursor: pointer;
     border: none;
     background-color: transparent;

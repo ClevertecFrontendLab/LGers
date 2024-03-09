@@ -1,24 +1,24 @@
-@import '../../constants/colors';
-@import '../../constants/media-sizes';
-@import '../../constants/sizes';
+@import '@constants/colors';
+@import '@constants/media-sizes';
+@import '@constants/sizes';
 
 .resultWrapper {
     width: 100%;
 
-    margin: auto 2rem;
-    padding: 40px 16px 28px;
+    margin: auto $size-32px;
+    padding: $size-40px $size-16px $size-28px;
 
     @media all and (min-width: $sm) {
-        min-width: 368px;
-        max-width: 368px;
+        min-width: $size-368px;
+        max-width: $size-368px;
     }
 
     &__title {
-        margin-bottom: 0;
-        letter-spacing: 0.5px;
+        margin-bottom: $size-0px;
+        letter-spacing: $size-0_5px;
     }
 
     &__subTitle {
-        letter-spacing: 0.5px;
+        letter-spacing: $size-0_5px;
     }
 }

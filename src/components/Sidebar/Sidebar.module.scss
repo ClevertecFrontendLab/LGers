@@ -1,5 +1,7 @@
-@import '../../constants/colors';
-@import '../../constants/media-sizes';
+@import '@constants/colors';
+@import '@constants/media-sizes';
+@import '@constants/sizes';
+@import '@constants/font-sizes';
 
 .sidebar {
     display: flex;
@@ -16,10 +18,10 @@
 
     &__DTBtn {
         position: absolute;
-        right: -20px;
-        top: calc(50% - 48px);
-        width: 20px;
-        height: 66px;
+        right: -$size-20px;
+        top: calc(50% - $size-48px);
+        width: $size-20px;
+        height: $size-66px;
 
         @media all and (max-width: $xs) {
             display: none;
@@ -32,28 +34,28 @@
         @media all and (max-width: $xs) {
             display: block;
             position: absolute;
-            right: -32px;
-            top: 10px;
-            width: 32px;
-            height: 48px;
+            right: -$size-32px;
+            top: $size-10px;
+            width: $size-32px;
+            height: $size-48px;
         }
     }
 }
 
 .logo {
-    min-height: 4rem;
-    min-width: 13rem;
+    min-height: $size-64px;
+    min-width: $size-208px;
 
     &__img {
-        height: 4rem;
-        padding: 1.875rem 0 3.125rem;
+        height: $size-64px;
+        padding: $size-30px $size-0px $size-50px;
 
         @media all and (max-width: $xs) {
-            padding: 9px 0 7px;
-            height: 50px;
+            padding: $size-9px $size-0px $size-7px;
+            height: $size-50px;
 
             & img {
-                width: 115px;
+                width: $size-115px;
             }
         }
     }
@@ -69,12 +71,12 @@
         background-image: url(../../assets/img/sidemenu-fixed-switcher.png);
         content: '';
         left: 0;
-        min-height: 4.125rem;
-        min-width: 1.25rem;
+        min-height: $size-66px;
+        min-width: $size-20px;
         position: absolute;
-        top: 0;
+        top: $size-0px;
 
-        @media all and (max-width: 360px) {
+        @media all and (max-width: $xs360) {
             background-image: url(../../assets/img/sidemenu-fixed-switcher-mobile.png);
             min-height: 3rem;
             width: 32px;
@@ -97,24 +99,24 @@
     &__links {
         display: flex;
         flex-direction: column;
-        gap: 1.25rem;
-        margin: 0 1rem;
+        gap: $size-20px;
+        margin: $size-0px $size-16px;
 
         @media all and (max-width: $xs) {
-            gap: 0.75rem;
-            margin: 0;
+            gap: $size-12px;
+            margin: $size-0px;
         }
     }
 
     &__link {
         align-items: flex-start;
         display: flex;
-        gap: 0.75rem;
+        gap: $size-12px;
         justify-content: center;
-        padding: 0.75rem 0;
+        padding: $size-12px $size-0px;
         width: 100%;
-        color: #262626;
-        font-size: 0.875rem;
+        color: $color-black-85;
+        font-size: $font-size-link-14px;
     }
 
     &_hideTitle {
@@ -137,7 +139,7 @@
         width: 100%;
 
         @media all and (max-width: $xs) {
-            padding-left: 0.5rem;
+            padding-left: $size-8px;
         }
     }
 }
@@ -146,10 +148,10 @@
     position: relative;
     margin-top: auto;
     display: flex;
-    gap: 10px;
+    gap: $size-10px;
     align-items: center;
-    min-height: 40px;
-    border-top: 1px solid $color-black-06;
+    min-height: $size-40px;
+    border-top: $size-1px solid $color-black-06;
 
     &__btn {
         cursor: pointer;
@@ -158,8 +160,8 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        gap: 1rem;
-        margin: 0 1rem;
+        gap: $size-16px;
+        margin: $size-0px $size-16px;
     }
 
     &__icon {

@@ -1,5 +1,6 @@
+@import '@constants/sizes';
 .wrapper {
-    padding: 0;
-    margin: 0;
+    padding: $size-0px;
+    margin: $size-0px;
     width: 100%;
 }
