@@ -1,15 +1,7 @@
 import { FC, useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
-import {
-    resetError,
-    setAuth,
-    setAuthError,
-    setCredentials,
-    setRememberMe,
-    setToken,
-} from '@redux/auth/auth.slice';
+import { resetError, setAuthError, setCredentials, setRememberMe } from '@redux/auth/auth.slice';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { useGoogleLogin } from '@react-oauth/google';
 import {
     CheckEmailResponse,
     cleverFitApi,
@@ -87,7 +79,7 @@ export const Auth: FC = () => {
         if (isAuth) {
             navigate(PATHS.main.path, { state: { from: location } });
         }
-    }, [isAuth, navigate]);
+    }, [isAuth, navigate, location]);
 
     useEffect(() => {
         if (error) {
@@ -116,25 +108,16 @@ export const Auth: FC = () => {
         }
 
         dispatch(resetError());
-    }, [error, dispatch, navigate]);
+    }, [error, dispatch, navigate, location]);
 
     const onFieldsChange = () => {
         setIsEmailCorrect(!form.getFieldError('email').length);
     };
 
-    const googleLogin = useGoogleLogin({
-        onSuccess: (tokenResponse) => {
-            const { access_token } = tokenResponse;
-            dispatch(setToken(access_token));
-            dispatch(setAuth(true));
-
-            if (rememberMe) {
-                localStorage.setItem('accessToken', access_token);
-            }
-
-            navigate(PATHS.main.path);
-        },
-    });
+    const googleLogin = () => {
+        localStorage.setItem('rememberMe', rememberMe);
+        window.location.href = 'https://marathon-api.clevertec.ru/auth/google';
+    };
 
     return (
         <Wrapper>
@@ -198,7 +181,7 @@ export const Auth: FC = () => {
                                             style={{ marginBottom: 0 }}
                                         >
                                             <Checkbox
-                                                defaultChecked={true}
+                                                checked={rememberMe}
                                                 data-test-id={'login-remember'}
                                                 onClick={() => dispatch(setRememberMe(!rememberMe))}
                                             >
@@ -231,7 +214,7 @@ export const Auth: FC = () => {
                                             type='default'
                                             className={styles.auth__googleBtn}
                                             block
-                                            onClick={() => googleLogin()}
+                                            onClick={googleLogin}
                                         >
                                             Войти через Google
                                         </Button>

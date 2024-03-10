@@ -23,6 +23,7 @@ export const authSlice = createSlice({
     reducers: {
         logout: (state) => {
             localStorage.removeItem('accessToken');
+            localStorage.removeItem('rememberMe');
             state.isAuth = false;
             state.accessToken = null;
         },
@@ -62,6 +63,7 @@ export const authSlice = createSlice({
 
         setRememberMe: (state, action) => {
             state.rememberMe = action.payload;
+            localStorage.setItem('rememberMe', action.payload);
         },
     },
 

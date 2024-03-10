@@ -1,5 +1,5 @@
 import { FC, useEffect } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useSearchParams, useLocation } from 'react-router-dom';
 import { Auth } from '@pages/auth';
 import { Registration } from '@pages/auth/registration';
 import { ChangePassword } from '@pages/auth/change-password/ChangePassword';
@@ -10,7 +10,7 @@ import { ErrorCheckEmail } from '@pages/result/error-check-email';
 import { ErrorUserExist } from '@pages/result/error-user-exist';
 import { Success } from '@pages/result/success';
 import { PrivateRoutes } from './PrivateRoutes';
-import { setAuth, setToken } from '@redux/auth/auth.slice';
+import { setAuth, setRememberMe, setToken } from '@redux/auth/auth.slice';
 import { useAppDispatch } from '@hooks/typed-react-redux-hooks';
 import { ConfirmEmail } from '@pages/auth/confirm-email';
 import { SuccessChangePassword } from '@pages/result/success-change-password';
@@ -19,15 +19,30 @@ import { PATHS, PATHS_RESULT } from '@constants/PATHS';
 
 export const AppRoutes: FC = () => {
     const dispatch = useAppDispatch();
+    const location = useLocation();
+    const [searchParams] = useSearchParams();
 
     useEffect(() => {
-        const accessToken = localStorage.getItem('accessToken');
+        const googleToken = searchParams.get('accessToken');
+        const accessToken = googleToken ?? localStorage.getItem('accessToken');
 
         if (accessToken) {
             dispatch(setToken(accessToken));
             dispatch(setAuth(true));
+        } else {
+            localStorage.removeItem('rememberMe');
         }
-    }, [dispatch]);
+
+        const rememberMe = localStorage.getItem('rememberMe');
+        if (rememberMe === 'true') {
+            dispatch(setRememberMe(true));
+            if (accessToken) {
+                localStorage.setItem('accessToken', accessToken);
+            }
+        } else if (rememberMe === 'false') {
+            dispatch(setRememberMe(false));
+        }
+    }, [dispatch, location, searchParams]);
 
     return (
         <>
