@@ -1,6 +1,7 @@
 import { FC, useState } from 'react';
-import { Button, Modal, Input, Rate } from 'antd';
+import { Button, Modal, Input, Space } from 'antd';
 import { useAddFeedbackMutation, useLazyGetFeedbacksQuery } from '@redux/api/api';
+import { AppRate } from '@components/AppRate/AppRate';
 import styles from './AddFeedback.module.scss';
 
 export type AddFeedbackProps = {
@@ -56,8 +57,15 @@ export const AddFeedback: FC<AddFeedbackProps> = ({ showModal, handleClose }) =>
                 </Button>,
             ]}
         >
-            <Rate onChange={onRateChange} value={state.rating} />
-            <Input.TextArea rows={3} autoSize onChange={(e) => onMessageChange(e.target.value)} />
+            <Space direction='vertical' style={{ display: 'flex' }}>
+                <AppRate onChange={onRateChange} value={state.rating} />
+                <Input.TextArea
+                    // rows={3}
+                    autoSize={{ minRows: 3 }}
+                    onChange={(e) => onMessageChange(e.target.value)}
+                    style={{ resize: 'both' }}
+                />
+            </Space>
         </Modal>
     );
 };

@@ -1,9 +1,10 @@
 import { FC } from 'react';
 import { Avatar, Card, Rate, Space, Typography } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
-import styles from './FeedbackCard.module.scss';
 import { Feedback } from '@redux/feedbacks/feedbacks.types';
 import { formatTime } from '@utils/index';
+import { AppRate } from '@components/AppRate/AppRate';
+import styles from './FeedbackCard.module.scss';
 
 const { Text } = Typography;
 export type FeedbackCardProps = {
@@ -24,8 +25,8 @@ export const FeedbackCard: FC<Feedback> = ({ fullName, imageSrc, message, rating
                     <p>{fullName}</p>
                 </Space>
                 <Space direction='vertical'>
-                    <Space>
-                        <Rate disabled defaultValue={rating} />
+                    <Space align='center'>
+                        <AppRate disabled defaultValue={rating} size={14} />
                         <Text type='secondary' style={{ fontSize: 12 }}>
                             {formatTime(createdAt)}
                         </Text>
