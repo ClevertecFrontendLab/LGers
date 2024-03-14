@@ -13,11 +13,12 @@ type State = {
     isShowSidebar: boolean;
 };
 
+const { calendar, workouts, achievements, profile } = PATHS;
 const links = [
-    { id: 1, title: 'Календарь', link: '/', icon: <CalendarTwoTone /> },
-    { id: 2, title: 'Тренировки', link: '/', icon: <HeartTwoTone /> },
-    { id: 3, title: 'Достижения', link: '/', icon: <TrophyTwoTone /> },
-    { id: 4, title: 'Профиль', link: '/', icon: <ProfileOutlined /> },
+    { id: 1, title: calendar.title, link: calendar.path, icon: <CalendarTwoTone /> },
+    { id: 2, title: workouts.title, link: workouts.path, icon: <HeartTwoTone /> },
+    { id: 3, title: achievements.title, link: achievements.path, icon: <TrophyTwoTone /> },
+    { id: 4, title: profile.title, link: profile.path, icon: <ProfileOutlined /> },
 ];
 
 export const Sidebar: FC = () => {

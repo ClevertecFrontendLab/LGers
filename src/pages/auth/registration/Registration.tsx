@@ -2,7 +2,8 @@ import { FC, useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
 import { useNavigate } from 'react-router-dom';
 import { resetError, setCredentials } from '@redux/auth/auth.slice';
-import { cleverFitApi, UserCredentials } from '@redux/api/api';
+import { cleverFitApi } from '@redux/api/api';
+import { UserCredentials } from '@redux/api/api.types';
 import { Button, Form, Input } from 'antd';
 import { Wrapper } from '@components/Wrapper';
 import { AuthWrapper } from '@components/AuthWrapper';
@@ -38,7 +39,7 @@ export const Registration: FC = () => {
             dispatch(resetError());
             registration({ email, password });
         }
-    }, []);
+    }, [dispatch]);
 
     useEffect(() => {
         if (error && error.status === STATUS.CODE_409) {

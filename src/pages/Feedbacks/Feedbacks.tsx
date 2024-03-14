@@ -49,7 +49,7 @@ export const Feedbacks = () => {
         if (error?.status === STATUS.CODE_403) {
             dispatch(logout());
         }
-    }, [error]);
+    }, [error, dispatch]);
 
     useEffect(() => {
         if (!feedbacks.length) {

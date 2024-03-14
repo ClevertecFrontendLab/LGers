@@ -1,9 +1,9 @@
 import { FC } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { MainPage } from '@pages/mainPage';
-
 import { Private } from '../../hoc/Private';
 import { Feedbacks } from '@pages/Feedbacks';
+import { CalendarPage } from '@pages/calendar-page';
 import { PATHS } from '@constants/PATHS';
 
 export const PrivateRoutes: FC = () => (
@@ -22,6 +22,14 @@ export const PrivateRoutes: FC = () => (
             element={
                 <Private>
                     <Feedbacks />
+                </Private>
+            }
+        />
+        <Route
+            path={PATHS.calendar.path}
+            element={
+                <Private>
+                    <CalendarPage />
                 </Private>
             }
         />

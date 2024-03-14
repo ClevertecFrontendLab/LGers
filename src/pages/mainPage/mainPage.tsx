@@ -5,19 +5,17 @@ import { Footer } from '@components/Footer';
 import { MainContent } from '@pages/mainPage/components/MainContent';
 import styles from './mainPage.module.scss';
 
-export const MainPage = () => {
-    return (
-        <Wrapper>
-            <div className={styles.main__page}>
-                <Sidebar />
-                <div className={styles.pageContainer}>
-                    <Header />
-                    <main className={styles.main}>
-                        <MainContent />
-                    </main>
-                    <Footer />
-                </div>
+export const MainPage = () => (
+    <Wrapper>
+        <div className={styles.main__page}>
+            <Sidebar />
+            <div className={styles.pageContainer}>
+                <Header />
+                <main className={styles.main}>
+                    <MainContent />
+                </main>
+                <Footer />
             </div>
-        </Wrapper>
-    );
-};
+        </div>
+    </Wrapper>
+);

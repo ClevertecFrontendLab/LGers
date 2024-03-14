@@ -1,46 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { RootState } from '@redux/configure-store';
-import { Feedback } from './api.types';
-
-export type IPost = {
-    id: number;
-    title: string;
-    body: string;
-};
-
-export interface UserCredentials {
-    email: string;
-    password: string;
-}
-
-export interface FormValues extends UserCredentials {
-    remember: boolean;
-}
-
-export type UserResponse = {
-    user: UserCredentials;
-    accessToken: string;
-};
-
-export type LoginRequest = {
-    email: string;
-    password: string;
-};
-
-export type CheckEmailResponse = {
-    data: {
-        email: string;
-        message: string;
-    };
-    error?: {
-        data?: {
-            error?: string;
-            message?: string;
-            statusCode?: number;
-        };
-        status?: number;
-    };
-};
+import { CheckEmailResponse, Feedback, UserCredentials } from './api.types';
+import { Training, TrainingList } from '@redux/training/training.types';
 
 const baseUrl = 'https://marathon-api.clevertec.ru';
 
@@ -70,7 +31,6 @@ export const cleverFitApi = createApi({
         }),
 
         registration: builder.mutation<Record<string, never>, UserCredentials>({
-            // todo Record
             query: (credentials) => ({
                 url: '/auth/registration',
                 method: 'POST',
@@ -119,6 +79,14 @@ export const cleverFitApi = createApi({
         getFeedbacks: builder.query<Feedback[], null>({
             query: () => '/feedback',
         }),
+
+        getTraining: builder.query<Training[], void>({
+            query: () => '/training',
+        }),
+
+        getTrainingList: builder.query<TrainingList[], void>({
+            query: () => 'catalogs/training-list',
+        }),
     }),
 });
 
@@ -131,4 +99,7 @@ export const {
     useAddFeedbackMutation,
     useGetFeedbacksQuery,
     useLazyGetFeedbacksQuery,
+    useGetTrainingListQuery,
+    useGetTrainingQuery,
+    useLazyGetTrainingQuery,
 } = cleverFitApi;

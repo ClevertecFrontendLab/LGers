@@ -15,6 +15,10 @@ export const PATHS: Record<string, Path> = {
         title: 'Восстановление аккаунта',
     },
     feedbacks: { path: '/feedbacks', title: 'Отзывы пользователей' },
+    calendar: { path: '/calendar', title: 'Календарь' },
+    workouts: { path: '/workouts', title: 'Тренировки' },
+    achievements: { path: '/achievements', title: 'Достижения' },
+    profile: { path: '/profile', title: 'Профиль' },
 };
 
 const result = '/result';
