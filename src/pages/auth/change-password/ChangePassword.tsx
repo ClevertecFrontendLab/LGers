@@ -4,7 +4,7 @@ import styles from '@pages/auth/Auth.module.scss';
 import { AuthResultWrapper } from '@components/AuthResultWrapper';
 import { useChangePasswordMutation } from '@redux/api/api';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { setCredentials } from '@redux/auth/auth.slice';
+import { authSelector, setCredentials } from '@redux/auth/auth.slice';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
 import { Loader } from '@components/Loader';
 import { PATHS_RESULT } from '@constants/PATHS';
@@ -27,7 +27,7 @@ export const ChangePassword: FC<Props> = () => {
 
     const [changePassword, changePasswordResult] = useChangePasswordMutation();
 
-    const { email, password, isFetching } = useAppSelector((state) => state.auth);
+    const { email, password, isFetching } = useAppSelector(authSelector);
     const onFinish = (values: FieldType) => {
         const { password, confirmPassword } = values;
         dispatch(setCredentials({ email, password }));

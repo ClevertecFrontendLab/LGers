@@ -1,14 +1,14 @@
 import { FC } from 'react';
 import { Button, Modal, Result } from 'antd';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
-import { resetError } from '@redux/feedbacks/feedbacks.slice';
+import { feedbacksSelector, resetError } from '@redux/feedbacks/feedbacks.slice';
 
 export type FeedbackErrorPostProps = {
     showModal: () => void;
 };
 
 export const FeedbackErrorPost: FC<FeedbackErrorPostProps> = ({ showModal }) => {
-    const { isPostError } = useAppSelector((state) => state.feedbacks);
+    const { isPostError } = useAppSelector(feedbacksSelector);
     const dispatch = useAppDispatch();
     const handleWriteFeedback = () => {
         dispatch(resetError());

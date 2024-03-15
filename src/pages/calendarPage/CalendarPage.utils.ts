@@ -29,7 +29,7 @@ const getExerciseType = (value: string): string => {
 
 export const getListData = ({ trainings }: GetListData) => {
     const listData = trainings?.map((item) => {
-        return { type: getExerciseType(item.name), content: item.name };
+        return { id: item._id, type: getExerciseType(item.name), content: item.name,  };
     });
 
     return listData || [];

@@ -7,9 +7,10 @@ import { PATHS } from '@constants/PATHS';
 import { useAppSelector } from '@hooks/typed-react-redux-hooks';
 import { Loader } from '@components/Loader';
 import { cleverFitApi } from '@redux/api/api';
+import { feedbacksSelector } from '@redux/feedbacks/feedbacks.slice';
 
 export const Footer: FC = () => {
-    const { isFetching } = useAppSelector((state) => state.feedbacks);
+    const { isFetching } = useAppSelector(feedbacksSelector);
     const [getFeedbacks] = cleverFitApi.useLazyGetFeedbacksQuery();
 
     const handleFeedbacksClick = async () => {

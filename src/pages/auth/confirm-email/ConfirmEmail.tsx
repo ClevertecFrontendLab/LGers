@@ -10,6 +10,7 @@ import { useConfirmEmailMutation } from '@redux/api/api';
 import { ResultStatusType } from 'antd/es/result';
 import { Loader } from '@components/Loader';
 import { PATHS } from '@constants/PATHS';
+import { authSelector } from '@redux/auth/auth.slice';
 
 export const ConfirmEmail: FC = () => {
     const [codeValue, setCodeValue] = useState('');
@@ -17,7 +18,7 @@ export const ConfirmEmail: FC = () => {
     const navigate = useNavigate();
 
     const [confirmEmail, confirmEmailResult] = useConfirmEmailMutation();
-    const { email, isFetching } = useAppSelector((state) => state.auth);
+    const { email, isFetching } = useAppSelector(authSelector);
     const CODE = {
         title: 'Введите код для восстановления аккауанта',
     };

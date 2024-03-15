@@ -2,8 +2,8 @@ import { FC } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { MainPage } from '@pages/mainPage';
 import { Private } from '../../hoc/Private';
-import { Feedbacks } from '@pages/Feedbacks';
-import { CalendarPage } from '@pages/calendar-page';
+import { Feedbacks } from '@pages/feedbacksPage';
+import { CalendarPage } from '@pages/calendarPage';
 import { PATHS } from '@constants/PATHS';
 
 export const PrivateRoutes: FC = () => (

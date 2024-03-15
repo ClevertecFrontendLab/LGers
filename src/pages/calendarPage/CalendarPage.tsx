@@ -65,7 +65,7 @@ export const CalendarPage: FC = () => {
         return (
             <ul>
                 {listData.map((item) => (
-                    <li key={item.content}>
+                    <li key={item.id}>
                         <Badge status={item.type as BadgeProps['status']} text={item.content} />
                     </li>
                 ))}

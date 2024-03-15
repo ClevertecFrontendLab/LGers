@@ -77,4 +77,6 @@ export const feedbackSlice = createSlice({
 
 export const { resetError, resetFeedbacks, closeShowSuccess } = feedbackSlice.actions;
 
+export const feedbacksSelector = (state: { feedbacks: FeedbackState }) => state.feedbacks;
+
 export const feedbacksReducer = feedbackSlice.reducer;

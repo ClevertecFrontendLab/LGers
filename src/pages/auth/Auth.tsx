@@ -1,14 +1,16 @@
 import { FC, useEffect, useState } from 'react';
-import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
-import { resetError, setAuthError, setCredentials, setRememberMe } from '@redux/auth/auth.slice';
-import { useLocation, useNavigate } from 'react-router-dom';
-import {
-    CheckEmailResponse,
-    cleverFitApi,
-    FormValues,
-    useCheckEmailMutation,
-} from '@redux/api/api';
 import { Button, Checkbox, Form, Input } from 'antd';
+import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
+import {
+    authSelector,
+    resetError,
+    setAuthError,
+    setCredentials,
+    setRememberMe,
+} from '@redux/auth/auth.slice';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { cleverFitApi, useCheckEmailMutation } from '@redux/api/api';
+import { CheckEmailResponse, FormValues } from '@redux/api/api.types';
 import { Wrapper } from '@components/Wrapper';
 import { AuthWrapper } from '@components/AuthWrapper';
 import { FormWrapper } from '@pages/auth/components/FormWrapper';
@@ -39,7 +41,7 @@ export const Auth: FC = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const dispatch = useAppDispatch();
-    const { isAuth, error, isFetching, rememberMe } = useAppSelector((state) => state.auth);
+    const { isAuth, error, isFetching, rememberMe } = useAppSelector(authSelector);
     const [checkEmail] = useCheckEmailMutation();
     const [form] = Form.useForm();
 
@@ -115,7 +117,7 @@ export const Auth: FC = () => {
     };
 
     const googleLogin = () => {
-        localStorage.setItem('rememberMe', rememberMe);
+        localStorage.setItem('rememberMe', rememberMe.toString());
         window.location.href = 'https://marathon-api.clevertec.ru/auth/google';
     };
 

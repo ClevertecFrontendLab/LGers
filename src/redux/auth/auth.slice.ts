@@ -167,4 +167,6 @@ export const {
     setRememberMe,
 } = authSlice.actions;
 
+export const authSelector = (state: { auth: AuthState }) => state.auth;
+
 export const authReducer = authSlice.reducer;

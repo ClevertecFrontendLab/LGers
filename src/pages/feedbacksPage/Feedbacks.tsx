@@ -3,17 +3,18 @@ import { Button } from 'antd';
 import { FeedbackCard } from '../../components/FeedbackCard';
 import { FeedbacksEmpty } from '@components/FeedbacksEmpty';
 import { AppWrapper } from '@components/AppWrapper';
-import styles from './Feedbacks.module.scss';
 import { AddFeedback } from '@components/modals/AddFeedback';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
 import { Feedback } from '@redux/feedbacks/feedbacks.types';
 import { Loader } from '@components/Loader';
 import { FeedbackSuccess } from '@components/modals/FeedbackSuccess';
 import { logout } from '@redux/auth/auth.slice';
+import { feedbacksSelector } from '@redux/feedbacks/feedbacks.slice';
 import { FeedbackError500 } from '@components/modals/FeedbackError500';
 import { useLazyGetFeedbacksQuery } from '@redux/api/api';
 import { FeedbackErrorPost } from '@components/modals/FeedbackErrorPost';
 import { STATUS } from '@constants/STATUS';
+import styles from './Feedbacks.module.scss';
 
 export type ModalProps = {
     isModalOpenProp: boolean;
@@ -21,7 +22,7 @@ export type ModalProps = {
 
 export const Feedbacks = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const { feedbacks, isFetching, error } = useAppSelector((state) => state.feedbacks);
+    const { feedbacks, isFetching, error } = useAppSelector(feedbacksSelector);
     const dispatch = useAppDispatch();
     const [getFeedbacks] = useLazyGetFeedbacksQuery();
 

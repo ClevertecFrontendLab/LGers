@@ -1,14 +1,14 @@
 import { FC, useEffect, useState } from 'react';
 import { Button, Modal, Result } from 'antd';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
-import { resetError } from '@redux/feedbacks/feedbacks.slice';
+import { feedbacksSelector, resetError } from '@redux/feedbacks/feedbacks.slice';
 import { useNavigate } from 'react-router-dom';
 import { PATHS } from '@constants/PATHS';
 import { STATUS } from '@constants/STATUS';
 
 export const FeedbackError500: FC = () => {
     const [isOpen, setIsOpen] = useState(false);
-    const { error } = useAppSelector((state) => state.feedbacks);
+    const { error } = useAppSelector(feedbacksSelector);
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
     const handleClose = () => {

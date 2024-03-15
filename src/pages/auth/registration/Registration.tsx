@@ -1,7 +1,7 @@
 import { FC, useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
 import { useNavigate } from 'react-router-dom';
-import { resetError, setCredentials } from '@redux/auth/auth.slice';
+import { authSelector, resetError, setCredentials } from '@redux/auth/auth.slice';
 import { cleverFitApi } from '@redux/api/api';
 import { UserCredentials } from '@redux/api/api.types';
 import { Button, Form, Input } from 'antd';
@@ -32,7 +32,7 @@ export const Registration: FC = () => {
 
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
-    const { isAuth, error, isFetching, email, password } = useAppSelector((state) => state.auth);
+    const { isAuth, error, isFetching, email, password } = useAppSelector(authSelector);
 
     useEffect(() => {
         if (error && email && password) {

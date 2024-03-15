@@ -1,10 +1,10 @@
 import { FC } from 'react';
 import { Button, Modal, Result } from 'antd';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
-import { closeShowSuccess } from '@redux/feedbacks/feedbacks.slice';
+import { closeShowSuccess, feedbacksSelector } from '@redux/feedbacks/feedbacks.slice';
 
 export const FeedbackSuccess: FC = () => {
-    const { isShowSuccess } = useAppSelector((state) => state.feedbacks);
+    const { isShowSuccess } = useAppSelector(feedbacksSelector);
     const dispatch = useAppDispatch();
 
     return (
