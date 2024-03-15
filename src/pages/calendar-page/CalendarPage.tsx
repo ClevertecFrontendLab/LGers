@@ -6,9 +6,16 @@ import { resetTrainingError, trainingsSelector } from '@redux/training/training.
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
 import { CloseOutlined } from '@ant-design/icons';
 import { getDate, getListData } from './CalendarPage.utils';
-
 import type { CalendarMode } from 'antd/es/calendar/generateCalendar';
+import { appLocale } from './CalendarPage.locale';
+import moment from 'moment';
 import type { Moment } from 'moment';
+
+moment.updateLocale('ru', {
+    week: {
+        dow: 1,
+    },
+});
 
 export const CalendarPage: FC = () => {
     const dispatch = useAppDispatch();
@@ -68,7 +75,11 @@ export const CalendarPage: FC = () => {
 
     return (
         <AppWrapper>
-            <Calendar dateCellRender={dateCellRender} onPanelChange={onPanelChange} />
+            <Calendar
+                dateCellRender={dateCellRender}
+                onPanelChange={onPanelChange}
+                locale={appLocale}
+            />
         </AppWrapper>
     );
 };
