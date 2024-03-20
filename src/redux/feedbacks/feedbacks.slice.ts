@@ -31,7 +31,7 @@ export const feedbackSlice = createSlice({
 
         closeShowSuccess: (state) => {
             state.isShowSuccess = false;
-        }
+        },
     },
 
     extraReducers: (builder) => {
@@ -45,7 +45,7 @@ export const feedbackSlice = createSlice({
             .addMatcher(getFeedbacks.matchFulfilled, (state, action) => {
                 state.isFetching = false;
                 state.error = null;
-                state.feedbacks = action.payload;
+                state.feedbacks = action.payload.reverse();
                 state.isGetError = false;
             })
             .addMatcher(getFeedbacks.matchRejected, (state, action) => {
@@ -75,10 +75,8 @@ export const feedbackSlice = createSlice({
     },
 });
 
-export const {
-    resetError,
-    resetFeedbacks,
-    closeShowSuccess,
-} = feedbackSlice.actions;
+export const { resetError, resetFeedbacks, closeShowSuccess } = feedbackSlice.actions;
+
+export const feedbacksSelector = (state: { feedbacks: FeedbackState }) => state.feedbacks;
 
 export const feedbacksReducer = feedbackSlice.reducer;

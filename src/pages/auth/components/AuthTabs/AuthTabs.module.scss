@@ -1,33 +1,34 @@
-@import '../../../../constants/colors';
-@import '../../../../constants/media-sizes';
+@import '@constants/colors';
+@import '@constants/media-sizes';
+@import '@constants/sizes';
 
 .tabs {
     display: flex;
     align-items: center;
     justify-content: center;
     width: 100%;
-    margin-bottom: 1.5rem;
+    margin-bottom: $size-24px;
 
     &__linkBtn {
-        border-bottom: 2px solid transparent;
-        padding-bottom: 4px;
+        border-bottom: $size-2px solid transparent;
+        padding-bottom: $size-4px;
         width: 100%;
         transition: all 0.3s ease-in-out;
 
         &:hover {
             color: $btn-color;
-            border-bottom: 2px solid $btn-color;
+            border-bottom: $size-2px solid $btn-color;
             transition: all 0.3s ease-in-out;
         }
 
-        @media all and (min-width: $sm){
+        @media all and (min-width: $sm) {
             letter-spacing: 0;
         }
     }
 
     &__linkBtnActive {
-        border-bottom: 2px solid $btn-color;
-        padding-bottom: 4px;
+        border-bottom: $size-2px solid $btn-color;
+        padding-bottom: $size-4px;
         width: 100%;
     }
 }

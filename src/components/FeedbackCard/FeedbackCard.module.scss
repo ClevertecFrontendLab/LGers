@@ -1,28 +1,32 @@
+@import '@constants/media-sizes';
+@import '@constants/sizes';
+@import '@constants/font-sizes';
+
 .content {
-  display: flex;
-  flex-direction: column;
+    display: flex;
+    flex-direction: column;
 
-  &__wrapper {
-    margin: 16px;
-    @media all and (min-width: 576px) {
-        margin: 20px 24px;
-      }
-  }
-
-  @media all and (min-width: 576px) {
-    flex-direction: row;
-  }
-
-  &__card {
-    margin-bottom: 16px;
-  }
-
-  &__user {
-    font-size: 16px;
-
-    @media all and (min-width: 576px) {
-      min-width: 174px;
-      flex-direction: column;
+    &__wrapper {
+        margin: $size-16px;
+        @media all and (min-width: $sm) {
+            margin: $size-20px $size-24px;
+        }
     }
-  }
+
+    @media all and (min-width: $sm) {
+        flex-direction: row;
+    }
+
+    &__card {
+        margin-bottom: $size-16px;
+    }
+
+    &__user {
+        font-size: $font-size-p-16px;
+
+        @media all and (min-width: $sm) {
+            min-width: $size-174px;
+            flex-direction: column;
+        }
+    }
 }

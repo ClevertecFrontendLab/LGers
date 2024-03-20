@@ -1,15 +1,17 @@
-@import '../../constants/colors';
-@import '../../constants/media-sizes';
+@import '@constants/colors';
+@import '@constants/media-sizes';
+@import '@constants/sizes';
+@import '@constants/font-sizes';
 
 .footer {
-    margin: 1.5rem 1rem 0;
+    margin: $size-24px $size-16px $size-0px;
     display: flex;
     flex-direction: column;
 
     @media all and (min-width: $sm) {
         flex-direction: row-reverse;
         justify-content: space-between;
-        margin: 2.625rem 1.5rem 0;
+        margin: $size-42px $size-24px $size-0px;
     }
 
     &__btn {
@@ -18,19 +20,19 @@
         color: $btn-color;
         cursor: pointer;
         text-align: center;
-        min-height: 40px;
+        min-height: $size-40px;
         margin-top: auto;
-        margin-left: 0.75rem;
-        padding-top: 2.25rem;
+        margin-left: $size-12px;
+        padding-top: $size-36px;
         transition: all 0.5s ease-in-out;
 
         &:hover {
-            transform: translate(0, 1rem);
+            transform: translate(0, $size-16px);
             transition: all 0.5s ease-in-out;
         }
 
         @media all and (min-width: $sm) {
-            padding-top: 0;
+            padding-top: $size-0px;
         }
     }
 }
@@ -39,26 +41,26 @@
     display: flex;
     flex-direction: column;
     background: $color-bg;
-    max-width: 20.5rem;
+    max-width: $size-328px;
 
     @media all and (min-width: $sm) {
-        max-width: 15rem;
+        max-width: $size-240px;
     }
 
     &__txt {
         display: flex;
         flex-direction: column;
-        padding: 0.75rem 1.5rem;
-        gap: 0.5rem;
-        border-bottom: 1px solid $color-black-06;
+        padding: $size-12px $size-24px;
+        gap: $size-8px;
+        border-bottom: $size-1px solid $color-black-06;
 
         @media all and (min-width: $sm) {
-            margin-right: 1.375rem;
+            margin-right: $size-22px;
         }
 
         p {
             text-align: center;
-            font-size: 1rem;
+            font-size: $font-size-p-16px;
 
             @media all and (min-width: $sm) {
                 text-align: left;
@@ -71,7 +73,7 @@
 
         &_secondary {
             color: $color-black-45;
-            letter-spacing: -1px;
+            letter-spacing: -$size-1px;
 
             @media all and (min-width: $sm) {
                 transform: scaleX(1);

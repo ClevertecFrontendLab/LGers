@@ -1,27 +1,37 @@
+import { FC } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { MainPage } from '@pages/mainPage';
-import { FC } from 'react';
-
 import { Private } from '../../hoc/Private';
-import { Feedbacks } from '@pages/Feedbacks';
+import { Feedbacks } from '@pages/feedbacksPage';
+import { CalendarPage } from '@pages/calendarPage';
 import { PATHS } from '@constants/PATHS';
 
-export const PrivateRoutes: FC = () => {
-    return (
-        <Routes>
-            <Route path={PATHS.home.path} element={
-                <Navigate to={PATHS.main.path} replace />
-            } />
-            <Route path={PATHS.main.path} element={
+export const PrivateRoutes: FC = () => (
+    <Routes>
+        <Route path={PATHS.home.path} element={<Navigate to={PATHS.main.path} replace />} />
+        <Route
+            path={PATHS.main.path}
+            element={
                 <Private>
                     <MainPage />
                 </Private>
-            } />
-            <Route path={PATHS.feedbacks.path} element={
+            }
+        />
+        <Route
+            path={PATHS.feedbacks.path}
+            element={
                 <Private>
                     <Feedbacks />
                 </Private>
-            } />
-        </Routes>
-    );
-};
+            }
+        />
+        <Route
+            path={PATHS.calendar.path}
+            element={
+                <Private>
+                    <CalendarPage />
+                </Private>
+            }
+        />
+    </Routes>
+);

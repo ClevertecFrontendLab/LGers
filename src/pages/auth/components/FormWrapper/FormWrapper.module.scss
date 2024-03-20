@@ -1,6 +1,6 @@
-@import '../../../../constants/colors';
-@import '../../../../constants/media-sizes';
-@import '../../../../constants/sizes';
+@import '@constants/colors';
+@import '@constants/media-sizes';
+@import '@constants/sizes';
 
 .formWrapper {
     display: flex;
@@ -8,15 +8,15 @@
     align-items: center;
     justify-content: center;
     width: 100%;
-    max-width: 328px;
+    max-width: $size-328px;
     background: $color-bg;
     border-radius: $border-radius-2px;
-    gap: 2rem;
-    padding: 2rem 1rem;
+    gap: $size-32px;
+    padding: $size-32px $size-16px;
 
     @media all and (min-width: $sm) {
-        padding: 4rem 1rem;
-        max-width: 539px;
-        gap: 3rem;
+        padding: $size-64px $size-16px;
+        max-width: $size-539px;
+        gap: $size-48px;
     }
 }

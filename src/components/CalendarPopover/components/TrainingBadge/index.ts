@@ -1,0 +1,1 @@
+import { TrainingBadge } from './TrainingBadge';

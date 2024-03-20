@@ -14,7 +14,7 @@ const initialState: AuthState = {
     accessToken: accessToken,
     password: '',
     email: '',
-    authError: undefined
+    authError: undefined,
 };
 
 export const authSlice = createSlice({
@@ -23,6 +23,7 @@ export const authSlice = createSlice({
     reducers: {
         logout: (state) => {
             localStorage.removeItem('accessToken');
+            localStorage.removeItem('rememberMe');
             state.isAuth = false;
             state.accessToken = null;
         },
@@ -47,7 +48,10 @@ export const authSlice = createSlice({
             state.hasResult = false;
         },
 
-        setCredentials: (state, action: PayloadAction<{ email: string | undefined, password: string | undefined }>) => {
+        setCredentials: (
+            state,
+            action: PayloadAction<{ email: string | undefined; password: string | undefined }>,
+        ) => {
             const { email, password } = action.payload;
             if (email) {
                 state.email = email;
@@ -59,6 +63,7 @@ export const authSlice = createSlice({
 
         setRememberMe: (state, action) => {
             state.rememberMe = action.payload;
+            localStorage.setItem('rememberMe', action.payload);
         },
     },
 
@@ -161,5 +166,7 @@ export const {
     setAuthError,
     setRememberMe,
 } = authSlice.actions;
+
+export const authSelector = (state: { auth: AuthState }) => state.auth;
 
 export const authReducer = authSlice.reducer;

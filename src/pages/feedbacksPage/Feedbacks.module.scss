@@ -1,0 +1,27 @@
+@import '@constants/media-sizes';
+@import '@constants/sizes';
+
+.feedbacks {
+    margin: $size-16px;
+
+    @media all and (min-width: $sm) {
+        margin: $size-20px $size-24px;
+    }
+
+    &__content {
+        width: 100%;
+    }
+
+    &__footer {
+        display: flex;
+        margin: $size-16px;
+        flex-direction: column;
+        gap: $size-16px;
+
+        @media all and (min-width: $sm) {
+            margin: $size-20px $size-24px;
+            flex-direction: row;
+            gap: $size-8px;
+        }
+    }
+}

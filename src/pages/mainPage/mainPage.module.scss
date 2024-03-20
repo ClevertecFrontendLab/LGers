@@ -1,5 +1,6 @@
-@import '../../constants/colors';
-@import '../../constants/media-sizes';
+@import '@constants/colors';
+@import '@constants/media-sizes';
+@import '@constants/sizes';
 
 .main {
     flex: 1;
@@ -12,11 +13,11 @@
         width: 100%;
 
         @media all and (max-width: $lg) {
-            background-position: -424px 0;
+            background-position: -$size-424px $size-0px;
         }
 
         @media all and (max-width: $xs) {
-            background-position: 4144px 896px;
+            background-position: $size-4144px $size-896px;
         }
     }
 }
@@ -25,5 +26,5 @@
     display: flex;
     flex-direction: column;
     flex: 1;
-    margin-bottom: 42px;
+    margin-bottom: $size-42px;
 }

@@ -1,11 +1,12 @@
 import { FC } from 'react';
 import { Button, Modal, Result } from 'antd';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
-import { closeShowSuccess } from '@redux/feedbacks/feedbacks.slice';
+import { closeShowSuccess, feedbacksSelector } from '@redux/feedbacks/feedbacks.slice';
 
 export const FeedbackSuccess: FC = () => {
-    const { isShowSuccess } = useAppSelector((state) => state.feedbacks);
+    const { isShowSuccess } = useAppSelector(feedbacksSelector);
     const dispatch = useAppDispatch();
+
     return (
         <Modal
             open={isShowSuccess}
@@ -19,7 +20,12 @@ export const FeedbackSuccess: FC = () => {
                 status={'success'}
                 title={'Отзыв успешно опубликован'}
                 extra={[
-                    <Button type="primary" onClick={() => dispatch(closeShowSuccess())} block>
+                    <Button
+                        type='primary'
+                        onClick={() => dispatch(closeShowSuccess())}
+                        block
+                        key={'closeButton'}
+                    >
                         Отлично
                     </Button>,
                 ]}

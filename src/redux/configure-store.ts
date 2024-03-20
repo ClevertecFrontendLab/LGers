@@ -4,6 +4,7 @@ import { createBrowserHistory } from 'history';
 import { authReducer } from '@redux/auth/auth.slice';
 import { cleverFitApi } from '@redux/api/api';
 import { feedbacksReducer } from './feedbacks/feedbacks.slice';
+import { trainingsReducer } from './training/training.slice';
 
 const { createReduxHistory, routerMiddleware, routerReducer } = createReduxHistoryContext({
     history: createBrowserHistory(),
@@ -13,6 +14,7 @@ const combinedReducer = combineReducers({
     router: routerReducer,
     auth: authReducer,
     feedbacks: feedbacksReducer,
+    trainings: trainingsReducer,
     [cleverFitApi.reducerPath]: cleverFitApi.reducer,
 });
 
@@ -26,9 +28,8 @@ const rootReducer: Reducer = (state: RootState, action) => {
 
 export const store = configureStore({
     reducer: rootReducer,
-    middleware: (getDefaultMiddleware) => getDefaultMiddleware()
-        .concat(routerMiddleware)
-        .concat(cleverFitApi.middleware)
+    middleware: (getDefaultMiddleware) =>
+        getDefaultMiddleware().concat(routerMiddleware).concat(cleverFitApi.middleware),
 });
 
 export type RootState = ReturnType<typeof store.getState>;

@@ -1,23 +1,24 @@
 import { FC, useEffect, useState } from 'react';
-import { Wrapper } from '@components/Wrapper';
 import { Button, Checkbox, Form, Input } from 'antd';
+import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
+import {
+    authSelector,
+    resetError,
+    setAuthError,
+    setCredentials,
+    setRememberMe,
+} from '@redux/auth/auth.slice';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { cleverFitApi, useCheckEmailMutation } from '@redux/api/api';
+import { CheckEmailResponse, FormValues } from '@redux/api/api.types';
+import { Wrapper } from '@components/Wrapper';
 import { AuthWrapper } from '@components/AuthWrapper';
 import { FormWrapper } from '@pages/auth/components/FormWrapper';
 import { Logo } from '@pages/auth/components/Logo';
-import { useLocation, useNavigate } from 'react-router-dom';
 import { AuthTabs } from '@pages/auth/components/AuthTabs';
-import {
-    CheckEmailResponse,
-    cleverFitApi,
-    FormValues,
-    useCheckEmailMutation,
-} from '@redux/api/api';
-import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
 import { Loader } from '@components/Loader';
-import { resetError, setAuth, setAuthError, setCredentials, setRememberMe, setToken } from '@redux/auth/auth.slice';
-import s from './Auth.module.scss';
-import { useGoogleLogin } from '@react-oauth/google';
-import { PATHS } from '@constants/PATHS';
+import { PATHS, PATHS_RESULT } from '@constants/PATHS';
+import styles from './Auth.module.scss';
 
 const marginBottom = 32;
 
@@ -27,24 +28,20 @@ type FieldType = {
     remember?: boolean;
 };
 
-export interface GoogleResponse {
+export type GoogleResponse = {
     clientId: string;
     credential: string;
     select_by: string;
-}
-
-const EmailLabel = () => {
-    return (
-        <span className={s.emailLabel}>e-mail:</span>
-    );
 };
+
+const EmailLabel = () => <span className={styles.emailLabel}>e-mail:</span>;
 
 export const Auth: FC = () => {
     const [login] = cleverFitApi.useLoginMutation();
     const navigate = useNavigate();
     const location = useLocation();
     const dispatch = useAppDispatch();
-    const { isAuth, error, isFetching, rememberMe } = useAppSelector(state => state.auth);
+    const { isAuth, error, isFetching, rememberMe } = useAppSelector(authSelector);
     const [checkEmail] = useCheckEmailMutation();
     const [form] = Form.useForm();
 
@@ -58,7 +55,7 @@ export const Auth: FC = () => {
             dispatch(setRememberMe(false));
         }
 
-        dispatch(setCredentials({ email, password }))
+        dispatch(setCredentials({ email, password }));
         login({ email, password });
     };
 
@@ -69,82 +66,73 @@ export const Auth: FC = () => {
                 const { email, password } = values;
                 dispatch(setCredentials({ email, password }));
                 if (email) {
-                    const data = await checkEmail({ email }) as CheckEmailResponse;
+                    const data = (await checkEmail({ email })) as CheckEmailResponse;
                     if (data.data) {
-                        navigate('/auth/confirm-email', { state: { from: location } });
+                        navigate(PATHS.authConfirmEmail.path, { state: { from: location } });
                     }
                 }
-
             })
             .catch((e) => {
                 dispatch(setAuthError(e));
-            })
-            ;
+            });
     };
 
     useEffect(() => {
         if (isAuth) {
-            navigate('/main', { state: { from: location } });
+            navigate(PATHS.main.path, { state: { from: location } });
         }
-    }, [isAuth]);
+    }, [isAuth, navigate, location]);
 
     useEffect(() => {
         if (error) {
             switch (error.status) {
                 case 400:
-                    navigate('/result/error-login', { state: { from: location } });
+                    navigate(PATHS_RESULT.errorLogin, { state: { from: location } });
                     break;
 
                 case 404:
                     if (error.data?.message === 'Email не найден') {
-                        navigate('/result/error-check-email-no-exist', { state: { from: location } });
+                        navigate(PATHS_RESULT.errorCheckEmailNoExist, {
+                            state: { from: location },
+                        });
                     } else {
-                        navigate('/result/error-login', { state: { from: location } });
+                        navigate(PATHS_RESULT.errorLogin, { state: { from: location } });
                     }
                     break;
 
                 case 409:
-                    navigate('/result/error-check-email');
+                    navigate(PATHS_RESULT.errorCheckEmail);
                     break;
 
                 default:
-                    navigate('/result/error-check-email', { state: { from: location } });
+                    navigate(PATHS_RESULT.errorCheckEmail, { state: { from: location } });
             }
         }
 
         dispatch(resetError());
-    }, [error]);
+    }, [error, dispatch, navigate, location]);
 
     const onFieldsChange = () => {
         setIsEmailCorrect(!form.getFieldError('email').length);
     };
 
-    const googleLogin = useGoogleLogin({
-        onSuccess: tokenResponse => {
-            const { access_token } = tokenResponse;
-            dispatch(setToken(access_token));
-            dispatch(setAuth(true));
-
-            if (rememberMe) {
-                localStorage.setItem('accessToken', access_token);
-            }
-
-            navigate(PATHS.main.path);
-        },
-    });
+    const googleLogin = () => {
+        localStorage.setItem('rememberMe', rememberMe.toString());
+        window.location.href = 'https://marathon-api.clevertec.ru/auth/google';
+    };
 
     return (
         <Wrapper>
             <>
                 {isFetching && <Loader />}
-                <div className={s.auth__page}>
+                <div className={styles.auth__page}>
                     <AuthWrapper>
                         <FormWrapper>
                             <>
                                 <Logo />
                                 <Form
                                     form={form}
-                                    name="auth"
+                                    name='auth'
                                     style={{ width: '100%', maxWidth: 368 }}
                                     initialValues={{
                                         remember: true,
@@ -155,7 +143,7 @@ export const Auth: FC = () => {
                                 >
                                     <AuthTabs activeTab={'auth'} />
                                     <Form.Item<FieldType>
-                                        name="email"
+                                        name='email'
                                         rules={[
                                             { required: true, message: '' },
                                             {
@@ -172,12 +160,15 @@ export const Auth: FC = () => {
                                     </Form.Item>
 
                                     <Form.Item<FieldType>
-                                        name="password"
-                                        rules={[{
-                                            required: true,
-                                            message: 'Пароль не менее 8 символов, с заглавной буквой и цифрой',
-                                            min: 8
-                                        }]}
+                                        name='password'
+                                        rules={[
+                                            {
+                                                required: true,
+                                                message:
+                                                    'Пароль не менее 8 символов, с заглавной буквой и цифрой',
+                                                min: 8,
+                                            },
+                                        ]}
                                         style={{ marginBottom, letterSpacing: '-0.5px' }}
                                     >
                                         <Input.Password
@@ -186,13 +177,13 @@ export const Auth: FC = () => {
                                         />
                                     </Form.Item>
 
-                                    <div className={s.rememberMe}>
+                                    <div className={styles.rememberMe}>
                                         <Form.Item<FieldType>
-                                            name="remember"
+                                            name='remember'
                                             style={{ marginBottom: 0 }}
                                         >
                                             <Checkbox
-                                                defaultChecked={true}
+                                                checked={rememberMe}
                                                 data-test-id={'login-remember'}
                                                 onClick={() => dispatch(setRememberMe(!rememberMe))}
                                             >
@@ -200,7 +191,7 @@ export const Auth: FC = () => {
                                             </Checkbox>
                                         </Form.Item>
                                         <Button
-                                            className={s.rememberMe__link}
+                                            className={styles.rememberMe__link}
                                             type={'link'}
                                             onClick={onRestorePassword}
                                             disabled={!isEmailCorrect}
@@ -209,12 +200,12 @@ export const Auth: FC = () => {
                                             Забыли пароль?
                                         </Button>
                                     </div>
-                                    <div className={s.auth__btns}>
+                                    <div className={styles.auth__btns}>
                                         <Form.Item style={{ marginBottom: 0 }}>
                                             <Button
-                                                type="primary"
-                                                htmlType="submit"
-                                                size="large"
+                                                type='primary'
+                                                htmlType='submit'
+                                                size='large'
                                                 block
                                                 data-test-id='login-submit-button'
                                             >
@@ -222,10 +213,10 @@ export const Auth: FC = () => {
                                             </Button>
                                         </Form.Item>
                                         <Button
-                                            type="default"
-                                            className={s.auth__googleBtn}
+                                            type='default'
+                                            className={styles.auth__googleBtn}
                                             block
-                                            onClick={() => googleLogin()}
+                                            onClick={googleLogin}
                                         >
                                             Войти через Google
                                         </Button>

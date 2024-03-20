@@ -1,13 +1,14 @@
 import { FC, useEffect, useState } from 'react';
 import { Button, Modal, Result } from 'antd';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
-import { resetError } from '@redux/feedbacks/feedbacks.slice';
+import { feedbacksSelector, resetError } from '@redux/feedbacks/feedbacks.slice';
 import { useNavigate } from 'react-router-dom';
 import { PATHS } from '@constants/PATHS';
+import { STATUS } from '@constants/STATUS';
 
 export const FeedbackError500: FC = () => {
     const [isOpen, setIsOpen] = useState(false);
-    const { error } = useAppSelector((state) => state.feedbacks);
+    const { error } = useAppSelector(feedbacksSelector);
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
     const handleClose = () => {
@@ -16,7 +17,7 @@ export const FeedbackError500: FC = () => {
     };
 
     useEffect(() => {
-        if (error?.status === 403 || error?.status === 500) {
+        if (error?.status === STATUS.CODE_403 || error?.status === STATUS.CODE_500) {
             setIsOpen(true);
         } else {
             setIsOpen(false);
@@ -37,7 +38,7 @@ export const FeedbackError500: FC = () => {
                 title={'Что-то пошло не так'}
                 subTitle={'Произошла ошибка, Попробуйте еще раз'}
                 extra={[
-                    <Button type="primary" onClick={handleClose} key='back'>
+                    <Button type='primary' onClick={handleClose} key='back'>
                         Назад
                     </Button>,
                 ]}

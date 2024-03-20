@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
-@import './src/constants/colors';
+@import '@constants/colors';
+@import '@constants/sizes';
+@import '@constants/font-sizes';
 
 :root {
     font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
@@ -34,53 +36,57 @@ a:active {
 }
 
 h1 {
-    font-size: 2.375rem;
+    font-size: $font-size-h1;
     font-weight: 700;
     line-height: 130%;
 }
 
-h2, h3, h4, h5 {
+h2,
+h3,
+h4,
+h5 {
     font-weight: 500;
     line-height: 130%;
 }
 
 h2 {
-    font-size: 2rem;
+    font-size: $font-size-h2;
     line-height: 130%;
 }
 
 h3 {
-    font-size: 1.5rem;
+    font-size: $font-size-h3;
     line-height: 130%;
 }
 
 h4 {
-    font-size: 1.25rem;
+    font-size: $font-size-h4;
     line-height: 130%;
 }
 
 h5 {
-    font-size: 1.25rem;
+    font-size: $font-size-h5;
     line-height: 130%;
 }
 
 h6 {
-    font-size: 1.25rem;
+    font-size: $font-size-h6;
     font-weight: 400;
     line-height: 130%;
 }
 
 p {
-    font-size: 0.875rem;
+    font-size: $font-size-p-16px;
     font-weight: 400;
     line-height: 130%;
 }
+
 .ant-btn-link {
     color: $btn-color;
-
 }
+
 .ant-btn-primary {
-    color: #fff;
+    color: $color-white;
     border-color: $btn-color;
     background: $btn-color;
 }

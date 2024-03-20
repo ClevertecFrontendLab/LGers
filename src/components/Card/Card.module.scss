@@ -1,5 +1,7 @@
-@import '../../constants/colors';
-@import '../../constants/media-sizes';
+@import '@constants/colors';
+@import '@constants/media-sizes';
+@import '@constants/sizes';
+@import '@constants/font-sizes';
 
 .card {
     color: $color-black-85;
@@ -10,8 +12,8 @@
     width: 100%;
 
     &__title {
-        margin: 0.75rem 1.5rem;
-        font-size: 1rem;
+        margin: $size-12px $size-24px;
+        font-size: $font-size-p-16px;
         text-align: left;
         align-self: flex-start;
 
@@ -22,18 +24,17 @@
         @media all and (min-width: $md) {
             align-self: center;
         }
-
     }
 
     &__btn {
         width: 100%;
-        font-size: 0.875rem;
-        padding: 1.25rem 0;
+        font-size: $font-size-p-14px;
+        padding: $size-20px $size-0px;
         color: $btn-color;
         display: flex;
         justify-content: center;
         align-items: center;
-        gap: 0.5rem;
+        gap: $size-8px;
         cursor: pointer;
         border: transparent;
         border-top: 1px solid $color-black-06;

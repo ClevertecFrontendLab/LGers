@@ -1,14 +1,16 @@
-@import '../../../../constants/colors';
-@import '../../../../constants/media-sizes';
+@import '@constants/colors';
+@import '@constants/media-sizes';
+@import '@constants/sizes';
+@import '@constants/font-sizes';
 
 .mainCard {
     color: $color-black-85;
-    max-width: 704px;
+    max-width: $size-704px;
     background-color: $color-bg;
-    padding: 1.5rem;
+    padding: $size-24px;
 
     @media all and (max-width: $xs) {
-        padding: 1rem 1.5rem 1rem 1rem;
+        padding: $size-16px $size-24px $size-16px $size-16px;
     }
 }
 
@@ -16,40 +18,40 @@
     color: $clr-light_blue-9;
     display: flex;
     flex-direction: column;
-    font-size: 1rem;
+    font-size: $font-size-p-16px;
     line-height: 130%;
-    max-width: 752px;
+    max-width: $size-752px;
 }
 
 .description {
-    padding: 0;
+    padding: $size-0px;
 }
 
 .h4 {
-    margin: 0;
+    margin: $size-0px;
 }
 
 .cards {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
-    max-width: 752px;
-    margin: 0 1rem;
+    gap: $size-8px;
+    max-width: $size-704px;
+    margin: $size-0px $size-16px;
 
     @media all and (min-width: $sm) {
         flex-direction: row;
-        gap: 1rem;
-        margin: 0 1.5rem;
+        gap: $size-16px;
+        margin: $size-0px $size-24px;
     }
 }
 
 .mainSection {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
-    margin: 1.5rem 1.5rem 1rem;
+    gap: $size-24px;
+    margin: $size-24px $size-24px $size-16px;
 
     @media all and (max-width: $xs) {
-        margin: 1.5rem 1rem 1rem;
+        margin: $size-24px $size-16px $size-16px;
     }
 }

@@ -1,7 +1,8 @@
-@import '../../../../constants/colors';
-@import '../../../../constants/media-sizes';
+@import '@constants/colors';
+@import '@constants/media-sizes';
+@import '@constants/sizes';
 
 .emailLabel {
     color: $color-black-85;
-    letter-spacing: 1px;
+    letter-spacing: $size-1px;
 }

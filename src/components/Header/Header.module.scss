@@ -1,8 +1,10 @@
-@import '../../constants/colors';
-@import '../../constants/media-sizes';
+@import '@constants/colors';
+@import '@constants/media-sizes';
+@import '@constants/sizes';
+@import '@constants/font-sizes';
 
 .header {
-    padding: 1rem 1.5rem;
+    padding: $size-16px $size-24px;
     color: $color-black-85;
     background-color: $header-bg;
 
@@ -11,36 +13,36 @@
     }
 
     &__h1 {
-        margin: 6px 0;
-        padding: 10px 0 0;
+        margin: $size-6px $size-0px;
+        padding: $size-10px $size-0px $size-0px;
         display: flex;
         flex-direction: column;
         width: 100%;
 
         @media all and (max-width: $lg) {
-            font-size: 1.5rem;
+            font-size: $font-size-h1-24px;
         }
 
         @media all and (max-width: $xs) {
-            font-size: 1.25rem;
+            font-size: $font-size-h1-20px;
         }
     }
 
     &__settings {
-        margin-top: 0.5rem;
+        margin-top: $size-8px;
         margin-right: -5px;
     }
 
     @media all and (min-width: $xs) {
-        margin-right: 0;
+        margin-right: $size-0px;
     }
 }
 
 .button {
-    padding: 0.5625rem 0.9375rem;
+    padding: $size-9px $size-15px;
     display: flex;
     align-items: center;
-    gap: 0.25rem;
+    gap: $size-4px;
     border: none;
     background: transparent;
     cursor: pointer;
@@ -52,17 +54,17 @@
     }
 
     @media all and (max-width: $lg) {
-        padding: 7px 15px;
+        padding: $size-7px $size-15px;
     }
 
     @media all and (max-width: $xs) {
         display: flex;
         justify-content: center;
         border-radius: 50%;
-        border: 1px solid $color-black-15;
+        border: $size-1px solid $color-black-15;
         background-color: $color-white;
-        width: 2rem;
-        height: 2rem;
+        width: $size-32px;
+        height: $size-32px;
     }
 
     &__icon {
@@ -84,13 +86,13 @@
 }
 
 .breadcrumbs {
-    margin-bottom: 0;
+    margin-bottom: $size-0px;
 
     a {
         color: $color-black-85;
     }
 
     @media all and (max-width: $xs) {
-        padding-bottom: 1rem;
+        padding-bottom: $size-16px;
     }
 }

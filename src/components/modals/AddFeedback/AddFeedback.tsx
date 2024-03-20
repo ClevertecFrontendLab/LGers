@@ -1,17 +1,15 @@
 import { FC, useState } from 'react';
-import { Button, Modal, Input, Rate, Divider } from 'antd';
-import s from './AddFeedback.module.scss';
+import { Button, Modal, Input, Space } from 'antd';
 import { useAddFeedbackMutation, useLazyGetFeedbacksQuery } from '@redux/api/api';
+import { AppRate } from '@components/AppRate/AppRate';
+import styles from './AddFeedback.module.scss';
 
-export interface AddFeedbackProps {
+export type AddFeedbackProps = {
     showModal: boolean;
     handleClose: () => void;
-}
+};
 
-export const AddFeedback: FC<AddFeedbackProps> = ({
-    showModal,
-    handleClose,
-}) => {
+export const AddFeedback: FC<AddFeedbackProps> = ({ showModal, handleClose }) => {
     const initialState = { rating: 0, message: '' };
     const [state, setState] = useState(initialState);
 
@@ -27,7 +25,7 @@ export const AddFeedback: FC<AddFeedbackProps> = ({
     const [getFeedbacks] = useLazyGetFeedbacksQuery();
 
     const handleOk = async () => {
-        await addFeedback({ rating: state.rating, message: state.message })
+        await addFeedback({ rating: state.rating, message: state.message });
         await getFeedbacks(null);
         handleClose();
     };
@@ -39,17 +37,17 @@ export const AddFeedback: FC<AddFeedbackProps> = ({
             okText={'Опубликовать'}
             okButtonProps={{
                 disabled: !state.rating,
-                datatype: 'new-review-submit-button'
+                datatype: 'new-review-submit-button',
             }}
             cancelButtonProps={{ style: { display: 'none' } }}
             onCancel={handleClose}
             style={{ padding: 0 }}
-            wrapClassName={s.wrapper}
+            wrapClassName={styles.wrapper}
             maskStyle={{ backdropFilter: 'blur(3px)' }}
             centered
             footer={[
                 <Button
-                    type="primary"
+                    type='primary'
                     onClick={handleOk}
                     disabled={!state.rating}
                     data-test-id='new-review-submit-button'
@@ -59,12 +57,15 @@ export const AddFeedback: FC<AddFeedbackProps> = ({
                 </Button>,
             ]}
         >
-            <Rate onChange={onRateChange} value={state.rating} />
-            <Input.TextArea
-                rows={3}
-                autoSize
-                onChange={(e) => onMessageChange(e.target.value)}
-            />
+            <Space direction='vertical' style={{ display: 'flex' }}>
+                <AppRate onChange={onRateChange} value={state.rating} />
+                <Input.TextArea
+                    // rows={3}
+                    autoSize={{ minRows: 3 }}
+                    onChange={(e) => onMessageChange(e.target.value)}
+                    style={{ resize: 'both' }}
+                />
+            </Space>
         </Modal>
     );
 };
