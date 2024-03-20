@@ -60,7 +60,7 @@ export const MainContent: FC = () => {
             btnIcon: <CalendarTwoTone />,
             link: PATHS.calendar.path,
             dataTestId: 'menu-button-calendar',
-            onClick: () => onCalendarClick(),
+            onClick: onCalendarClick,
         },
         {
             id: 2,
