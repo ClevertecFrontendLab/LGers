@@ -1,16 +1,24 @@
-import { FC, useEffect } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { AppWrapper } from '@components/AppWrapper';
-import { Badge, BadgeProps, Calendar, Modal } from 'antd';
+import { Badge, BadgeProps, Calendar, Modal, Popover, Tooltip } from 'antd';
 import { useGetTrainingListQuery } from '@redux/api/api';
-import { resetTrainingError, trainingsSelector } from '@redux/training/training.slice';
+import {
+    resetTrainingError,
+    setCurrentTrainings,
+    setSelectedDate,
+    setSelectedTrainee,
+    trainingsSelector,
+} from '@redux/training/training.slice';
 import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
 import { CloseOutlined } from '@ant-design/icons';
-import { getDate, getListData } from './CalendarPage.utils';
-import type { CalendarMode } from 'antd/es/calendar/generateCalendar';
+import { getDate, getListData } from '../../utils/CalendarPage.utils';
 import { appLocale } from './CalendarPage.locale';
 import moment from 'moment';
 import type { Moment } from 'moment';
+import { CalendarPopover2 } from '@components/CalendarPopover';
+import { AppDrawer } from '@components/AppDrawer';
 
+moment.locale('ru');
 moment.updateLocale('ru', {
     week: {
         dow: 1,
@@ -20,10 +28,31 @@ moment.updateLocale('ru', {
 export const CalendarPage: FC = () => {
     const dispatch = useAppDispatch();
     const { refetch } = useGetTrainingListQuery();
-    const { trainings, hasError } = useAppSelector(trainingsSelector);
-    const onPanelChange = (value: Moment, mode: CalendarMode) => {
-        console.log(value.format('YYYY-MM-DD'), mode);
-        console.log(value.format('MM'), mode);
+    const { trainings, hasError, selectedDate } = useAppSelector(trainingsSelector);
+    const [selectedValue, setSelectedValue] = useState(() => moment());
+    const [open, setOpen] = useState(false);
+
+    const onClose = (e: React.MouseEvent<HTMLElement>) => {
+        e.stopPropagation();
+        e.preventDefault();
+        setOpen(false);
+    };
+
+    const onOpen = (e: React.MouseEvent<HTMLElement>) => {
+        setOpen(true);
+    };
+
+    useEffect(() => {
+        dispatch(setSelectedTrainee(undefined));
+    }, [selectedDate, dispatch]);
+
+    const onSelect = (newValue: Moment) => {
+        const currentDate = newValue.format('YYYY-MM-DD');
+        const currentTrainings = trainings.filter((item) => getDate(item.date) === currentDate);
+
+        setSelectedValue(newValue);
+        dispatch(setSelectedDate(newValue.format()));
+        dispatch(setCurrentTrainings(currentTrainings));
     };
 
     const info = () => {
@@ -63,23 +92,52 @@ export const CalendarPage: FC = () => {
         const listData = getListData({ trainings: currentTrainings });
 
         return (
-            <ul>
-                {listData.map((item) => (
-                    <li key={item.id}>
-                        <Badge status={item.type as BadgeProps['status']} text={item.content} />
-                    </li>
-                ))}
-            </ul>
+            <div
+                style={{
+                    position: 'relative',
+                }}
+            >
+                <ul>
+                    {listData.map((item) => (
+                        <li key={item.id}>
+                            <Badge status={item.type as BadgeProps['status']} text={item.content} />
+                        </li>
+                    ))}
+                </ul>
+            </div>
+        );
+    };
+
+    const dateFullCellRender = (value: Moment) => {
+        const isSelectedDate = value.format('YYYYMMDD') === selectedValue.format('YYYYMMDD');
+
+        return (
+            <div className='date-cell' onClick={onOpen}>
+                {isSelectedDate && open && (
+                    <CalendarPopover2 date={value} isCurrentMonth={false} onClose={onClose} />
+                )}
+                <div
+                    className='ant-picker-cell-inner ant-picker-calendar-date'
+                    // style={{ zIndex: 0 }}
+                >
+                    <div className='ant-picker-calendar-date-value'>
+                        {moment(value).format('DD')}
+                    </div>
+                    <div className='ant-picker-calendar-date-content'>{dateCellRender(value)}</div>
+                </div>
+            </div>
         );
     };
 
     return (
         <AppWrapper>
             <Calendar
-                dateCellRender={dateCellRender}
-                onPanelChange={onPanelChange}
+                // onPanelChange={onPanelChange}
+                onSelect={onSelect}
                 locale={appLocale}
+                dateFullCellRender={dateFullCellRender}
             />
+            <AppDrawer />
         </AppWrapper>
     );
 };

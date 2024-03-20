@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { TrainingsState } from './training.types';
 import { cleverFitApi } from '@redux/api/api';
 import { ApiError } from '@redux/auth/auth.types';
+import moment from 'moment';
 
 const initialState: TrainingsState = {
     isFetching: false,
@@ -9,6 +10,12 @@ const initialState: TrainingsState = {
     trainings: [],
     trainingsError: null,
     hasError: false,
+    isAddTrainee: false,
+    selectedDate: moment().format(),
+    selectedTrainee: undefined,
+    currentExercises: [],
+    currentTrainings: [],
+    updatedTrainings: [],
 };
 
 export const trainingsSlice = createSlice({
@@ -26,6 +33,36 @@ export const trainingsSlice = createSlice({
         resetTrainingError: (state) => {
             state.trainingsError = null;
             state.hasError = false;
+        },
+
+        toggleDrawer: (state) => {
+            state.isAddTrainee = !state.isAddTrainee;
+        },
+
+        setSelectedDate: (state, action) => {
+            // state.selectedDate = moment(action.payload).format();
+            state.selectedDate = moment(action.payload).format();
+            // state.selectedDate = action.payload;
+        },
+
+        setSelectedTrainee: (state, action) => {
+            state.selectedTrainee = action.payload;
+        },
+
+        setCurrentExercise: (state, action) => {
+            state.currentExercises = action.payload;
+        },
+
+        setCurrentTrainings: (state, action) => {
+            state.currentTrainings = action.payload;
+        },
+
+        setUpdatedTrainings: (state, action) => {
+            state.updatedTrainings = action.payload;
+        },
+
+        setTrainings: (state, action) => {
+            state.trainings = action.payload;
         },
     },
 
@@ -64,7 +101,18 @@ export const trainingsSlice = createSlice({
     },
 });
 
-export const { getTrainings, getTrainingList, resetTrainingError } = trainingsSlice.actions;
+export const {
+    getTrainings,
+    getTrainingList,
+    resetTrainingError,
+    toggleDrawer,
+    setSelectedDate,
+    setSelectedTrainee,
+    setCurrentExercise,
+    setCurrentTrainings,
+    setUpdatedTrainings,
+    setTrainings,
+} = trainingsSlice.actions;
 
 export const trainingsSelector = (state: { trainings: TrainingsState }) => state.trainings;
 

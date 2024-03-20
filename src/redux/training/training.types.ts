@@ -1,4 +1,5 @@
-import { ApiError } from "@redux/auth/auth.types";
+import { ApiError } from '@redux/auth/auth.types';
+import type { Moment } from 'moment';
 
 export type Exercise = {
     _id?: string;
@@ -13,7 +14,7 @@ export type Training = {
     name: string;
     date: string | number;
     isImplementation: boolean;
-    parameters: {
+    parameters?: {
         repeat: boolean;
         period: number;
         jointTraining: boolean;
@@ -22,6 +23,8 @@ export type Training = {
     exercises: Exercise[];
     _id?: string;
     userId?: string;
+    isUpdated?: boolean;
+    isNew?: boolean;
 };
 
 export type TrainingList = {
@@ -35,4 +38,11 @@ export type TrainingsState = {
     trainings: Training[];
     trainingsError: ApiError | null | undefined;
     hasError: boolean;
+    isAddTrainee: boolean;
+    selectedDate: string | Moment;
+    // selectedTrainee: Training | string[] | undefined;
+    selectedTrainee: Training | undefined;
+    currentExercises: Exercise[];
+    currentTrainings: Training[];
+    updatedTrainings: Training[];
 };
